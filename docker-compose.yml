@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: $PWD
+    container_name: xx
+    ports:
+      - '1090:3000'
+    env_file:
+      - ../../models/openai_gpt35/.env
