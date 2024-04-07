@@ -11,7 +11,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip'
-import { useEnterSubmit } from '@/hooks/client-hooks'
+import { useEnterSubmit } from '@/hooks/client'
 
 import type { AI } from '../action'
 import { UIStateType } from '../types'

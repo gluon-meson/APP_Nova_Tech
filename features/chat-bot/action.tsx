@@ -1,9 +1,10 @@
+'use server'
 import { nanoid } from 'ai'
 import { createAI, createStreamableUI, getMutableAIState } from 'ai/rsc'
+import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import { logger } from '@/lib/server'
 import { sleep } from '@/lib/utils'
 
 import { SpinnerWithText } from './component/chat-messages'

@@ -1,8 +1,7 @@
 import { OpenAIStream } from 'ai'
 import { createStreamableUI, getAIState, getMutableAIState } from 'ai/rsc'
+import { logger } from 'lib/shared'
 import React from 'react'
-
-import { logger } from '@/lib/server'
 
 import { AI } from './action'
 import { prompt } from './constants'
