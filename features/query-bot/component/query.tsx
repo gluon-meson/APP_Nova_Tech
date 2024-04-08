@@ -3,8 +3,7 @@
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
-import { IconSend } from '@/components/icons'
-import { Textarea } from '@/components/ui/textarea'
+import { IconFile, IconSend } from '@/components/icons'
 import { BotMessage } from '@/features/query-bot/component/botMessage'
 import { UserMessage } from '@/features/query-bot/component/userMessage'
 import { ChatType } from '@/features/query-bot/types'
@@ -63,17 +62,18 @@ export const Query = () => {
   }
   return (
     <main className="flex h-screen space-x-16 p-8">
-      <div className="w-80">
+      <div className="flex w-80 flex-col">
         <h1 className="font-bold">News navigator</h1>
-        <div className="mt-16">
+        <div className="mt-16 flex flex-1 flex-col overflow-y-auto">
           <h2 className="font-bold">Upload Files</h2>
-          <ul className="mt-8">
+          <ul className="mt-8 flex-1 overflow-y-auto">
             {uploadFiles.map((item) => {
               return (
                 <li
                   key={item.id}
-                  className="mb-5 flex h-16 items-center bg-violet-400 text-white"
+                  className="mb-5 flex h-16 items-center bg-violet-400 px-2.5 text-white"
                 >
+                  <IconFile className="mr-2.5" />
                   <span className="... truncate">{item.name}</span>
                 </li>
               )
