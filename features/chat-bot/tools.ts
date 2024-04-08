@@ -77,7 +77,7 @@ export async function get_data(query: string) {
   logger.info({ query }, 'call get_data with query:')
   try {
     const res = await fetch(
-      `${process.env.KNOWLEDGE_BASE_URL}/data-sets/211/search`,
+      `${process.env.KNOWLEDGE_BASE_URL}/data-sets/215/search`,
       {
         headers: {
           'Content-Type': 'application/json',
