@@ -1,41 +1,35 @@
-import fs from 'fs/promises'
+import fs from 'fs'
 
+import { ApiResponse, DATA_TYPE, STOCK_INFO } from './type'
 import { loadENV } from './utils'
 
 loadENV()
 
-type StockData = {
-  ticker: string
-  date: string
-  open: number
-  high: number
-  low: number
-  close: number
-  volume: number
-}
+function getStockData(stockInfo: STOCK_INFO, data_type: DATA_TYPE) {
+  const { exchange_code, ticker, ticker_name, start_date } = stockInfo
+  const filePath = `../stock-data/${ticker}_stock_${data_type}.json`
 
-type ApiResponse = {
-  msg: string
-  code: number
-  data: StockData[]
-}
-
-type STOCK_INFO = {
-  exchange_code: string
-  ticker: string | number
-  start_date: string
-}
-
-function getStockData(stockInfo: STOCK_INFO, filePath: string) {
-  const url = `https://tsanghi.com/api/fin/stock/${stockInfo.exchange_code}/daily?token=${process.env.TSANGHI_TOKEN}&ticker=${stockInfo.ticker}&start_date=${stockInfo.start_date}&order=1`
+  const url = `https://tsanghi.com/api/fin/stock/${exchange_code}/${data_type}?token=${process.env.TSANGHI_TOKEN}&ticker=${ticker}&order=1`
 
   fetch(url)
     .then((res) => res.json())
     .then((parsedData: ApiResponse) => {
       if (parsedData.code === 200) {
-        fs.writeFile(filePath, JSON.stringify(parsedData.data, null, 2))
-          .then(() => console.log(`data had saved in: ${filePath}`))
-          .catch((err) => console.error(`error when save data: ${err}`))
+        const mapData = parsedData.data.map((item) => ({
+          ...item,
+          ticker_name: ticker_name,
+          exchange_code: exchange_code,
+          type: data_type,
+        }))
+        const writeStream = fs.createWriteStream(filePath)
+        writeStream.write(JSON.stringify(mapData, null, 2))
+        writeStream.end()
+        writeStream.on('finish', () => {
+          console.log(`Data has been saved in: ${filePath}`)
+        })
+        writeStream.on('error', (err) => {
+          console.error(`Error when saving data: ${err}`)
+        })
       } else {
         console.error('fetch parse json error:', parsedData.msg)
         console.log(parsedData)
@@ -49,13 +43,22 @@ function getStockData(stockInfo: STOCK_INFO, filePath: string) {
 const colaStockInfo: STOCK_INFO = {
   exchange_code: 'NYSE',
   ticker: 'KO',
-  start_date: '2022-04-01',
+  ticker_name: 'Cola',
+  start_date: '2021-04-08',
 }
 
 const bookingStockInfo: STOCK_INFO = {
   exchange_code: 'XNAS',
   ticker: 'BKNG',
-  start_date: '2022-04-01',
+  // start_date: '2021-04-08',
+  ticker_name: 'Booking Holdings Inc',
 }
 
-getStockData(bookingStockInfo, '../booking_stock_daily.json')
+const ciscoStockInfo: STOCK_INFO = {
+  exchange_code: 'XNAS',
+  ticker: 'CSCO',
+  ticker_name: 'Cisco Systems Inc',
+}
+
+// getStockData(bookingStockInfo, DATA_TYPE.DAILY)
+getStockData(ciscoStockInfo, DATA_TYPE.DAILY)
