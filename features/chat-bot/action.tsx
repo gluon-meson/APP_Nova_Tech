@@ -69,6 +69,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   completion.onToolCall(
     TOOLS_NAMES.GET_DATA,
     async (args: { query: string }) => {
+      reply.update(<SpinnerWithText text="Data retriving is processing..." />)
       return await get_data(args.query)
     },
   )

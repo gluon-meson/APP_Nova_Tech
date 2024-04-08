@@ -2,6 +2,7 @@ import type OpenAI from 'openai'
 
 import { logger } from '@/lib/shared'
 import { sleep } from '@/lib/utils'
+import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 
 export const tools: OpenAI.ChatCompletionTool[] = [
   {
@@ -27,7 +28,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     function: {
       name: 'get_data',
       description:
-        'Get the stock data in a given natural language query string',
+        'Get the trusted stock data in a given natural language query string for Booking Holdings Inc and Cisco Systems Inc.',
       parameters: {
         type: 'object',
         properties: {
@@ -75,25 +76,12 @@ async function get_current_weather(location: string, unit: string) {
 
 export async function get_data(query: string) {
   logger.info({ query }, 'call get_data with query:')
-  try {
-    const res = await fetch(
-      `${process.env.KNOWLEDGE_BASE_URL}/data-sets/215/search`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${process.env.OFFLINE_TOKEN}`,
-        },
-        body: JSON.stringify({
-          query: query,
-        }),
-        method: 'POST',
-      },
-    ).then((res) => {
-      return res.json()
-    })
-    logger.info(res, 'get_data done with')
-    return 'the response is:' + JSON.stringify(res)
-  } catch (e) {
+  const res = await queryKnowledgeBase({
+    query,
+    data_set_id: 215,
+  }).catch((e) => {
     logger.error(e, 'tool get_data error:')
-  }
+  })
+  logger.info(res, 'get_data done with:')
+  return 'the response is:' + res ? JSON.stringify(res) : ''
 }

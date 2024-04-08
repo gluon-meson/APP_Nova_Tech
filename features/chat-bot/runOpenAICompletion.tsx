@@ -29,6 +29,7 @@ const callLLM = async () => {
           return newItem
         }),
       ],
+      max_tokens: 3000, // todo remove
     })
     logger.info(aiState?.id, 'creating completion succeed')
     return resp
