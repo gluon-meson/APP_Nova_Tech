@@ -4,6 +4,7 @@ import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 import { IconSend } from '@/components/icons'
+import { Textarea } from '@/components/ui/textarea'
 import { BotMessage } from '@/features/query-bot/component/botMessage'
 import { UserMessage } from '@/features/query-bot/component/userMessage'
 import { ChatType } from '@/features/query-bot/types'
@@ -13,6 +14,7 @@ import {
   getUploadFiles,
 } from '../../../app/api/query/getHomePage'
 import { type File, Message } from '../../../app/api/query/home'
+import { ENTER_KEY } from '../../../constants/conmon'
 
 export const Query = () => {
   const conversation = useRef<HTMLDivElement | null>(null)
@@ -27,17 +29,19 @@ export const Query = () => {
   }, [])
 
   const handleSendMessage = () => {
-    scrollToBottom()
-    setMessages((currentMessages) => [
-      ...currentMessages,
-      {
-        id: Date.now().toString(),
-        type: ChatType.HUMAN,
-        content: inputValue,
-      },
-    ])
-    setInputValue('')
-    handleGetBotMessage()
+    if (inputValue) {
+      scrollToBottom()
+      setMessages((currentMessages) => [
+        ...currentMessages,
+        {
+          id: Date.now().toString(),
+          type: ChatType.HUMAN,
+          content: inputValue,
+        },
+      ])
+      setInputValue('')
+      handleGetBotMessage()
+    }
   }
 
   const handleGetBotMessage = () => {
@@ -93,14 +97,19 @@ export const Query = () => {
           ))}
         </div>
         <div className="mt-4 flex items-center justify-between bg-emerald-50">
-          <input
-            type="text"
+          <textarea
             value={inputValue}
-            className="flex h-16 w-full bg-background bg-emerald-50 px-3 py-2 text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-16 w-full resize-none bg-background bg-emerald-50 px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             placeholder="Ask GluonMeson ..."
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            rows={1}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
               setInputValue(e.target.value)
             }
+            onKeyDown={(e) => {
+              if (e.key === ENTER_KEY && !e.shiftKey) {
+                handleSendMessage()
+              }
+            }}
           />
           <div className="mx-4">
             <IconSend onClick={handleSendMessage} />

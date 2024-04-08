@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .markdown {
+    @apply w-full flex flex-col break-words bg-transparent text-sm flex-1;
+  }
+
+  h1 {
+    @apply text-2xl mb-2 mt-2;
+  }
+
+  h2 {
+    @apply text-xl mb-2 mt-2;
+  }
+
+  h3 {
+    @apply text-lg mb-2 mt-2;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply text-base mb-2 mt-2;
+  }
+
+  p {
+    @apply text-sm text-gray-900 mb-4;
+  }
+}
+
+
