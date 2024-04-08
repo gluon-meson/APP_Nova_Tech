@@ -9,8 +9,6 @@ const downColor = '#ec0000'
 export default function KChart() {
   const chartRef = useRef(null)
 
-  console.log(bookingStockDaily, 'raw data from data')
-
   const transformedData = bookingStockDaily.map((item) => [
     item.date,
     item.open,
@@ -19,7 +17,6 @@ export default function KChart() {
     item.high,
     item.volume,
   ]) as Array<[string, number, number, number, number, number]>
-  console.log(transformedData, 'transformdata')
 
   function splitData(
     rawData: Array<[string, number, number, number, number, number]>,
