@@ -1,5 +1,6 @@
 import type OpenAI from 'openai'
 
+import { logger } from '@/lib/shared'
 import { sleep } from '@/lib/utils'
 
 export const tools: OpenAI.ChatCompletionTool[] = [
@@ -24,37 +25,30 @@ export const tools: OpenAI.ChatCompletionTool[] = [
   {
     type: 'function',
     function: {
-      name: 'draw_radar_chart',
+      name: 'get_data',
       description:
-        'Draw a radar chart to show the customer positive, neutral, negative and unknown(no relevant identified for the dimension) for six dimensions statistical feedback data about the insurance product;' +
-        'The radar chart will be drawn when the function is called. Context: PolarAngleAxis(recharts) is the six dimensions of the insurance product;' +
-        'It shows a comparison of the sum of positive/neutral/negative sentiment/emotion for each dimensions;' +
-        'You need to explain the chart more base on the data you got;',
-    },
-  },
-  {
-    type: 'function',
-    function: {
-      name: 'draw_bar_chart',
-      description:
-        'Draw a radar chart to show the customer positive, neutral, negative and unknown(no relevant identified for the dimension) for six dimensions statistical feedback data about the insurance product;' +
-        `The bar chart will be drawn when the function is called. "Context": The chart's X-axis represents six dimensions of the insurance product, with each dimension featuring three bars superposed corresponding to negative, neutral, positive and unknown sentiments. The Y-axis quantifies the total sentiment/emotion responses (for example, all negative responses) collected for the insurance data;` +
-        'It shows a comparison of the sum of positive/neutral/negative sentiment/emotion for each dimensions;' +
-        'You need to explain the chart more base on the data you got;',
+        'Get the stock data in a given natural language query string',
+      parameters: {
+        type: 'object',
+        properties: {
+          query: {
+            type: 'string',
+            description: 'user natural language query about stock',
+          },
+        },
+        required: ['query'],
+      },
     },
   },
 ]
 
-const tools_name_map = tools.map((item) => item.function.name)
-
 export enum TOOLS_NAMES {
   GET_WEATHER = 'get_current_weather',
-  DRAW_RADAR_CHART = 'draw_radar_chart',
-  DRAW_BAR_CHART = 'draw_bar_chart',
+  GET_DATA = 'get_data',
 }
 
-// example: https://platform.openai.com/docs/guides/function-calling/parallel-function-calling
-export async function get_current_weather(location: string, unit: string) {
+export // example: https://platform.openai.com/docs/guides/function-calling/parallel-function-calling
+async function get_current_weather(location: string, unit: string) {
   await sleep(1000)
   if (location.toLowerCase().includes('tokyo')) {
     return JSON.stringify({
@@ -76,5 +70,30 @@ export async function get_current_weather(location: string, unit: string) {
     })
   } else {
     return JSON.stringify({ location, temperature: 'unknown' })
+  }
+}
+
+export async function get_data(query: string) {
+  logger.info({ query }, 'call get_data with query:')
+  try {
+    const res = await fetch(
+      `${process.env.KNOWLEDGE_BASE_URL}/data-sets/211/search`,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          authorization: `Bearer ${process.env.OFFLINE_TOKEN}`,
+        },
+        body: JSON.stringify({
+          query: query,
+        }),
+        method: 'POST',
+      },
+    ).then((res) => {
+      return res.json()
+    })
+    logger.info(res, 'get_data done with')
+    return 'the response is:' + JSON.stringify(res)
+  } catch (e) {
+    logger.error(e, 'tool get_data error:')
   }
 }

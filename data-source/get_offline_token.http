@@ -1,0 +1,13 @@
+
+# 404 for now
+POST http://bj-3090.private.gluon-meson.tech:8006/auth/realms/gluon-meson/protocol/openid-connect/token
+Content-Type: application/json
+
+{
+  "client_id": "offline-token-provider",
+  "client_secret": "xx",
+  "username": "notend",
+  "password": "xx",
+  "grant_type": "password",
+  "scope": "offline_access"
+}

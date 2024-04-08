@@ -1,4 +1,3 @@
-'use server'
 import { nanoid } from 'ai'
 import { createAI, createStreamableUI, getMutableAIState } from 'ai/rsc'
 import { logger } from 'lib/shared'
@@ -9,7 +8,7 @@ import { sleep } from '@/lib/utils'
 
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
-import { get_current_weather, TOOLS_NAMES } from './tools'
+import { get_current_weather, get_data, TOOLS_NAMES } from './tools'
 import { AIState, MessageRole, UIState, UIStateType } from './types'
 
 async function submitUserMessage(userInput: string): Promise<UIState[number]> {
@@ -67,18 +66,12 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     },
   )
 
-  completion.onToolCall(TOOLS_NAMES.DRAW_BAR_CHART, async () => {
-    return (
-      'the bar chart had drawn for the statistical data:' + JSON.stringify({})
-    )
-  })
-
-  completion.onToolCall(TOOLS_NAMES.DRAW_RADAR_CHART, async () => {
-    return (
-      'the radar chart had drawn for the statistical data: ' +
-      JSON.stringify({})
-    )
-  })
+  completion.onToolCall(
+    TOOLS_NAMES.GET_DATA,
+    async (args: { query: string }) => {
+      return await get_data(args.query)
+    },
+  )
 
   return {
     id: Date.now().toString(),

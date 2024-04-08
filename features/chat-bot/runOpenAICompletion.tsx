@@ -1,6 +1,6 @@
 import { OpenAIStream } from 'ai'
 import { createStreamableUI, getAIState, getMutableAIState } from 'ai/rsc'
-import { logger } from 'lib/shared'
+import { consumeStream, logger, runAsyncFnWithoutBlocking } from 'lib/shared'
 import React from 'react'
 
 import { AI } from './action'
@@ -10,14 +10,6 @@ import { tools, TOOLS_NAMES } from './tools'
 import { Message, MessageRole } from './types'
 
 const MAX_CALLS = 5 // Set a limit on the number of calls
-
-const consumeStream = async (stream: ReadableStream) => {
-  const reader = stream.getReader()
-  while (true) {
-    const { done } = await reader.read()
-    if (done) break
-  }
-}
 
 const callLLM = async () => {
   const aiState = getAIState() // readonly
@@ -62,7 +54,7 @@ export function runOpenAICompletion(
 
   let onToolsCall = {} as any
 
-  ;(async () => {
+  runAsyncFnWithoutBlocking(async () => {
     try {
       await consumeStream(
         OpenAIStream(await callLLM(), {
@@ -148,7 +140,7 @@ export function runOpenAICompletion(
       logger.error(e, 'runOpenAICompletion async IIFE')
       streamableUI.done(<p>Sorry, some error happening</p>)
     }
-  })()
+  })
 
   return {
     onTextContent: (
