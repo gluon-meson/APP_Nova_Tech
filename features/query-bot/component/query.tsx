@@ -30,7 +30,8 @@ export const Query = () => {
   }, [])
 
   const handleSendMessage = () => {
-    if (inputValue) {
+    const trimmedValue = inputValue.trim()
+    if (inputValue && trimmedValue && !answering) {
       scrollToBottom()
       setMessages((currentMessages) => [
         ...currentMessages,
@@ -129,12 +130,20 @@ export const Query = () => {
             }
             onKeyDown={(e) => {
               if (e.key === ENTER_KEY && !e.shiftKey) {
+                e.preventDefault()
                 handleSendMessage()
               }
             }}
           />
           <div className="mx-4">
-            <IconSend onClick={handleSendMessage} />
+            {answering ? (
+              <IconSend className="fill-gray-400" />
+            ) : (
+              <IconSend
+                className="fill-violet-400"
+                onClick={handleSendMessage}
+              />
+            )}
           </div>
         </div>
       </div>

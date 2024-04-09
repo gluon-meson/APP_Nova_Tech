@@ -1,11 +1,9 @@
-import { isEmpty } from 'lodash'
 import React from 'react'
 
 import MarkdownRenderer from '@/components/markdown-renderer'
 import { Loading } from '@/components/ui/loading'
 
 type Props = {
-  className?: string
   content: string
   loading: boolean
 }
@@ -16,7 +14,7 @@ export const BotMessage = ({ content, loading }: Props) => {
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <span>GluonMeson's reply:</span>
       </div>
-      {loading && isEmpty(content) ? (
+      {loading && content.length === 0 ? (
         <Loading />
       ) : (
         <MarkdownRenderer markdown={content} />
