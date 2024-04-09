@@ -4,7 +4,7 @@ services:
   web:
     build:
       context: $PWD
-    container_name: xx
+    container_name: wealth_management
     ports:
       - '1091:3000'
     env_file:
