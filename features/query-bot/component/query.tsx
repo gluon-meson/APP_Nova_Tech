@@ -12,7 +12,7 @@ import {
   getChatResponse,
   getUploadFiles,
 } from '../../../app/api/query/getHomePage'
-import { type File, Message } from '../../../app/api/query/home'
+import { ChatInfo, type File, Message } from '../../../app/api/query/home'
 import { ENTER_KEY } from '../../../constants/conmon'
 
 export const Query = () => {
@@ -44,13 +44,17 @@ export const Query = () => {
   }
 
   const handleGetBotMessage = () => {
-    getChatResponse().then((res) => {
+    getChatResponse({
+      question: inputValue,
+      conversation_id: Date.now().toString(),
+      user_id: 'John',
+    } as ChatInfo).then((res) => {
       setMessages((currentMessages) => [
         ...currentMessages,
         {
           id: Date.now().toString(),
           type: ChatType.AI,
-          content: res,
+          content: res.content,
         },
       ])
     })

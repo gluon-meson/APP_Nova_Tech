@@ -10,3 +10,9 @@ export type Message = {
   type: ChatType
   content: string
 }
+
+export type ChatInfo = {
+  question: string
+  conversation_id: string
+  user_id: string
+}
