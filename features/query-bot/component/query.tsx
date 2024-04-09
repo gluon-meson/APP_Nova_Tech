@@ -1,5 +1,6 @@
 'use client'
 
+import { cloneDeep } from 'lodash'
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
@@ -20,6 +21,7 @@ export const Query = () => {
   const [inputValue, setInputValue] = useState('')
   const [uploadFiles, setUploadFiles] = useState([] as File[])
   const [messages, setMessages] = useState([] as Message[])
+  const [answering, setAnswering] = useState(false)
 
   useEffect(() => {
     getUploadFiles().then((res) => {
@@ -44,20 +46,32 @@ export const Query = () => {
   }
 
   const handleGetBotMessage = () => {
+    setAnswering(true)
+    setMessages((preMessages) => {
+      return [
+        ...preMessages,
+        {
+          id: Date.now().toString(),
+          type: ChatType.AI,
+          content: '',
+        },
+      ]
+    })
     getChatResponse({
       question: inputValue,
       conversation_id: Date.now().toString(),
       user_id: 'John',
-    } as ChatInfo).then((res) => {
-      setMessages((currentMessages) => [
-        ...currentMessages,
-        {
-          id: Date.now().toString(),
-          type: ChatType.AI,
-          content: res.content,
-        },
-      ])
-    })
+    } as ChatInfo)
+      .then((res) => {
+        setMessages((preMessages) => {
+          const newMessages = cloneDeep(preMessages)
+          newMessages[preMessages.length - 1].content = res.content
+          return newMessages
+        })
+      })
+      .finally(() => {
+        setAnswering(false)
+      })
   }
   const scrollToBottom = () => {
     if (conversation.current) {
@@ -95,7 +109,11 @@ export const Query = () => {
               {item.type === ChatType.HUMAN ? (
                 <UserMessage content={item.content} />
               ) : (
-                <BotMessage content={item.content} />
+                <BotMessage
+                  key={index}
+                  content={item.content}
+                  loading={answering}
+                />
               )}
             </React.Fragment>
           ))}
