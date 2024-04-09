@@ -14,7 +14,7 @@ export const BotMessage = ({ content, loading }: Props) => {
       <div className="mr-6 flex size-[45px] items-center justify-center self-start rounded-full border bg-violet-400 shadow-lg">
         <IconLogo className="fill-violet-400" />
       </div>
-      <div className="mr-[80px] flex-1 self-center overflow-hidden">
+      <div className="mr-[40px] flex-1 self-center overflow-hidden">
         {loading && content.length === 0 ? (
           <Loading />
         ) : (

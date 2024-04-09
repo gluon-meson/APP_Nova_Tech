@@ -89,7 +89,7 @@ export const Query = () => {
     }
   }
   return (
-    <main className="flex h-screen space-x-16 bg-gray-50 p-8">
+    <main className="flex h-screen bg-gray-50 p-8">
       <div className="customBoxShadow flex w-80 flex-col rounded-lg px-8">
         <div className="flex flex-1 flex-col overflow-y-auto">
           <h2 className="font-bold">Data Source</h2>
@@ -108,7 +108,7 @@ export const Query = () => {
           </ul>
         </div>
       </div>
-      <div className="flex w-full flex-col overflow-visible">
+      <div className="ml-16 mr-8 flex w-full flex-col overflow-visible">
         <div
           className="mt-5 flex-1 overflow-y-scroll"
           ref={conversation}
