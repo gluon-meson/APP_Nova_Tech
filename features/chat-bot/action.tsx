@@ -1,11 +1,13 @@
 import { nanoid } from 'ai'
 import { createAI, createStreamableUI, getMutableAIState } from 'ai/rsc'
+import { getDataForCandleChart } from 'data-source/utils'
 import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
 import { sleep } from '@/lib/utils'
 
+import KChart from './component/charts/kChart'
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
 import { get_current_weather, get_data, TOOLS_NAMES } from './tools'
@@ -73,6 +75,13 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       return await get_data(args.query)
     },
   )
+
+  completion.onToolCall(TOOLS_NAMES.DRAW_CANDLE_CHART, async () => {
+    const data = await getDataForCandleChart()
+    toolsStreamUI.append(<KChart originalData={data} />)
+    // How do we pass the context of the graph to LLM, the data is too large
+    return 'the candlestick chart had been drawn for the stock data'
+  })
 
   return {
     id: Date.now().toString(),

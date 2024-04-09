@@ -1,22 +1,18 @@
+'use client'
 import * as echarts from 'echarts'
 import React, { useEffect, useRef } from 'react'
 
-import bookingStockDaily from '../../../data-source/booking_stock_daily.json'
+import { DATA_ITEM } from './generatorData'
 
 const upColor = '#00da3c'
 const downColor = '#ec0000'
 
-export default function KChart() {
+export default function KChart({
+  originalData,
+}: {
+  originalData: DATA_ITEM[]
+}) {
   const chartRef = useRef(null)
-
-  const transformedData = bookingStockDaily.map((item) => [
-    item.date,
-    item.open,
-    item.close,
-    item.low,
-    item.high,
-    item.volume,
-  ]) as Array<[string, number, number, number, number, number]>
 
   function splitData(
     rawData: Array<[string, number, number, number, number, number]>,
@@ -58,7 +54,7 @@ export default function KChart() {
   useEffect(() => {
     let chartInstance = echarts.init(chartRef.current)
 
-    const data = splitData(transformedData)
+    const data = splitData(originalData)
 
     let option = {
       animation: false,
@@ -270,7 +266,7 @@ export default function KChart() {
     return () => {
       chartInstance.dispose()
     }
-  }, [transformedData])
+  }, [originalData])
 
   return (
     <div

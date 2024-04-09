@@ -1,8 +1,8 @@
 import type OpenAI from 'openai'
 
 import { logger } from '@/lib/shared'
-import { sleep } from '@/lib/utils'
 import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
+import { sleep } from '@/lib/utils'
 
 export const tools: OpenAI.ChatCompletionTool[] = [
   {
@@ -41,11 +41,19 @@ export const tools: OpenAI.ChatCompletionTool[] = [
       },
     },
   },
+  {
+    type: 'function',
+    function: {
+      name: 'draw_candle_chart',
+      description: `Generate a candlestick (K-line) chart for stock market analysis. This function plots a chart showing open, high, low, and close prices of stocks over time, aiding users in identifying trends and patterns. It's an essential tool for investors analyzing market movements to inform trading decisions. The chart highlights price dynamics and can be adjusted to cover various time periods, supporting both short-term and long-term strategies.`,
+    },
+  },
 ]
 
 export enum TOOLS_NAMES {
   GET_WEATHER = 'get_current_weather',
   GET_DATA = 'get_data',
+  DRAW_CANDLE_CHART = 'draw_candle_chart',
 }
 
 export // example: https://platform.openai.com/docs/guides/function-calling/parallel-function-calling
