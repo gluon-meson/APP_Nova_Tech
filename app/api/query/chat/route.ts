@@ -27,9 +27,8 @@ export async function POST(request: NextRequest) {
 
     for (const line of lines) {
       if (line.startsWith('data:')) {
-        const data = JSON.parse(line.substring('data:'.length))
-
         try {
+          const data = JSON.parse(line.substring('data:'.length))
           const output = data.answer
           content += output
         } catch (error) {

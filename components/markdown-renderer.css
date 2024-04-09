@@ -4,7 +4,7 @@
 
 @layer components {
   .markdown {
-    @apply w-full flex flex-col break-words bg-transparent text-sm flex-1;
+    @apply w-full flex flex-col break-words !bg-transparent text-sm;
   }
 
   h1 {
