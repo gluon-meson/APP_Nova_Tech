@@ -15,17 +15,32 @@ export async function POST(request: NextRequest) {
   let content = ''
   // @ts-ignore
   const reader = res.body.getReader()
-  const { value } = await reader.read()
 
-  const decodeText = new TextDecoder('utf-8').decode(value)
+  while (true) {
+    const { done, value } = await reader.read()
 
-  if (decodeText.startsWith('data:')) {
-    const data = JSON.parse(decodeText.substring('data:'.length))
-    try {
-      content = data.answer
-    } catch (error) {
-      console.log('json parse error in get chat response', error)
+    if (done) {
+      break
+    }
+
+    const chunk = new TextDecoder('utf-8').decode(value)
+    const lines = chunk.split('\n')
+
+    for (const line of lines) {
+      if (line.startsWith('data:')) {
+        const data = JSON.parse(line.substring('data:'.length))
+
+        try {
+          const output = data.answer
+          content += output
+        } catch (error) {
+          console.error('JSONDecodeError:', error)
+        }
+      }
     }
   }
-  return NextResponse.json({ content }, { status: 200 })
+  return NextResponse.json(
+    { content: content ? content : 'Chat error, please try again later' },
+    { status: 200 },
+  )
 }
