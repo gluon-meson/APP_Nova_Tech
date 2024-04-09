@@ -4,6 +4,6 @@ services:
   web:
     build:
       context: $PWD
-    container_name: wealth_management
+    container_name: wealth_management_fe
     ports:
       - '1091:3000'
