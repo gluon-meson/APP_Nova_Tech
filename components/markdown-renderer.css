@@ -7,26 +7,30 @@
     @apply w-full flex flex-col break-words !bg-transparent text-sm;
   }
 
-  h1 {
+  .markdown > h1 {
     @apply text-2xl mb-2 mt-2;
   }
 
-  h2 {
+  .markdown > h2 {
     @apply text-xl mb-2 mt-2;
   }
 
-  h3 {
+  .markdown > h3 {
     @apply text-lg mb-2 mt-2;
   }
 
-  h4,
-  h5,
-  h6 {
+  .markdown > h4,
+  .markdown > h5,
+  .markdown > h6 {
     @apply text-base mb-2 mt-2;
   }
 
-  p {
-    @apply text-lg text-gray-900 mb-4;
+  .markdown > p {
+    @apply text-base text-gray-900 mb-4;
+  }
+
+  summary {
+    @apply mb-[20px]
   }
 }
 

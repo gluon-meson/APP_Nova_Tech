@@ -108,7 +108,7 @@ export const Query = () => {
           </ul>
         </div>
       </div>
-      <div className="flex w-full flex-col overflow-x-hidden">
+      <div className="flex w-full flex-col overflow-visible">
         <div
           className="mt-5 flex-1 overflow-y-scroll"
           ref={conversation}
@@ -116,24 +116,26 @@ export const Query = () => {
           {messages.map((item, index) => (
             <React.Fragment key={index}>
               {item.type === ChatType.HUMAN ? (
-                <UserMessage content={item.content} />
-              ) : (
                 <>
-                  <div className="my-4 border-[0.5px]"></div>
-                  <BotMessage
-                    key={index}
-                    content={item.content}
-                    loading={answering}
-                  />
+                  <UserMessage content={item.content} />
+                  {index !== messages.length && (
+                    <div className="my-4 border-[0.5px]"></div>
+                  )}
                 </>
+              ) : (
+                <BotMessage
+                  key={index}
+                  content={item.content}
+                  loading={answering}
+                />
               )}
             </React.Fragment>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-between rounded-lg bg-white">
+        <div className="customBoxShadow flex items-center justify-between rounded-lg bg-white">
           <textarea
             value={inputValue}
-            className="flex h-16 w-full resize-none bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-16 w-full resize-none rounded-lg bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             placeholder="Ask GluonMeson ..."
             rows={1}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
