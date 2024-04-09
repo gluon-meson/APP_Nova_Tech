@@ -71,6 +71,14 @@ export const Query = () => {
           return newMessages
         })
       })
+      .catch(() => {
+        setMessages((preMessages) => {
+          const newMessages = cloneDeep(preMessages)
+          newMessages[preMessages.length - 1].content =
+            'Chat error, please try again later'
+          return newMessages
+        })
+      })
       .finally(() => {
         setAnswering(false)
       })
@@ -82,9 +90,9 @@ export const Query = () => {
   }
   return (
     <main className="flex h-screen space-x-16 bg-gray-50 p-8">
-      <div className="sideBoxShadow flex w-80 flex-col rounded-lg px-8">
+      <div className="customBoxShadow flex w-80 flex-col rounded-lg px-8">
         <div className="flex flex-1 flex-col overflow-y-auto">
-          <h2 className="font-bold">Upload Files</h2>
+          <h2 className="font-bold">Data Source</h2>
           <ul className="mt-8 flex-1 overflow-y-auto">
             {uploadFiles.map((item) => {
               return (
@@ -101,7 +109,6 @@ export const Query = () => {
         </div>
       </div>
       <div className="flex w-full flex-col overflow-x-hidden">
-        <HeaderCard />
         <div
           className="mt-5 flex-1 overflow-y-scroll"
           ref={conversation}
@@ -123,7 +130,7 @@ export const Query = () => {
             </React.Fragment>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-between rounded-lg bg-white p-4 ">
+        <div className="mt-4 flex items-center justify-between rounded-lg bg-white">
           <textarea
             value={inputValue}
             className="flex h-16 w-full resize-none bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"

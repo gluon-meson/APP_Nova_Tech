@@ -79,7 +79,7 @@
   @apply mx-auto max-w-screen-xl px-2 sm:px-4 lg:px-8;
 }
 
-.sideBoxShadow {
+.customBoxShadow {
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 0 6px -2px rgb(0 0 0 / 0.1);
 }
 

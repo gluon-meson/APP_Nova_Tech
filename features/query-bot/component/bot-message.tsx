@@ -11,10 +11,10 @@ type Props = {
 export const BotMessage = ({ content, loading }: Props) => {
   return (
     <div className="mb-3 flex items-start rounded-lg p-2 text-xl">
-      <div className="mr-6 flex size-[45px] items-center justify-center rounded-full border bg-violet-400 shadow-lg">
+      <div className="mr-6 flex size-[45px] items-center justify-center self-start rounded-full border bg-violet-400 shadow-lg">
         <IconLogo className="fill-violet-400" />
       </div>
-      <div className="flex-1 overflow-hidden">
+      <div className="mr-[80px] flex-1 self-center overflow-hidden">
         {loading && content.length === 0 ? (
           <Loading />
         ) : (
