@@ -10,11 +10,11 @@ type Props = {
 }
 export const UserMessage = ({ content, username }: Props) => {
   return (
-    <div className="mb-3 flex items-center rounded-lg p-2 text-xl font-bold">
+    <div className="mb-3 flex items-start rounded-lg p-2 text-xl font-bold">
       <div className="mr-6 flex size-[45px] items-center justify-center rounded-full border bg-white shadow-lg">
         <IconUser className="fill-violet-400" />
       </div>
-      <div>
+      <div className="flex-1 overflow-hidden">
         <MarkdownRenderer markdown={content} />
       </div>
     </div>
