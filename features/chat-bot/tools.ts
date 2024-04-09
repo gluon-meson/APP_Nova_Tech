@@ -1,5 +1,6 @@
 import type OpenAI from 'openai'
 
+import { data_explain } from '@/features/chat-bot/constants'
 import { logger } from '@/lib/shared'
 import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
@@ -27,14 +28,14 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'get_data',
-      description:
-        'Get the trusted stock data in a given natural language query string for Booking Holdings Inc and Cisco Systems Inc.',
+      description: `Get the trusted stock or index data in a given natural language query string for ${data_explain}`,
       parameters: {
         type: 'object',
         properties: {
           query: {
             type: 'string',
-            description: 'user natural language query about stock',
+            description:
+              'natural language for retrieve stock or Index data, try to add more context or explain as more as possible for the data you want. eg: Coca-Cola stock trending recently? => Coca-Cola(KO) stock daily and weekly data in past three month?',
           },
         },
         required: ['query'],
@@ -92,5 +93,7 @@ export async function get_data(query: string) {
     return 'Nothing got, try again with more context for the query param'
   })
   logger.info(res, 'get_data done with:')
-  return 'the response is:' + res ? JSON.stringify(res) : ''
+  if (!res || (typeof res !== 'string' && res?.items.length === 0))
+    return 'Nothing retrieved, try again with more context or explain for data you want to retrieve.'
+  return 'the response is:' + JSON.stringify(res)
 }

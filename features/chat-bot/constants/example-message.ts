@@ -1,20 +1,18 @@
 export const exampleMessages = [
   {
-    heading: 'Overall Satisfaction',
-    message: 'Summary the satisfaction generally.',
+    heading: 'Data query',
+    message: "What's the highest price for booking stock last year?",
   },
   {
     heading: 'Suggestion',
-    message: 'Give me suggestions to improve my product and service',
+    message: 'Any investment advice or insight for buying Coca-Cola stock?',
   },
   {
-    heading: 'Value Perception',
-    message:
-      'Do customers feel they receive good value for their insurance premium?',
+    heading: 'Index trending',
+    message: 'Whats the Nasdaq Index trending in past three years?',
   },
   {
-    heading: 'Claims Experience',
-    message:
-      'Why customer think Claims Experience is bad? And summary reasons and give me advices',
+    heading: 'Compare',
+    message: 'Compare Westlake and Cisco stock trending for last year',
   },
 ]
