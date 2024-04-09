@@ -5,7 +5,8 @@ import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
 
 import { IconFile, IconSend } from '@/components/icons'
-import { BotMessage } from '@/features/query-bot/component/botMessage'
+import { BotMessage } from '@/features/query-bot/component/bot-message'
+import { HeaderCard } from '@/features/query-bot/component/header-card'
 import { UserMessage } from '@/features/query-bot/component/userMessage'
 import { ChatType } from '@/features/query-bot/types'
 
@@ -80,17 +81,16 @@ export const Query = () => {
     }
   }
   return (
-    <main className="flex h-screen space-x-16 p-8">
-      <div className="flex w-80 flex-col">
-        <h1 className="font-bold">News navigator</h1>
-        <div className="mt-16 flex flex-1 flex-col overflow-y-auto">
+    <main className="flex h-screen space-x-16 bg-gray-50 p-8">
+      <div className="sideBoxShadow flex w-80 flex-col rounded-lg px-8">
+        <div className="flex flex-1 flex-col overflow-y-auto">
           <h2 className="font-bold">Upload Files</h2>
           <ul className="mt-8 flex-1 overflow-y-auto">
             {uploadFiles.map((item) => {
               return (
                 <li
                   key={item.id}
-                  className="mb-5 flex h-16 items-center bg-violet-400 px-2.5 text-white"
+                  className="mb-5 flex h-[42px] cursor-pointer items-center rounded-md px-2.5 odd:bg-gray-100"
                 >
                   <IconFile className="mr-2.5" />
                   <span className="... truncate">{item.name}</span>
@@ -101,8 +101,9 @@ export const Query = () => {
         </div>
       </div>
       <div className="flex w-full flex-col overflow-x-hidden">
+        <HeaderCard />
         <div
-          className="flex-1 overflow-y-scroll"
+          className="mt-5 flex-1 overflow-y-scroll"
           ref={conversation}
         >
           {messages.map((item, index) => (
@@ -110,19 +111,22 @@ export const Query = () => {
               {item.type === ChatType.HUMAN ? (
                 <UserMessage content={item.content} />
               ) : (
-                <BotMessage
-                  key={index}
-                  content={item.content}
-                  loading={answering}
-                />
+                <>
+                  <div className="my-4 border-[0.5px]"></div>
+                  <BotMessage
+                    key={index}
+                    content={item.content}
+                    loading={answering}
+                  />
+                </>
               )}
             </React.Fragment>
           ))}
         </div>
-        <div className="mt-4 flex items-center justify-between bg-emerald-50">
+        <div className="mt-4 flex items-center justify-between rounded-lg bg-white p-4 ">
           <textarea
             value={inputValue}
-            className="flex h-16 w-full resize-none bg-background bg-emerald-50 px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            className="flex h-16 w-full resize-none bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             placeholder="Ask GluonMeson ..."
             rows={1}
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
