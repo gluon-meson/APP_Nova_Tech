@@ -37,35 +37,35 @@ export const queryKnowledgeBase = async (
   params: KB_QUERY_PARAM,
 ): Promise<KB_QUERY_RESP | undefined> => {
   const { page = 1, size = 100, data_set_id, query = '' } = params
-  try {
-    const res = await fetch(
-      `${process.env.KNOWLEDGE_BASE_URL}/data-sets/${data_set_id}/search`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          authorization: `Bearer ${process.env.OFFLINE_TOKEN}`,
-        },
-        body: JSON.stringify({
-          query: query,
-        }),
-        method: 'POST',
+  const res = await fetch(
+    `${process.env.KNOWLEDGE_BASE_URL}/data-sets/${data_set_id}/search`,
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${process.env.OFFLINE_TOKEN}`,
       },
-    ).then((res) => {
-      if (!res.ok) {
-        throw new Error(`queryKnowledgeBase error! status: ${res.status}`)
-      }
-      return res.json()
-    })
+      body: JSON.stringify({
+        query: query,
+      }),
+      method: 'POST',
+    },
+  )
 
-    logger.info(
-      {
-        params,
-        res,
-      },
-      'queryKnowledgeBase done with:',
+  if (!res.ok) {
+    const error = new Error(
+      `queryKnowledgeBase error! status: ${res.status}, message: ${res.statusText}`,
     )
-    return res
-  } catch (e) {
-    logger.error(e, 'queryKnowledgeBase error:')
+    error.cause = res
+    throw error
   }
+  const data = await res.json()
+
+  logger.info(
+    {
+      params,
+      data,
+    },
+    'queryKnowledgeBase done with:',
+  )
+  return data
 }

@@ -89,6 +89,7 @@ export async function get_data(query: string) {
     data_set_id: 215,
   }).catch((e) => {
     logger.error(e, 'tool get_data error:')
+    return 'Nothing got, try again with more context for the query param'
   })
   logger.info(res, 'get_data done with:')
   return 'the response is:' + res ? JSON.stringify(res) : ''
