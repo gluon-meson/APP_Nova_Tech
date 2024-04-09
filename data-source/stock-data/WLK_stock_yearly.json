@@ -1,0 +1,50 @@
+[
+  {
+    "ticker": "WLK",
+    "date": "2021-12-31",
+    "open": 83.16,
+    "high": 106.47,
+    "low": 74.42,
+    "close": 97.13,
+    "volume": 146942829,
+    "ticker_name": "Westlake Corp",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  },
+  {
+    "ticker": "WLK",
+    "date": "2022-12-30",
+    "open": 98.05,
+    "high": 141.19,
+    "low": 81.285,
+    "close": 102.54,
+    "volume": 197444166,
+    "ticker_name": "Westlake Corp",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  },
+  {
+    "ticker": "WLK",
+    "date": "2023-12-29",
+    "open": 102.75,
+    "high": 143.61,
+    "low": 98.05,
+    "close": 139.96,
+    "volume": 117895963,
+    "ticker_name": "Westlake Corp",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  },
+  {
+    "ticker": "WLK",
+    "date": "2024-04-08",
+    "open": 140.33,
+    "high": 160.94,
+    "low": 118.635,
+    "close": 158.15,
+    "volume": 25440099,
+    "ticker_name": "Westlake Corp",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  }
+]

@@ -41,10 +41,9 @@ function getStockData(stockInfo: STOCK_INFO, data_type: DATA_TYPE) {
 }
 
 const colaStockInfo: STOCK_INFO = {
-  exchange_code: 'NYSE',
+  exchange_code: 'XNYS',
   ticker: 'KO',
-  ticker_name: 'Cola',
-  start_date: '2021-04-08',
+  ticker_name: 'Coca-Cola Co',
 }
 
 const bookingStockInfo: STOCK_INFO = {
@@ -60,5 +59,13 @@ const ciscoStockInfo: STOCK_INFO = {
   ticker_name: 'Cisco Systems Inc',
 }
 
+const westlakeStockInfo: STOCK_INFO = {
+  exchange_code: 'XNYS', // New York Stock Exchange
+  ticker: 'WLK',
+  ticker_name: 'Westlake Corp',
+}
+
 // getStockData(bookingStockInfo, DATA_TYPE.DAILY)
-getStockData(ciscoStockInfo, DATA_TYPE.DAILY)
+// getStockData(ciscoStockInfo, DATA_TYPE.DAILY)
+// getStockData(westlakeStockInfo, DATA_TYPE.DAILY)
+// getStockData(colaStockInfo, DATA_TYPE.MONTHLY)

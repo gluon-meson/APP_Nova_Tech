@@ -1,0 +1,50 @@
+[
+  {
+    "ticker": "KO",
+    "date": "2021-12-31",
+    "open": 54.27,
+    "high": 59.35,
+    "low": 48.11,
+    "close": 59.21,
+    "volume": 3990523600,
+    "ticker_name": "Coca-Cola Co",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  },
+  {
+    "ticker": "KO",
+    "date": "2022-12-30",
+    "open": 58.82,
+    "high": 67.2,
+    "low": 54.02,
+    "close": 63.61,
+    "volume": 4021898700,
+    "ticker_name": "Coca-Cola Co",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  },
+  {
+    "ticker": "KO",
+    "date": "2023-12-29",
+    "open": 63.56,
+    "high": 64.99,
+    "low": 51.55,
+    "close": 58.93,
+    "volume": 3438191300,
+    "ticker_name": "Coca-Cola Co",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  },
+  {
+    "ticker": "KO",
+    "date": "2024-04-08",
+    "open": 58.8,
+    "high": 61.62,
+    "low": 58.66,
+    "close": 59.27,
+    "volume": 925098447,
+    "ticker_name": "Coca-Cola Co",
+    "exchange_code": "XNYS",
+    "type": "yearly"
+  }
+]

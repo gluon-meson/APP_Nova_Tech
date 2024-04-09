@@ -58,4 +58,8 @@ async function saveData(path: string) {
 }
 
 // saveData('../stock-data/BKNG_stock_yearly.json')
-saveData('../stock-data/CSCO_stock_daily.json')
+// saveData('../stock-data/CSCO_stock_daily.json')
+// saveData('../stock-data/KO_stock_daily.json')
+// saveData('../stock-data/KO_stock_weekly.json')
+// saveData('../stock-data/KO_stock_monthly.json')
+saveData('../stock-data/WLK_stock_daily.json')
