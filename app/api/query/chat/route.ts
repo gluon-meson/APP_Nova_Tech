@@ -1,17 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+import { HTTP_METHOD } from '../../../../constants/http'
+
 export async function POST(request: NextRequest) {
   const reqBody = await request.json()
-  const res = await fetch(
-    'http://bj-3090.private.gluon-meson.tech:1022/score',
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(reqBody),
+  const res = await fetch(`${process.env.WEALTH_MANAGEMENT_CHAT_URL}`, {
+    method: HTTP_METHOD.POST,
+    headers: {
+      'Content-Type': 'application/json',
     },
-  )
+    body: JSON.stringify(reqBody),
+  })
   let content = ''
   // @ts-ignore
   const reader = res.body.getReader()

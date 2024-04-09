@@ -9,5 +9,6 @@ namespace NodeJS {
 
     KNOWLEDGE_BASE_URL: string
     OFFLINE_TOKEN: string
+    WEALTH_MANAGEMENT_CHAT_URL: string
   }
 }
