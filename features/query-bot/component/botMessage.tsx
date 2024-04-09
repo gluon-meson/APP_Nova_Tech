@@ -1,8 +1,10 @@
 import React from 'react'
 
+import MarkdownRenderer from '@/components/markdown-renderer'
+
 type Props = {
   className?: string
-  content: React.ReactNode
+  content: string
 }
 export const BotMessage = ({ content }: Props) => {
   return (
@@ -11,7 +13,7 @@ export const BotMessage = ({ content }: Props) => {
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <span>GluonMeson's reply:</span>
       </div>
-      <div className="break-words">{content}</div>
+      <MarkdownRenderer markdown={content} />
     </div>
   )
 }
