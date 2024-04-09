@@ -1,0 +1,2187 @@
+[
+  {
+    "ticker": "BCOMGC",
+    "name": "Gold",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSY",
+    "name": "Soybeans",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "CPQ",
+    "name": "ISE Cloud Computing",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSDN",
+    "name": "Dow Jones Defense",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSES",
+    "name": "Dow Jones Real Estate Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFT",
+    "name": "Dow Jones Footwear",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSL",
+    "name": "Dow Jones Large-Cap",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRL",
+    "name": "Dow Jones Retail REITs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NTUHCB",
+    "name": "Northern Trust High Yield US Corporate Bond Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "S5FI",
+    "name": "S&P 500 Stocks Above 50-Day Average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SGIXGD5L",
+    "name": "Gold x5 Leveraged Index (USD TR)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP100",
+    "name": "S&P 100 Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP400",
+    "name": "S&P 400 Midcap",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPGSCLP",
+    "name": "S&P GSCI Crude Oil Index Excess",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US6M",
+    "name": "U.S. 6 Month Treasury Bill",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XLHK",
+    "name": "Dow Jones Hong Kong Titans 30",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DECN",
+    "name": "NYSE Declining Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSBK",
+    "name": "Dow Jones Banks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSTK",
+    "name": "Dow Jones Trucking",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSTT",
+    "name": "Dow Jones Travel & Tourism",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MALA",
+    "name": "52-Week Lows AMEX",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NDXT",
+    "name": "NASDAQ 100 Technology Sector",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NVLD",
+    "name": "NYSE Declining Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "QSHD",
+    "name": "NASD Declining Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-55",
+    "name": "S&P 500 Utilities (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPCDNX",
+    "name": "S&P/TSX Venture Composite",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPGTCLTR",
+    "name": "S&P Global Clean Energy Index (TR)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLRCT",
+    "name": "S&P 500 Information Technology",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VIX1Y",
+    "name": "Cboe S&P 500 One-Year Volatil Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VIX3M",
+    "name": "CBOE S&P 500 3 Month Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XCI",
+    "name": "ARCA Computer Technology",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSOI",
+    "name": "Dow Jones Oil Equipment & Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRU",
+    "name": "Dow Jones Restaurants & Bars",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSWC",
+    "name": "Dow Jones Mobile Telecommunications",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "EMCLOUDN",
+    "name": "BVP Nasdaq Emerging Cloud NTR Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "EVZ",
+    "name": "CBOE Euro Currency Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "GVZ",
+    "name": "CBOE Gold Volatitity",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IXE",
+    "name": "IXE: Select Sector Spdr-energy  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IXF",
+    "name": "NASDAQ Financial 100",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "JPN",
+    "name": "ARCA Japan",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXR",
+    "name": "Consumer Staples Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXV",
+    "name": "Health Care Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPPREF",
+    "name": "S&P Preferred Stock Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VIX9D",
+    "name": "Cboe S&P 500 9-Day Volatility Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "W2DOW",
+    "name": "Dow Jones Global ex-U.S. Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XAG",
+    "name": "Stlmt ID PHLX Gold/Silver Sector",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "AVVA",
+    "name": "AMEX Advancing Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMBO",
+    "name": "Soybean Oil",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCA",
+    "name": "Dow Jones Gambling",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSPL",
+    "name": "Dow Jones Pipelines",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRA",
+    "name": "Dow Jones Apparel Retailers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "QVLD",
+    "name": "NASD Declining Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXU",
+    "name": "Utilities Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-15",
+    "name": "S&P 500 Materials (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-30",
+    "name": "S&P 500 Consumer Staples (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPPREFTR",
+    "name": "S&P U.S. Preferred Stock Index (TR)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US5Y",
+    "name": "U.S. 5 Year Treasury",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "UTY",
+    "name": "PHLX Utility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VIX",
+    "name": "CBOE Volatility Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XAX",
+    "name": "NYSE AMEX Composite",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "ASHD",
+    "name": "AMEX Declining Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMAG",
+    "name": "Agriculture",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMAGTR",
+    "name": "Agriculture Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCC",
+    "name": "Cocoa",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCCTR",
+    "name": "Cocoa Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMWH",
+    "name": "Wheat",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BEMEWER",
+    "name": "Bloomberg Energy and Metals EqualWeighted Excess R",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCX",
+    "name": "Dow Jones Specialty Chemicals",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSEH",
+    "name": "Dow Jones U.S. Real Estate Hold",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSPR",
+    "name": "Dow Jones Pharmaceuticals",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IDCOTCTR",
+    "name": "ICE U.S Treasury Core Bond TR Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NSHU",
+    "name": "NYSE Advancing Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "OEX",
+    "name": "S&P 100",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "RCI",
+    "name": "Dow Jones Composite All REIT",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPDAUDP",
+    "name": "S&P 500 Dividend Aristocrats",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US1M",
+    "name": "U.S. 1 Month Treasury Bill",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VXN",
+    "name": "CBOE NASDAQ 100 Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "WILRESI",
+    "name": "Wilshire US Real Estate Securities Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMNITR",
+    "name": "Nickel Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJTMDI",
+    "name": "Dow Jones Media Titans 30 Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSVE",
+    "name": "Dow Jones Conventional Electricity",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IBX50",
+    "name": "Bovespa Brazil 50",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "LOVOL",
+    "name": "CBOE Low Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "LOWQ",
+    "name": "NASD New Lows",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NBI",
+    "name": "NASDAQ Biotechnology",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NDTW",
+    "name": "Percent of Nasdaq stocks above 20 day average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NY",
+    "name": "NYSE US 100  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "QSHU",
+    "name": "NASD Advancing Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SGLY",
+    "name": "S&P GLOBAL 1200",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXT",
+    "name": "Technology Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPDGPAUP",
+    "name": "S&P Pan Asia Dividend Aristocrats",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPEUP",
+    "name": "S&P EUROPE 350",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPXPGX",
+    "name": "S&P 500 Pure Growth",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCLTR",
+    "name": "WTI Crude Oil Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCTTR",
+    "name": "Cotton Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BXMD",
+    "name": "CBOE S&P 500 30-Delta BuyWrite",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAF",
+    "name": "Dow Jones Delivery Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSIV",
+    "name": "Dow Jones Business Support Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSLG",
+    "name": "Dow Jones Hotels",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRR",
+    "name": "Dow Jones Railroads",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "FVX",
+    "name": "Treasury Yield 5 Years  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NQEU",
+    "name": "The NASDAQ Europe Indexed marke",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPIPSA",
+    "name": "S&P CLX IPSA",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMPE",
+    "name": "Bloomberg Petroleum Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSI",
+    "name": "Bloomberg Silver Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BVLG",
+    "name": "PSI All Share Gross Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJAT",
+    "name": "Dow Jones Asian Titans 50 USD",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSDV",
+    "name": "Dow Jones Computer Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSIB",
+    "name": "Dow Jones Insurance Brokers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSIU",
+    "name": "Dow Jones Reinsurance",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRB",
+    "name": "Dow Jones Broadline Retailers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWGROT",
+    "name": "Dow Jones U.S. Growth Total Stock Market",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXRE",
+    "name": "Real Estate Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPGSSINR",
+    "name": "S&P N AMER NAT RES",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "ATXPRIME",
+    "name": "ATX Prime",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMLI3T",
+    "name": "Bloomberg Livestock 3M Fwd TR",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSO",
+    "name": "Softs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSP",
+    "name": "Bloomberg Commodity Spot Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BSE500",
+    "name": "S&P BSE-500",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BTOUR",
+    "name": "BlueStar Travel and Vacation Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCP",
+    "name": "Dow Jones Containers & Packaging",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFA",
+    "name": "Dow Jones Financial Administration",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSPC",
+    "name": "Dow Jones Waste & Disposal Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MOVE",
+    "name": "ICE BofAML MOVE Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NRU",
+    "name": "S&P Global Natural Resources Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SBITOP",
+    "name": "Blue-Chip SBITOP",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-40",
+    "name": "S&P 500 Financials (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP600",
+    "name": "S&P 600",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US1Y",
+    "name": "U.S. 1 Year Treasury Bill",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "AMZ",
+    "name": "Alerian MLP Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAM",
+    "name": "Dow Jones Medical Equipment",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSEC",
+    "name": "Dow Jones Electrical Components & Equipment",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWCOGS",
+    "name": "DWCOGS: Dow Jones U.S. Oil & Gas Tota",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NYA",
+    "name": "NYSE Composite",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "PUT",
+    "name": "CBOE S&P 500 PutWrite Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXI",
+    "name": "Industrials Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLPEQTY",
+    "name": "S&P Listed Private Equity Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPNY",
+    "name": "S&P 500 Energy",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XBD",
+    "name": "ARCA Securities Broker",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMPR",
+    "name": "Precious Metals",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BTOURNTR",
+    "name": "BlueStar Travel and Vacation Index N",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJASD",
+    "name": "DJASD: Dow Jones Asia Select Dividen",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSDB",
+    "name": "Dow Jones Brewers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSGU",
+    "name": "Dow Jones Gas Distribution",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSMS",
+    "name": "Dow Jones Medical Supplies",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSSP",
+    "name": "Dow Jones Specialty Finance",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJX",
+    "name": "DOW JONES 1/100",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "TRIN",
+    "name": "NYSE Trin Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VIX1D",
+    "name": "Cboe S&P 500 1-Day Volatility Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VXGS",
+    "name": "CBOE Equity VIX on Goldman Sachs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XAU",
+    "name": "Philadelphia Gold/Silver",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XMI",
+    "name": "ARCA Major Markets",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMLCTR",
+    "name": "Live Cattle Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMPB",
+    "name": "Lead",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSITR",
+    "name": "Silver Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSN",
+    "name": "Tin",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMWHTR",
+    "name": "Wheat Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DECA",
+    "name": "AMEX Declining Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAL",
+    "name": "Dow Jones Aluminum",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRQ",
+    "name": "Dow Jones Recreational Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSTB",
+    "name": "Dow Jones Tobacco",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "HIGQ",
+    "name": "NASD New Highs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "S5TELS",
+    "name": "S&P 500 Communication Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SAX",
+    "name": "SAX",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-35",
+    "name": "S&P 500 Health Care (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP5IGBIT",
+    "name": "S&P 500 INVESTMENT GRADE CORPORATE BOND INDEX",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLRCD",
+    "name": "S&P 500 Consumer Discretionary",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VXD",
+    "name": "DJIA Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "W1DOW",
+    "name": "Dow Jones Global",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "ADVA",
+    "name": "AMEX Advancing Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSID",
+    "name": "Dow Jones Diversified Industrials",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSOL",
+    "name": "Dow Jones Integrated Oil & Gas",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IXIC",
+    "name": "NASDAQ Composite",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "OOI",
+    "name": "S&P Global 100",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-45",
+    "name": "S&P 500 Information Technology (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPSIRE",
+    "name": "S&P RETAIL SELECT INDUST",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPTMI",
+    "name": "S&P TMI",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPXVTR",
+    "name": "S&P 500 Value Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "TREIT",
+    "name": "Tokyo Stock Exchange REIT",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VXEWZ",
+    "name": "CBOE Brazil Etf Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "ADVN",
+    "name": "NYSE Advancing Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMBOTR",
+    "name": "Soybean Oil Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSYTR",
+    "name": "Soybeans Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAU",
+    "name": "Dow Jones Automobiles",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCF",
+    "name": "Dow Jones Clothing & Accessories",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSSD",
+    "name": "Dow Jones Soft Drinks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IXHC",
+    "name": "NASDAQ Health Care",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NYFANG",
+    "name": "NYSE FANG+TM",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXM",
+    "name": "CBOE Financial Select Sector",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPGSCI",
+    "name": "S&P Goldman Sachs Commodity Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPGSCITR",
+    "name": "S&P GSCI Commodity Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "W5KLCG",
+    "name": "Wilshire US Large Cap  Growth",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "W5KLCV",
+    "name": "Wilshire US Large Cap Value",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCO",
+    "name": "Brent Crude",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMNI",
+    "name": "Bloomberg Nickel Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMRB",
+    "name": "Unleaded Gasoline",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BSE200",
+    "name": "S&P BSE-200",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BTK",
+    "name": "ARCA Biotechnology",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCR",
+    "name": "Dow Jones Computer Hardware",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFE",
+    "name": "Dow Jones Industrial Machinery",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSMF",
+    "name": "Dow Jones Mortgage Finance",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWCF",
+    "name": "Dow Jones U.S. Total Stock Market Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IMUS",
+    "name": "Dow Jones Islamic Market US",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NYL",
+    "name": "NYSE World Leaders Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "PSE",
+    "name": "ARCA Technology 100",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "TNX",
+    "name": "Cboe Interest Rate 10 Year T Note",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VIX6M",
+    "name": "Cboe S&P 500 6-Month Volatility Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMKCTR",
+    "name": "Coffee Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMZS",
+    "name": "Zinc",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJT",
+    "name": "Dow Jones Transportation",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHP",
+    "name": "Dow Jones Health Care Providers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSSF",
+    "name": "Dow Jones Consumer Finance",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSST",
+    "name": "Dow Jones Iron & Steel",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "LOWA",
+    "name": "AMEX New Lows",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NTUICB",
+    "name": "Northern Trust Investment Grade US Corporate Bond Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPSY",
+    "name": "S&P 500 Financials",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPXGTR",
+    "name": "S&P 500 Growth Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "TICK",
+    "name": "NYSE Tick Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMHGTR",
+    "name": "Copper Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMLC",
+    "name": "Live Cattle",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMLH",
+    "name": "Lean Hogs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSBTR",
+    "name": "Sugar Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJCBP",
+    "name": "Dow Jones Equal Weight US Corporate Bond",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAR",
+    "name": "Dow Jones Airlines",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSIF",
+    "name": "Dow Jones Full Line Insurance",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSNS",
+    "name": "Dow Jones Internet",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DVCA",
+    "name": "AMEX Declining Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DXY",
+    "name": "US Dollar Currency Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MAHA",
+    "name": "52-Week Highs AMEX",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500TR",
+    "name": "S&P 500 TR (Total Return)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US10Y",
+    "name": "U.S. 10 Year Treasury",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "ASHU",
+    "name": "AMEX Advancing Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMEN3T",
+    "name": "Bloomberg Energy 3 Month Fwd TR",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DECQ",
+    "name": "NASD Declining Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJU",
+    "name": "Dow Jones Utility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSBE",
+    "name": "Dow Jones Business Training & Employment Agencies",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DVCQ",
+    "name": "NASD Declining Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "HIGN",
+    "name": "NYSE New Highs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IRX",
+    "name": "13-week Treasury Bill Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MAHQ",
+    "name": "52-Week Highs Nasdaq",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NSHD",
+    "name": "NYSE Declining Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NYATR",
+    "name": "NYSE Composite Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPHYDA",
+    "name": "S&P High Yield Dividend Aristocrats",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLRCM",
+    "name": "S&P 500 Materials",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPSUEP",
+    "name": "S&P Select Sector Capped 20% Energy",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMEN",
+    "name": "Bloomberg Energy Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMENTR",
+    "name": "Energy Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMRBTR",
+    "name": "Unleaded Gas Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJI",
+    "name": "Dow Jones Industrial Average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAG",
+    "name": "Dow Jones Asset Managers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFC",
+    "name": "Dow Jones Fixed Line Telecommunications",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSPB",
+    "name": "Dow Jones Publishing",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSTY",
+    "name": "Dow Jones Toys",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWRTFT",
+    "name": "Dow Jones U.S. Select REIT Total Return Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "GEX",
+    "name": "GEX (GERMAN ENTREPRENEURIAL TOTAL RETURN INDEX)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NZCI",
+    "name": "NZX All Share",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SDEX",
+    "name": "Nations SkewDex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLRCI",
+    "name": "S&P 500 Industrials",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPSVULP",
+    "name": "S&P 500 Capped 35/20 Utilities Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US30Y",
+    "name": "U.S. 30 Year Treasury",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US3M",
+    "name": "U.S. 3 Month Treasury Bill",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "AVVQ",
+    "name": "NASD Advancing Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCT",
+    "name": "Cotton",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMNGTR",
+    "name": "Natural Gas Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BKX",
+    "name": "KBW Bank",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSBD",
+    "name": "Dow Jones Building Materials & Fixtures",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSBT",
+    "name": "Dow Jones Biotechnology",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFP",
+    "name": "Dow Jones Food Product Makers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWCTIR",
+    "name": "Dow Jones U.S. Tires Total Stoc",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWMI",
+    "name": "DWMI: Dow Jones U.S. Micro-Cap Tota",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "HUI",
+    "name": "ARCA Gold BUGS",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MALQ",
+    "name": "52-Week Lows Nasdaq",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "TDEX",
+    "name": "Nations TailDex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US2Y",
+    "name": "U.S. 2 Year Treasury",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XSP",
+    "name": "S&P 500 MINI SPX OPTIONS INDEX",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOM",
+    "name": "Bloomberg Commodity Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCNTR",
+    "name": "Corn Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAI",
+    "name": "Dow Jones Electronic Equipment",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCM",
+    "name": "Dow Jones Personal Products",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHD",
+    "name": "Dow Jones Durable Household Products",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHV",
+    "name": "Dow Jones Heavy Construction",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSSW",
+    "name": "Dow Jones Software",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IMXL",
+    "name": "Dow Jones Islamic Market Titans 100",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "LOWN",
+    "name": "NYSE New Lows",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NYY",
+    "name": "NYSE TMT  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "S5TW",
+    "name": "S&P 500 Stocks Above 20-Day Average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXC",
+    "name": "CBOE Communication Services Select Sector",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SKEW",
+    "name": "CBOE SKEW Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMALTR",
+    "name": "Aluminum Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJCI",
+    "name": "Dow Jones Commodity",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAS",
+    "name": "Dow Jones Aerospace",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSEN",
+    "name": "Dow Jones Oil & Gas",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFH",
+    "name": "Dow Jones Furnishings",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSIO",
+    "name": "Dow Jones Industrial & Office REITs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSMR",
+    "name": "Dow Jones Mortgage REITs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "GSPC",
+    "name": "S&P 500 Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLRCS",
+    "name": "S&P 500 Consumer Staples",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPXEW",
+    "name": "S&P 500 Equal Weighted",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "TYX",
+    "name": "Treasury Yield 30 Years  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US7Y",
+    "name": "U.S. 7 Year Treasury",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VOLI",
+    "name": "Nations VolDex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XII",
+    "name": "ARCA Institutional",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCN",
+    "name": "Bloomberg Corn Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMHG",
+    "name": "Bloomberg Copper Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMIN",
+    "name": "Industrial Metals",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMLITR",
+    "name": "Bloomberg Livestock TR",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJBGI",
+    "name": "Dow Jones Brookfield Global Infrastructure USD",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCS",
+    "name": "Dow Jones Specialized Consumer Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHR",
+    "name": "Dow Jones Commercial Vehicles & Trucks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSIP",
+    "name": "Dow Jones Property & Casualty Insurance",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSMU",
+    "name": "Dow Jones Multiutilities",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRP",
+    "name": "Dow Jones Recreational Products",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWRTF",
+    "name": "Dow Jones Select REIT",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "IDCOT10TR",
+    "name": "ICE U.S. Treasury 10-20 Year TR",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXB",
+    "name": "Materials Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXE",
+    "name": "Energy Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-60",
+    "name": "S&P 500 Real Estate (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPXNTR",
+    "name": "S&P 500 Net TR",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCL",
+    "name": "WTI Crude Oil",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMCOT",
+    "name": "Brent Crude Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSPM",
+    "name": "Dow Jones Gold Mining",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSSB",
+    "name": "Dow Jones Investment Services",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "GSPTXDV",
+    "name": "S&P/TSX Dividend Aristocrats",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MID",
+    "name": "S&P Midcap 400",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NVLU",
+    "name": "NYSE Advancing Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-151010",
+    "name": "S&P 500 Chemicals",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500NTR",
+    "name": "S&P 500 Net Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPCLXIGPA",
+    "name": "S&P CLX IGPA",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "ADVQ",
+    "name": "NASD Advancing Stocks",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMGCTR",
+    "name": "Gold Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSBC",
+    "name": "Dow Jones Broadcasting & Entertainment",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSNF",
+    "name": "Dow Jones Nonferrous Metals",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DRG",
+    "name": "ARCA Pharmaceutical",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "HIGA",
+    "name": "AMEX New Highs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NDFI",
+    "name": "Percent of Nasdaq stocks above 50 day average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NWX",
+    "name": "ARCA Networking",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500BDT",
+    "name": "S&P 500 Bond Index Total",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLRCREC",
+    "name": "S&P 500 Real Estate",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "5SP2550",
+    "name": "S&P 500 Retailing (Industry Group)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMPL",
+    "name": "Bloomberg Platinum Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMSB",
+    "name": "Sugar",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJASDT",
+    "name": "DJASDT: Dow Jones Asia Select Dividen",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAT",
+    "name": "Dow Jones Auto Parts Makers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCC",
+    "name": "Dow Jones Commodity Chemicals",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSCT",
+    "name": "DowJones Telecommunications Equipment",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSDS",
+    "name": "Dow Jones Industrial Suppliers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSDT",
+    "name": "Dow Jones Diversified REITs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSVN",
+    "name": "Dow Jones Distillers & Vintners",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSWU",
+    "name": "Dow Jones Water",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DVG",
+    "name": "NASDAQ US Dividend Achievers Select",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWCCOA",
+    "name": "Dow Jones U.S. Coal Total Stock",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "HGX",
+    "name": "PHLX Housing",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "QVLU",
+    "name": "NASD Advancing Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPVIXSTR",
+    "name": "SP 500 VIX Short Term Futures",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SX8P",
+    "name": "STOXX Europe 600 Technology",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "US500",
+    "name": "S&P 500 Futures",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "W5000",
+    "name": "Wilshire 5000 Total Market Full Cap",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XAL",
+    "name": "ARCA Airline",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "AVLD",
+    "name": "AMEX Declining Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMZSTR",
+    "name": "Zinc Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHL",
+    "name": "Dow Jones Hotel & Lodging REITs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSM",
+    "name": "Dow Jones Mid-Cap",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MAHN",
+    "name": "52-Week Highs NYSE",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "S5TH",
+    "name": "S&P 500 Stocks Above 200-Day Average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-20",
+    "name": "S&P 500 Industrials (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPDAEHN",
+    "name": "S&P Europe 350 Dividend Aristocrats",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPDAUDT",
+    "name": "S&P 500 Dividends Aristocrats Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPG1200",
+    "name": "S&P GLOBAL 1200",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPGNRET",
+    "name": "S&P Global Natural Resources Index Equal Weight",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VALUG",
+    "name": "Value Line Geometric Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "AVLU",
+    "name": "AMEX Advancing Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "AVVN",
+    "name": "NYSE Advancing Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMGR",
+    "name": "Grains",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSSR",
+    "name": "Dow Jones Specialty REITs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DVGTR",
+    "name": "NASDAQ DIV ACHIEVRS SEL IDX TR",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWCREE",
+    "name": "Dow Jones U.S. Renewable Energy",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MXY",
+    "name": "ARCA Mexico",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "QMI",
+    "name": "NASDAQ 100 Pre Market Indicator",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "REIT",
+    "name": "DOW JONES EQUITY ALL REIT TOTAL RETURN INDEX",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPSIOP",
+    "name": "S&P OIL GAS EXPLOR PROD",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPSUPX",
+    "name": "S&P Composite 1500  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMHO",
+    "name": "Heat Oil",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMHOTR",
+    "name": "Heat Oil Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMLI",
+    "name": "Bloomberg Livestock Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "CN20",
+    "name": "CAC Next 20",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHB",
+    "name": "Dow Jones Home Construction",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHI",
+    "name": "Dow Jones Home Improvement Retailers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSMG",
+    "name": "Dow Jones Mining",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSOS",
+    "name": "Dow Jones Exploration & Production",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRD",
+    "name": "Dow Jones Drug Retailers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSS",
+    "name": "Dow Jones Small-Cap",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWRSF",
+    "name": "Dow Jones US Select Real Estate Securities",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWST",
+    "name": "Dow Jones U.S. Small-Cap Total Stock Market Total Return Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NDTH",
+    "name": "Percent of Nasdaq stocks above 200 day average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NDX",
+    "name": "Nasdaq 100",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "OSX",
+    "name": "PHLX Oil Service",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-50",
+    "name": "S&P 500 Telecommunication Services (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SXY",
+    "name": "PHLX Swiss Franc",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMAL",
+    "name": "Bloomberg Aluminum Subindex",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFN",
+    "name": "DJUSFN: Dow Jones U.S. Financials  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSHN",
+    "name": "Dow Jones Nondurable Household Products",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSIL",
+    "name": "Dow Jones Life Insurance",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSMT",
+    "name": "Dow Jones Marine Transportation",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DWCPAP",
+    "name": "Dow Jones U.S. Paper Total Stoc",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NQROBO",
+    "name": "Nasdaq CTA Artificial Intelligence & Robotics",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SOX",
+    "name": "Philadelphia Semiconductor Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SP500-25",
+    "name": "S&P 500 Consumer Discretionary (Sector)",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VVIX",
+    "name": "CBOE Vix Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "VXTH",
+    "name": "CBOE Vix Tail Hedge",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "WGRESI",
+    "name": "Wilshire Global Real Estate Securities  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XOI",
+    "name": "ARCA Oil",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMKC",
+    "name": "Coffee",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMLHTR",
+    "name": "Lean Hogs Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "BCOMNG",
+    "name": "Natural Gas",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJARB50",
+    "name": "Dow Jones Arabia Titans 50",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUS",
+    "name": "Dow Jones US",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSAV",
+    "name": "Dow Jones Media Agencies",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSFD",
+    "name": "Dow Jones Food Retail & Wholesale",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRN",
+    "name": "Dow Jones Residential REITs",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSSC",
+    "name": "Dow Jones Semiconductors",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DVCN",
+    "name": "NYSE Declining Volume",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MALN",
+    "name": "52-Week Lows NYSE",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "OVX",
+    "name": "CBOE Crude Oil Volatility",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SIXY",
+    "name": "Consumer Discretionary Select Sector Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SML",
+    "name": "S&P Small-Cap 600  Index",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPGSCLTR",
+    "name": "S&P GSCI Crude Oil Index Total",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "TR20",
+    "name": "Dow Jones Turkey Titans 20",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XCMP",
+    "name": "NASDAQ Composite Total Return",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "XNG",
+    "name": "ARCA Natural Gas",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "CXY",
+    "name": "PHLX Canadian Dollar",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJA",
+    "name": "Dow Jones Composite Average",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "DJUSRS",
+    "name": "Dow Jones Specialty Retailers",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "MERH0A0",
+    "name": "ICE BofA US High Yield",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "NQEM",
+    "name": "NASDAQ Emerging Markets",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPLRCU",
+    "name": "S&P 500 Utilities",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPVIXETR",
+    "name": "SP500 VIX Futures Enhanced Roll TR",
+    "country_code": "USA"
+  },
+  {
+    "ticker": "SPXHC",
+    "name": "S&P 500 Health Care",
+    "country_code": "USA"
+  }
+]
