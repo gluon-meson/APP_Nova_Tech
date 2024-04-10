@@ -4,7 +4,7 @@ import {
   Extended_KB_QUERY_RESP,
   getDataForCandleStickChart,
 } from 'data-source/utils'
-import { logger } from 'lib/shared'
+import { convertToNumber, logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
@@ -12,6 +12,7 @@ import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
 
 import KChart from './component/charts/kChart'
+import { VolumeAreaChart } from './component/charts/volume-area-chart'
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
 import { get_current_weather, get_data, TOOLS_NAMES } from './tools'
@@ -79,6 +80,45 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       const res = await get_data(args.query, args?.size)
       reply.update(<SpinnerWithText text="LLM analysing..." />)
       return res
+    },
+  )
+
+  completion.onToolCall(
+    TOOLS_NAMES.DRAW_LINE_BAR_CHART,
+    async (args: { query: string; data_key: string; size?: number }) => {
+      logger.info(args.query, 'call DRAW_LINE_BAR_CHART with query:')
+      try {
+        const { query, data_key, size = 100 } = args
+        const data = await queryKnowledgeBase({
+          query,
+          size,
+          data_set_id: 215,
+        })
+        logger.info(data, 'DRAW_LINE_BAR_CHART got data:')
+        if (Array.isArray(data?.items) && data?.items.length) {
+          const list = data.items.map((item) => ({
+            ...item,
+            [data_key]: convertToNumber(item[data_key]) ?? 0,
+          }))
+          // @ts-ignore
+          list.sort((a, b) => new Date(a.date) - new Date(b.date))
+          const xAxisData = list.map((item) => item.date)
+          const yAxisData = list.map((item) => item[data_key])
+          toolsStreamUI.append(
+            <VolumeAreaChart
+              name={data_key}
+              xAxisData={xAxisData}
+              yAxisData={yAxisData}
+            />,
+          )
+          return `the chart had draw with data: xAxis: ${JSON.stringify(xAxisData)} and yAxis: ${JSON.stringify(yAxisData)}}, explain the chart and give a summary or insight within 100 words`
+        }
+        return 'the data retrieved is not right, can not draw chart, try again/'
+      } catch (err) {
+        logger.error(err, 'tool DRAW_LINE_BAR_CHART error:')
+      }
+
+      return 'failed, try again'
     },
   )
 

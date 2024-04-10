@@ -29,7 +29,8 @@ export const prompt = `
 3. **Data Summarization:** When presenting data, provide a summary in no more than 200 words.
 4. If I ask a question for which you cannot find relevant data through your tools, please refrain from fabricating data; simply state that you do not have such information.
 5. Use the different types appropriately: Daily, weekly, monthly, and yearly data to match the query, and it's better to tell the understanding when you can the *get_data* tool also.
-6. **Markdown Responses:** When appropriate, format your responses in Markdown to enhance readability and presentation.
+6. Call/Use chart tool if the is pretty relative the question.
+7. **Markdown Responses:** When appropriate, format your responses in Markdown to enhance readability and presentation.
 `
 
 // Booking Holdings Inc(BKNG),Cisco Systems Inc(CSCO),Coca-Cola Co(KO),Westlake Corp(WLK)

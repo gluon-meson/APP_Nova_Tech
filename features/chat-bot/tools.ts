@@ -43,10 +43,38 @@ export const tools: OpenAI.ChatCompletionTool[] = [
             type: 'number',
             description:
               'how many items do you want to get when the data you want to get is a list not aggregated, make sure the amount of data is under your control, ' +
-              'currently the supported maximum size is 100',
+              'currently the supported **maximum size** is 100', // todo
           },
         },
         required: ['query'],
+      },
+    },
+  },
+  {
+    type: 'function',
+    function: {
+      name: 'draw_line_bar_chart',
+      description: `it can draw line and bar chart for ${data_explain}, the default is line chart, you can notice me to switch to bar chart by the top right icon.`,
+      parameters: {
+        type: 'object',
+        properties: {
+          query: {
+            type: 'string',
+            description:
+              'what data the chart want to show, similar with tool get_data query parameter, but it should query a list of data not a aggregated one.',
+          },
+          data_key: {
+            type: 'string',
+            description: 'it should be open, high, low, close price or volume',
+          },
+          size: {
+            type: 'number',
+            description:
+              'how many items do you want to get when the data you want to get is a list not aggregated, make sure the amount of data is under your control, ' +
+              'currently the supported maximum size is 100',
+          },
+        },
+        required: ['query', 'data_key'],
       },
     },
   },
@@ -77,6 +105,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
 export enum TOOLS_NAMES {
   GET_WEATHER = 'get_current_weather',
   GET_DATA = 'get_data',
+  DRAW_LINE_BAR_CHART = 'draw_line_bar_chart',
   DRAW_CANDLE_CHART = 'draw_candle_chart',
 }
 
