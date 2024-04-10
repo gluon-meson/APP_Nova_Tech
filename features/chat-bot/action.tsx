@@ -132,6 +132,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   completion.onToolCall(
     TOOLS_NAMES.DRAW_CANDLE_CHART,
     async (args: { query: string; incorporation: string }) => {
+      reply.update(<SpinnerWithText text="Data retriving..." />)
       logger.info(args.query, 'call DRAW_CANDLE_CHART with query:')
       const res = await queryKnowledgeBase({
         query: args.query,
@@ -146,6 +147,10 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
         return 'Drawing error, try again with more context for the query param'
       }
       const data = covertDataForLine(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)
+
+      if (data.length === 0) {
+        return 'Drawing error, try again with more context for the query param'
+      }
       logger.info(data, 'convert data from knowledge base done with:')
       toolsStreamUI.append(
         <KChart
