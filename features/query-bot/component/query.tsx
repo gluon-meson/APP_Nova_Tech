@@ -85,29 +85,31 @@ export const Query = () => {
     }, 100)
   }
   return (
-    <div className="ml-16 mr-8 flex w-full flex-col overflow-visible">
-      <div
-        className="mt-5 flex-1 overflow-y-scroll"
-        ref={conversation}
-      >
-        {messages.map((item, index) => (
-          <React.Fragment key={index}>
-            {item.type === ChatType.HUMAN ? (
-              <>
-                <UserMessage content={item.content} />
-                {index !== messages.length && (
-                  <div className="my-4 border-[0.5px]"></div>
-                )}
-              </>
-            ) : (
-              <BotMessage
-                key={index}
-                content={item.content}
-                loading={answering}
-              />
-            )}
-          </React.Fragment>
-        ))}
+    <div className="ml-16 mr-8 flex w-full flex-col">
+      <div className="w-full flex-1 overflow-auto">
+        <div
+          className="mt-5 flex-1 overflow-y-scroll"
+          ref={conversation}
+        >
+          {messages.map((item, index) => (
+            <React.Fragment key={index}>
+              {item.type === ChatType.HUMAN ? (
+                <>
+                  <UserMessage content={item.content} />
+                  {index !== messages.length && (
+                    <div className="my-4 border-[0.5px]"></div>
+                  )}
+                </>
+              ) : (
+                <BotMessage
+                  key={index}
+                  content={item.content}
+                  loading={answering}
+                />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
       </div>
       <div className="customBoxShadow flex items-center justify-between rounded-lg bg-white">
         <textarea
