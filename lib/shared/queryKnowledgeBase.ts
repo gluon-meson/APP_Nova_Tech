@@ -26,13 +26,14 @@ export type KB_QUERY_PARAM = {
   sort?: SearchSort[]
 }
 
-export type KB_QUERY_RESP = {
-  items: Record<string, any>[]
+export type KB_QUERY_RESP<T = Record<string, any>> = {
+  items: T[]
   total: number
   page: number
   size: number
   pages: number
 }
+
 export const queryKnowledgeBase = async (
   params: KB_QUERY_PARAM,
 ): Promise<KB_QUERY_RESP | undefined> => {

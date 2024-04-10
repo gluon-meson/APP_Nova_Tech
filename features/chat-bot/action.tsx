@@ -1,22 +1,28 @@
 import { nanoid } from 'ai'
 import { createAI, createStreamableUI, getMutableAIState } from 'ai/rsc'
-import {
-  Extended_KB_QUERY_RESP,
-  getDataForCandleStickChart,
-} from 'data-source/utils'
-import { convertToNumber, logger } from 'lib/shared'
+import { convertCurrencyToNumber, logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
+import { covertDataForLine } from '@/features/chat-bot/utils'
+import {
+  KB_QUERY_RESP,
+  queryKnowledgeBase,
+} from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
 
-import KChart from './component/charts/kChart'
-import { VolumeAreaChart } from './component/charts/volume-area-chart'
+import KChart from './component/charts/k-chart'
+import { LineBarChart } from './component/charts/line-bar-chart'
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
 import { get_current_weather, get_data, TOOLS_NAMES } from './tools'
-import { AIState, MessageRole, UIState, UIStateType } from './types'
+import {
+  AIState,
+  MessageRole,
+  STOCK_DATA_ITEM,
+  UIState,
+  UIStateType,
+} from './types'
 
 async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   'use server'
@@ -88,6 +94,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     async (args: { query: string; data_key: string; size?: number }) => {
       logger.info(args.query, 'call DRAW_LINE_BAR_CHART with query:')
       try {
+        // todo merge with get_data tool?
         const { query, data_key, size = 100 } = args
         const data = await queryKnowledgeBase({
           query,
@@ -98,14 +105,14 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
         if (Array.isArray(data?.items) && data?.items.length) {
           const list = data.items.map((item) => ({
             ...item,
-            [data_key]: convertToNumber(item[data_key]) ?? 0,
+            [data_key]: convertCurrencyToNumber(item[data_key]) ?? 0,
           }))
           // @ts-ignore
           list.sort((a, b) => new Date(a.date) - new Date(b.date))
           const xAxisData = list.map((item) => item.date)
           const yAxisData = list.map((item) => item[data_key])
           toolsStreamUI.append(
-            <VolumeAreaChart
+            <LineBarChart
               name={data_key}
               xAxisData={xAxisData}
               yAxisData={yAxisData}
@@ -125,25 +132,21 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   completion.onToolCall(
     TOOLS_NAMES.DRAW_CANDLE_CHART,
     async (args: { query: string; incorporation: string }) => {
-      logger.info(args.query, 'call queryKnowledgeBase with query:')
-      const res = (await queryKnowledgeBase({
+      logger.info(args.query, 'call DRAW_CANDLE_CHART with query:')
+      const res = await queryKnowledgeBase({
         query: args.query,
         data_set_id: 215,
       }).catch((e) => {
-        logger.error(e, 'tool get_data error:')
+        logger.error(e, 'tool DRAW_CANDLE_CHART error:')
         return 'Nothing got, try again with more context for the query param'
-      })) as Extended_KB_QUERY_RESP | undefined | string
-      logger.info(res, 'get_data done with:', JSON.stringify(res))
+      })
+      logger.info(res, 'kb query for DRAW_CANDLE_CHART done with:')
 
-      const data = getDataForCandleStickChart(res)
-      logger.info(
-        data,
-        'convert data from knowledge base done with:',
-        JSON.stringify(res),
-      )
-      if (data.length === 0) {
+      if (typeof res === 'string' || res?.items.length === 0) {
         return 'Drawing error, try again with more context for the query param'
       }
+      const data = covertDataForLine(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)
+      logger.info(data, 'convert data from knowledge base done with:')
       toolsStreamUI.append(
         <KChart
           originalData={data}

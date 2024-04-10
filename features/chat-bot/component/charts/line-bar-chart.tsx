@@ -4,7 +4,7 @@ import * as echarts from 'echarts'
 import ReactEcharts from 'echarts-for-react'
 import React from 'react'
 
-export const VolumeAreaChart = ({
+export const LineBarChart = ({
   xAxisData,
   yAxisData,
   name,

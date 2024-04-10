@@ -1,5 +1,3 @@
-import { STOCK_DATA } from '@/features/chat-bot/types'
-
 export const runAsyncFnWithoutBlocking = (
   fn: (...args: any) => Promise<any>,
 ) => {
@@ -14,10 +12,10 @@ export const consumeStream = async (stream: ReadableStream) => {
   }
 }
 
-export function convertToNumber(currencyString: string): number | null {
+export function convertCurrencyToNumber(currencyString: string): number {
   const cleanedString = currencyString.replace(/[^\d.-]/g, '')
 
   const result = parseFloat(cleanedString)
 
-  return Number.isNaN(result) ? null : result
+  return Number.isNaN(result) ? 0 : result
 }
