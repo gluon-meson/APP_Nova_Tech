@@ -12,7 +12,7 @@ import { UIState, UIStateType } from '../types'
 export const ChatList = () => {
   const [messages, setMessages] = useUIState<typeof AI>()
   return (
-    <div className="mx-auto mt-6 max-w-3xl px-4">
+    <div className="mx-auto mt-6 max-w-4xl md:pl-4">
       <div className="rounded-lg border bg-background p-4 pb-10">
         {messages.length === 0 && <ExampleMessages setMessages={setMessages} />}
         {messages.map((ui, index) => {
