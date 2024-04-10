@@ -1,5 +1,6 @@
 'use client'
 
+import TextArea from 'antd/lib/input/TextArea'
 import { cloneDeep } from 'lodash'
 import * as React from 'react'
 import { useEffect, useRef, useState } from 'react'
@@ -112,11 +113,11 @@ export const Query = () => {
         </div>
       </div>
       <div className="customBoxShadow flex items-center justify-between rounded-lg bg-white">
-        <textarea
-          value={inputValue}
-          className="flex h-16 w-full resize-none rounded-lg bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        <TextArea
+          className="flex h-16 w-full resize-none rounded-lg border-0 bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus:ring-transparent disabled:cursor-not-allowed disabled:opacity-50"
           placeholder="send your message ..."
-          rows={1}
+          autoSize={{ minRows: 1, maxRows: 5.5 }}
+          value={inputValue}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
             setInputValue(e.target.value)
           }
@@ -127,6 +128,21 @@ export const Query = () => {
             }
           }}
         />
+        {/*<textarea*/}
+        {/*  value={inputValue}*/}
+        {/*  className="flex h-16 w-full resize-none rounded-lg bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"*/}
+        {/*  placeholder="send your message ..."*/}
+        {/*  rows={1}*/}
+        {/*  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>*/}
+        {/*    setInputValue(e.target.value)*/}
+        {/*  }*/}
+        {/*  onKeyDown={(e) => {*/}
+        {/*    if (e.key === ENTER_KEY && !e.shiftKey) {*/}
+        {/*      e.preventDefault()*/}
+        {/*      handleSendMessage()*/}
+        {/*    }*/}
+        {/*  }}*/}
+        {/*/>*/}
         <div className="mx-4">
           {answering ? (
             <IconSend className="fill-gray-400" />

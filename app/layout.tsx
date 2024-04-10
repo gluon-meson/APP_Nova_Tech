@@ -1,4 +1,5 @@
 import '@/styles/globals.css'
+import '@/styles/rewrite.css'
 
 import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
