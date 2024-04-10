@@ -9,8 +9,10 @@ const downColor = '#ec0000'
 
 export default function KChart({
   originalData,
+  incorporation,
 }: {
   originalData: DATA_ITEM[]
+  incorporation: string
 }) {
   const chartRef = useRef(null)
 
@@ -61,7 +63,7 @@ export default function KChart({
       legend: {
         bottom: 10,
         left: 'center',
-        data: ['Dow-Jones index', 'MA5', 'MA10', 'MA20', 'MA30'],
+        data: [incorporation, 'MA5', 'MA10', 'MA20', 'MA30'],
       },
       tooltip: {
         trigger: 'axis',
@@ -205,7 +207,7 @@ export default function KChart({
       ],
       series: [
         {
-          name: 'Dow-Jones index',
+          name: incorporation,
           type: 'candlestick',
           data: data.values,
           itemStyle: {
@@ -271,7 +273,7 @@ export default function KChart({
   return (
     <div
       ref={chartRef}
-      style={{ height: '400px', width: '100%' }}
+      style={{ height: '500px', width: '100%' }}
     />
   )
 }

@@ -1,10 +1,14 @@
 import { nanoid } from 'ai'
 import { createAI, createStreamableUI, getMutableAIState } from 'ai/rsc'
-import { getDataForCandleChart } from 'data-source/utils'
+import {
+  Extended_KB_QUERY_RESP,
+  getDataForCandleStickChart,
+} from 'data-source/utils'
 import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
+import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
 
 import KChart from './component/charts/kChart'
@@ -76,12 +80,38 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     },
   )
 
-  completion.onToolCall(TOOLS_NAMES.DRAW_CANDLE_CHART, async () => {
-    const data = await getDataForCandleChart()
-    toolsStreamUI.append(<KChart originalData={data} />)
-    // How do we pass the context of the graph to LLM, the data is too large
-    return 'the candlestick chart had been drawn for the stock data'
-  })
+  completion.onToolCall(
+    TOOLS_NAMES.DRAW_CANDLE_CHART,
+    async (args: { query: string; incorporation: string }) => {
+      logger.info(args.query, 'call queryKnowledgeBase with query:')
+      const res = (await queryKnowledgeBase({
+        query: args.query,
+        data_set_id: 215,
+      }).catch((e) => {
+        logger.error(e, 'tool get_data error:')
+        return 'Nothing got, try again with more context for the query param'
+      })) as Extended_KB_QUERY_RESP | undefined | string
+      logger.info(res, 'get_data done with:', JSON.stringify(res))
+
+      const data = getDataForCandleStickChart(res)
+      logger.info(
+        data,
+        'convert data from knowledge base done with:',
+        JSON.stringify(res),
+      )
+      if (data.length === 0) {
+        return 'Drawing error, try again with more context for the query param'
+      }
+      toolsStreamUI.append(
+        <KChart
+          originalData={data}
+          incorporation={args.incorporation}
+        />,
+      )
+      // How do we pass the context of the graph to LLM, the data is too large
+      return 'the candlestick chart had been drawn for the stock data'
+    },
+  )
 
   return {
     id: Date.now().toString(),

@@ -47,6 +47,21 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     function: {
       name: 'draw_candle_chart',
       description: `Generate a candlestick (K-line) chart for stock market analysis. This function plots a chart showing open, high, low, and close prices of stocks over time, aiding users in identifying trends and patterns. It's an essential tool for investors analyzing market movements to inform trading decisions. The chart highlights price dynamics and can be adjusted to cover various time periods, supporting both short-term and long-term strategies.`,
+      parameters: {
+        type: 'object',
+        properties: {
+          query: {
+            type: 'string',
+            description:
+              'user natural language query about stock for the candlestick (K-line) chart',
+          },
+          incorporation: {
+            type: 'string',
+            description: 'the name of the stock company',
+          },
+        },
+        required: ['query', 'incorporation'],
+      },
     },
   },
 ]

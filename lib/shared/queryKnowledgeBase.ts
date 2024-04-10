@@ -38,7 +38,7 @@ export const queryKnowledgeBase = async (
 ): Promise<KB_QUERY_RESP | undefined> => {
   const { page = 1, size = 100, data_set_id, query = '' } = params
   const res = await fetch(
-    `${process.env.KNOWLEDGE_BASE_URL}/data-sets/${data_set_id}/search`,
+    `${process.env.KNOWLEDGE_BASE_URL}/data-sets/${data_set_id}/search?${new URLSearchParams({ size: size.toString(), page: page.toString() })}`,
     {
       headers: {
         'Content-Type': 'application/json',
