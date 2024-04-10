@@ -2,7 +2,7 @@
 
 import { cloneDeep } from 'lodash'
 import * as React from 'react'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { IconSend } from '@/components/icons'
 import { BotMessage } from '@/features/query-bot/component/bot-message'
@@ -23,7 +23,6 @@ export const Query = () => {
   const handleSendMessage = () => {
     const trimmedValue = inputValue.trim()
     if (inputValue && trimmedValue && !answering) {
-      scrollToBottom()
       setMessages((currentMessages) => [
         ...currentMessages,
         {
@@ -73,10 +72,17 @@ export const Query = () => {
         setAnswering(false)
       })
   }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
   const scrollToBottom = () => {
-    if (conversation.current) {
-      conversation.current.scrollTop = conversation.current.scrollHeight
-    }
+    setTimeout(() => {
+      if (conversation.current) {
+        conversation.current.scrollTop = conversation.current.scrollHeight
+      }
+    }, 100)
   }
   return (
     <div className="ml-16 mr-8 flex w-full flex-col overflow-visible">
