@@ -2,33 +2,23 @@
 
 import { cloneDeep } from 'lodash'
 import * as React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
-import { IconFile, IconSend } from '@/components/icons'
+import { IconSend } from '@/components/icons'
 import { BotMessage } from '@/features/query-bot/component/bot-message'
-import { HeaderCard } from '@/features/query-bot/component/header-card'
 import { UserMessage } from '@/features/query-bot/component/userMessage'
 import { ChatType } from '@/features/query-bot/types'
 
-import {
-  getChatResponse,
-  getUploadFiles,
-} from '../../../app/api/query/getHomePage'
-import { ChatInfo, type File, Message } from '../../../app/api/query/home'
+import { getChatResponse } from '../../../app/api/query/getHomePage'
+import { ChatInfo, Message } from '../../../app/api/query/home'
 import { ENTER_KEY } from '../../../constants/conmon'
 
 export const Query = () => {
   const conversation = useRef<HTMLDivElement | null>(null)
   const [inputValue, setInputValue] = useState('')
-  const [uploadFiles, setUploadFiles] = useState([] as File[])
+
   const [messages, setMessages] = useState([] as Message[])
   const [answering, setAnswering] = useState(false)
-
-  useEffect(() => {
-    getUploadFiles().then((res) => {
-      setUploadFiles(res)
-    })
-  }, [])
 
   const handleSendMessage = () => {
     const trimmedValue = inputValue.trim()
@@ -89,77 +79,57 @@ export const Query = () => {
     }
   }
   return (
-    <main className="flex h-screen bg-gray-50 p-8">
-      <div className="customBoxShadow flex w-80 flex-col rounded-lg px-8">
-        <div className="flex flex-1 flex-col overflow-y-auto">
-          <h2 className="font-bold">Data Source</h2>
-          <ul className="mt-8 flex-1 overflow-y-auto">
-            {uploadFiles.map((item) => {
-              return (
-                <li
-                  key={item.id}
-                  className="mb-5 flex h-[42px] cursor-pointer items-center rounded-md px-2.5 odd:bg-gray-100"
-                >
-                  <IconFile className="mr-2.5" />
-                  <span className="... truncate">{item.name}</span>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </div>
-      <div className="ml-16 mr-8 flex w-full flex-col overflow-visible">
-        <div
-          className="mt-5 flex-1 overflow-y-scroll"
-          ref={conversation}
-        >
-          {messages.map((item, index) => (
-            <React.Fragment key={index}>
-              {item.type === ChatType.HUMAN ? (
-                <>
-                  <UserMessage content={item.content} />
-                  {index !== messages.length && (
-                    <div className="my-4 border-[0.5px]"></div>
-                  )}
-                </>
-              ) : (
-                <BotMessage
-                  key={index}
-                  content={item.content}
-                  loading={answering}
-                />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
-        <div className="customBoxShadow flex items-center justify-between rounded-lg bg-white">
-          <textarea
-            value={inputValue}
-            className="flex h-16 w-full resize-none rounded-lg bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-            placeholder="Ask GluonMeson ..."
-            rows={1}
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
-              setInputValue(e.target.value)
-            }
-            onKeyDown={(e) => {
-              if (e.key === ENTER_KEY && !e.shiftKey) {
-                e.preventDefault()
-                handleSendMessage()
-              }
-            }}
-          />
-          <div className="mx-4">
-            {answering ? (
-              <IconSend className="fill-gray-400" />
+    <div className="ml-16 mr-8 flex w-full flex-col overflow-visible">
+      <div
+        className="mt-5 flex-1 overflow-y-scroll"
+        ref={conversation}
+      >
+        {messages.map((item, index) => (
+          <React.Fragment key={index}>
+            {item.type === ChatType.HUMAN ? (
+              <>
+                <UserMessage content={item.content} />
+                {index !== messages.length && (
+                  <div className="my-4 border-[0.5px]"></div>
+                )}
+              </>
             ) : (
-              <IconSend
-                className="fill-violet-400"
-                onClick={handleSendMessage}
+              <BotMessage
+                key={index}
+                content={item.content}
+                loading={answering}
               />
             )}
-          </div>
+          </React.Fragment>
+        ))}
+      </div>
+      <div className="customBoxShadow flex items-center justify-between rounded-lg bg-white">
+        <textarea
+          value={inputValue}
+          className="flex h-16 w-full resize-none rounded-lg bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          placeholder="send your message ..."
+          rows={1}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+            setInputValue(e.target.value)
+          }
+          onKeyDown={(e) => {
+            if (e.key === ENTER_KEY && !e.shiftKey) {
+              e.preventDefault()
+              handleSendMessage()
+            }
+          }}
+        />
+        <div className="mx-4">
+          {answering ? (
+            <IconSend className="fill-gray-400" />
+          ) : (
+            <IconSend
+              className="fill-violet-400"
+              onClick={handleSendMessage}
+            />
+          )}
         </div>
       </div>
-    </main>
+    </div>
   )
 }
