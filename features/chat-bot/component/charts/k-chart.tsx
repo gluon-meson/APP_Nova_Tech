@@ -191,7 +191,7 @@ export default function KChart({
         {
           type: 'inside',
           xAxisIndex: [0, 1],
-          start: 98,
+          start: 60,
           end: 100,
         },
         {
@@ -199,7 +199,7 @@ export default function KChart({
           xAxisIndex: [0, 1],
           type: 'slider',
           top: '85%',
-          start: 98,
+          start: 60,
           end: 100,
         },
       ],
