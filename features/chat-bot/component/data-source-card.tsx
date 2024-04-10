@@ -65,8 +65,8 @@ export const DataSourceCard = () => {
         Stock
       </h4>
       <p className="text-sm">
-        Daily, weekly, monthly, and yearly K-line chart data over the past three
-        years for the below companies:
+        Daily, weekly, monthly, and yearly open, high, low, close price and
+        volume data over the past three years for the below companies:
       </p>
       <ul className="my-4 ml-4 list-disc [&>li]:mt-2">
         {dataSourceList
@@ -91,7 +91,8 @@ export const DataSourceCard = () => {
         Index
       </h4>
       <p className="text-sm">
-        Daily K-line chart data over the past three years for the below Indexs:
+        Daily open, high, low, close price and volume data over the past three
+        years for the below indexes:
       </p>
       <ul className="my-4 ml-4 list-disc [&>li]:mt-2">
         {dataSourceList

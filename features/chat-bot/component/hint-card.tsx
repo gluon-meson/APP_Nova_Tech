@@ -29,9 +29,14 @@ export const HintCard = () => {
             </CollapsibleTrigger>
           </div>
           <CollapsibleContent>
-            <p className="text-sm leading-normal text-muted-foreground">TBD</p>
+            <p className="text-sm leading-normal text-muted-foreground">
+              The Assistant can help to analyze the stock and Index structured
+              data that list on the left, provide insights into investment
+              opportunities and economic indicators.
+            </p>
             <p className="mt-2 text-sm leading-normal text-muted-foreground">
-              TBD
+              Please feel free to ask, you can start from the below example
+              queries!
             </p>
           </CollapsibleContent>
         </div>

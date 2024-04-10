@@ -2,7 +2,7 @@ const dotenv = require('dotenv')
 
 dotenv.config({ path: '../.env.local' })
 fetch(
-  'http://bj-3090.private.gluon-meson.tech:11000/components/knowledge-base/data-sets/215/search',
+  'http://bj-3090.private.gluon-meson.tech:11000/components/knowledge-base/data-sets/215/search', // ?page=1&size=200
   {
     headers: {
       'Content-Type': 'application/json',

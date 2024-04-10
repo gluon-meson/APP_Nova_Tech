@@ -28,14 +28,22 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'get_data',
-      description: `Get the trusted stock or index data in a given natural language query string for ${data_explain}`,
+      description: `Get the trusted stock or Index data in a given natural language query string for ${data_explain}`,
       parameters: {
         type: 'object',
         properties: {
           query: {
             type: 'string',
             description:
-              'natural language for retrieve stock or Index data, try to add more context or explain as more as possible for the data you want. eg: Coca-Cola stock trending recently? => Coca-Cola(KO) stock daily and weekly data in past three month?',
+              'natural language for retrieve stock or Index data, The inside logic is generate postgres SQL to query db by the query parameter, ' +
+              'so try to add more context or explain as more as possible for the data you want to get, make sure this tool can generate right sql to query the data I want' +
+              'Eg: Coca-Cola stock trending recently? => Coca-Cola(KO) stock daily and weekly data in past three month?',
+          },
+          size: {
+            type: 'number',
+            description:
+              'how many items do you want to get when the data you want to get is a list not aggregated, make sure the amount of data is under your control, ' +
+              'currently the supported maximum size is 100',
           },
         },
         required: ['query'],
@@ -98,10 +106,11 @@ async function get_current_weather(location: string, unit: string) {
   }
 }
 
-export async function get_data(query: string) {
-  logger.info({ query }, 'call get_data with query:')
+export async function get_data(query: string, size?: number) {
+  logger.info({ query, size }, 'call get_data with query:')
   const res = await queryKnowledgeBase({
     query,
+    size,
     data_set_id: 215,
   }).catch((e) => {
     logger.error(e, 'tool get_data error:')
