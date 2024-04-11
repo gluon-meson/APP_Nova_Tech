@@ -57,7 +57,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
       name: 'draw_line_bar_chart',
       description: `it can draw line and bar chart for ${data_explain}, it can generate plot for one or multiple company stock or market Index .
       Multiple functionality is for comparing the data trending. Example question: Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be:
-      ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(GSPC) daily close price from 2024-01-01 to 2024-03-31"].
+      ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(NDX) daily close price from 2024-01-01 to 2024-03-31"].
       the default is line chart, you can hint me to switch to bar chart by the top right icon.
       `,
       parameters: {
@@ -73,7 +73,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
             description:
               'what data the chart want to show, each item is similar with tool get_data query parameter, but it should query a array list of data not a aggregated one. Add the time range for the data!' +
               "You need split question to a string array to get different data if ask multiple data. It's better to add the same time range for each item to make sure the data is comparable." +
-              'Eg: question is Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be: ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(GSPC) daily close price from 2024-01-01 to 2024-03-31"].',
+              'Eg: question is Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be: ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(NDX) daily close price from 2024-01-01 to 2024-03-31"].',
           },
           data_key: {
             type: 'string',
@@ -87,7 +87,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
                 'one of the companies or index markers names, might be Coca-Cola Co(KO) or others according the query',
             },
             description:
-              'which company or index marker the data belongs, the sequence should be follow query parameter, one or mutilate from Booking Holdings Inc(BKNG),Nasdaq 100(GSPC) and etc...',
+              'which company or index marker the data belongs, the sequence should be follow query parameter, one or mutilate from Booking Holdings Inc(BKNG),Nasdaq 100(NDX) and etc...',
           },
           size: {
             type: 'number',

@@ -1,5 +1,5 @@
 export const data_explain = `Daily, weekly, monthly, and yearly open, high, low, close price and volume data over the past three years for these companies: Booking Holdings Inc(BKNG),Cisco Systems Inc(CSCO),Coca-Cola Co(KO) and Westlake Corp(WLK).
- Daily open, high, low, close price and volume Stock Market Index data for the S&P 500 Index(GSPC),Nasdaq 100(GSPC) over the same three-year period.`
+ Daily open, high, low, close price and volume Stock Market Index data for the S&P 500 Index(GSPC),Nasdaq 100(NDX) over the same three-year period.`
 
 export const prompt = `
 **Background:**I'm a Relationship manager(RM) in wealth management that serve high-net-worth individuals effectively, My goal is to provide insights into investment opportunities and economic indicators from company stock price and Stock Market Index data, you need help to do this.
@@ -35,4 +35,4 @@ export const prompt = `
 `
 
 // Booking Holdings Inc(BKNG),Cisco Systems Inc(CSCO),Coca-Cola Co(KO),Westlake Corp(WLK)
-// Index data: S&P 500 Index(GSPC),Nasdaq 100(GSPC)
+// Index data: S&P 500 Index(GSPC),Nasdaq 100(NDX)

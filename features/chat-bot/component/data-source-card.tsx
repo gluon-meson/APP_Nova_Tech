@@ -77,7 +77,7 @@ export const DataSourceCard = () => {
                 key={stock.ticker}
                 // className="flex h-12 items-center truncate rounded bg-gray-100 p-2"
               >
-                {stock.name}
+                {stock.name} - {stock.ticker}
               </li>
             )
           })}
@@ -103,7 +103,7 @@ export const DataSourceCard = () => {
                 key={stock.ticker}
                 // className="flex h-12 items-center truncate rounded bg-gray-100 p-2"
               >
-                {stock.name}
+                {stock.name} - {stock.ticker}
               </li>
             )
           })}
