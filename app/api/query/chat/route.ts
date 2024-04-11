@@ -11,34 +11,20 @@ export async function POST(request: NextRequest) {
     },
     body: JSON.stringify(reqBody),
   })
-  let content = ''
-  // @ts-ignore
-  const reader = res.body.getReader()
-
-  while (true) {
-    const { done, value } = await reader.read()
-
-    if (done) {
-      break
-    }
-
-    const chunk = new TextDecoder('utf-8').decode(value)
-    const lines = chunk.split('\n')
-
-    for (const line of lines) {
-      if (line.startsWith('data:')) {
-        try {
-          const data = JSON.parse(line.substring('data:'.length))
-          const output = data.answer
-          content += output
-        } catch (error) {
-          console.error('JSONDecodeError:', error)
-        }
-      }
-    }
+  const references = []
+  const response = await res.text()
+  const data = response.substring(6)
+  const parse = JSON.parse(data)
+  const content = parse['answer']
+  for (const reference of JSON.parse(parse['references'])) {
+    references.push(reference)
   }
+
   return NextResponse.json(
-    { content: content ? content : 'Chat error, please try again later' },
+    {
+      content: content ? content : 'Chat error, please try again later',
+      references: references,
+    },
     { status: 200 },
   )
 }
