@@ -87,39 +87,51 @@ export const LineBarChart = ({
         end: 100,
       },
     ],
-    series: dataBelongs.map((data_name, index) => {
-      return {
-        name: data_name,
-        type: 'line',
-        symbol: 'none',
-        sampling: 'lttb',
-        itemStyle: {
-          color: colors[index].itemsColors,
-        },
-        data: yAxisData[index],
-        areaStyle: {
-          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-              offset: 0,
-              color: colors[index].areaStyleOne,
+    series:
+      dataBelongs.length > 1
+        ? dataBelongs.map((data_name, index) => {
+            return {
+              name: data_name,
+              type: 'line',
+              // symbol: 'none',
+              // sampling: 'lttb',
+              // itemStyle: {
+              //   color: colors[index].itemsColors,
+              // },
+              data: yAxisData[index],
+              // itemStyle: {
+              //   normal: {
+              //     color: colors[index].itemsColors,
+              //     label: {
+              //       show: true,
+              //       position: 'top',
+              //     },
+              //   },
+              // },
+            }
+          })
+        : {
+            name: dataBelongs[0],
+            type: 'line',
+            symbol: 'none',
+            sampling: 'lttb',
+            itemStyle: {
+              color: colors[0].itemsColors,
             },
-            {
-              offset: 1,
-              color: colors[index].areaStyleTwo,
+            data: yAxisData[0],
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                {
+                  offset: 0,
+                  color: colors[0].areaStyleOne,
+                },
+                {
+                  offset: 1,
+                  color: colors[0].areaStyleTwo,
+                },
+              ]),
             },
-          ]),
-        },
-        // itemStyle: {
-        //   normal: {
-        //     color: '#3398DB',
-        //     label: {
-        //       show: true,
-        //       position: 'top',
-        //     },
-        //   },
-        // },
-      }
-    }),
+          },
   }
 
   return (
