@@ -5,6 +5,8 @@ import Page from '../app/page'
 describe('Home component', () => {
   it('renders correctly', () => {
     render(<Page />)
-    expect(screen.getByText(/home/i)).toBeInTheDocument()
+    expect(
+      screen.getByText(/Wealth Management Assistants/i),
+    ).toBeInTheDocument()
   })
 })
