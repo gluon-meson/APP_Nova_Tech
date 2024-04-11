@@ -4,7 +4,10 @@ import { convertCurrencyToNumber, logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import { covertDataForLine } from '@/features/chat-bot/utils'
+import {
+  covertDataForLine,
+  getKeyInfoFromData,
+} from '@/features/chat-bot/utils'
 import {
   KB_QUERY_RESP,
   queryKnowledgeBase,
@@ -159,7 +162,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
         />,
       )
       // How do we pass the context of the graph to LLM, the data is too large
-      return 'the candlestick chart had been drawn for the stock data'
+      return `the candlestick chart had been drawn for the stock data, and the chart with these key info ${getKeyInfoFromData(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)}`
     },
   )
 
