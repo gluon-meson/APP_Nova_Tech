@@ -5,6 +5,7 @@ import type { Metadata } from 'next'
 import { Inter as FontSans } from 'next/font/google'
 
 import { Providers } from '@/components/providers'
+import { SwitchBotNav } from '@/components/switch-bot-nav'
 import { cn } from '@/lib/utils'
 
 const fontSans = FontSans({
@@ -33,6 +34,7 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <SwitchBotNav />
         <Providers>{children}</Providers>
       </body>
     </html>
