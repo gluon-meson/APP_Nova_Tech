@@ -48,7 +48,7 @@ const dataSourceList: DATA_ITEM[] = [
 ]
 export const DataSourceCard = () => {
   return (
-    <div className="fixed top-8 mb-8 hidden w-72 overflow-auto rounded-lg bg-background p-2 shadow md:block lg:w-80 lg:p-4">
+    <div className="fixed top-8 z-10 mb-8 hidden w-72 overflow-auto rounded-lg bg-background p-2 shadow md:block lg:w-80 lg:p-4">
       <h3 className="flex scroll-m-20 items-center text-2xl font-semibold tracking-tight">
         <FolderSearch2Icon
           className="mr-2"

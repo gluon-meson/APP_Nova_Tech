@@ -29,21 +29,21 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'get_data',
-      description: `Get the trusted stock or Index data in a given natural language query string for ${data_explain}`,
+      description: `Get the trusted stock or stock market Index data in a given natural language query string for ${data_explain}`,
       parameters: {
         type: 'object',
         properties: {
           query: {
             type: 'string',
             description:
-              'natural language for retrieve stock or Index data, The inside logic is generate postgres SQL to query db by the query parameter, ' +
-              'so try to add more context or explain as more as possible for the data you want to get, make sure this tool can generate right sql to query the data I want' +
+              'natural language for retrieve stock or stock market Index data, The inside logic is generate postgres SQL to query db by the query parameter, ' +
+              'so try to add more context or explain as more as possible for the data you want to get, make sure this tool can generate right sql to query the data related' +
               'Eg: Coca-Cola stock trending recently? => Coca-Cola(KO) stock daily and weekly data in past three month?',
           },
           size: {
             type: 'number',
             description:
-              'how many items do you want to get when the data you want to get is a list not aggregated, make sure the amount of data is under your control, ' +
+              'how many amount items data do you want to get, pass it when the data you want to get is a list not aggregated result, make sure the amount of results is under your control, ' +
               'currently the supported **maximum size** is 100', // todo
           },
         },
@@ -55,10 +55,10 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_line_bar_chart',
-      description: `it can draw line and bar chart for ${data_explain}, it can generate plot for one or multiple company stock or Index market.
-      Multiple is to compare the data trending. Example: question is Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be:
+      description: `it can draw line and bar chart for ${data_explain}, it can generate plot for one or multiple company stock or market Index .
+      Multiple functionality is for comparing the data trending. Example question: Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be:
       ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(GSPC) daily close price from 2024-01-01 to 2024-03-31"].
-      the default is line chart, you can notice me to switch to bar chart by the top right icon.
+      the default is line chart, you can hint me to switch to bar chart by the top right icon.
       `,
       parameters: {
         type: 'object',
@@ -68,10 +68,10 @@ export const tools: OpenAI.ChatCompletionTool[] = [
             items: {
               type: 'string',
               description:
-                'natural language for retrieve one company stock or Index data',
+                'natural language for retrieve one company stock or stock market Index data',
             },
             description:
-              'what data the chart want to show, each item is similar with tool get_data query parameter, but it should query a list of data not a aggregated one. Add the time range for the data!' +
+              'what data the chart want to show, each item is similar with tool get_data query parameter, but it should query a array list of data not a aggregated one. Add the time range for the data!' +
               "You need split question to a string array to get different data if ask multiple data. It's better to add the same time range for each item to make sure the data is comparable." +
               'Eg: question is Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be: ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(GSPC) daily close price from 2024-01-01 to 2024-03-31"].',
           },
@@ -92,7 +92,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
           size: {
             type: 'number',
             description:
-              'how many items do you want to get when the data you want to get is a list not aggregated, make sure the amount of data is under your control, ' +
+              'how many amount items data do you want to get, pass it when the data you want to get is a list not aggregated result, make sure the amount of results is under your control, ' +
               'currently the supported maximum size is 100',
           },
         },
@@ -113,11 +113,11 @@ export const tools: OpenAI.ChatCompletionTool[] = [
           query: {
             type: 'string',
             description:
-              'user natural language query about stock for the candlestick (K-line) chart',
+              'user natural language query about stock or Stock Market Index for the candlestick (K-line) chart',
           },
           incorporation: {
             type: 'string',
-            description: 'the name of the stock company',
+            description: 'the name of the stock company or Stock Market Index',
           },
         },
         required: ['query', 'incorporation'],
@@ -130,7 +130,6 @@ export enum TOOLS_NAMES {
   GET_WEATHER = 'get_current_weather',
   GET_DATA = 'get_data',
   DRAW_LINE_BAR_CHART = 'draw_line_bar_chart',
-  DRAW_COMPARE_LINE_BAR_CHART = 'draw_compare_line_bar_chart',
   DRAW_CANDLE_CHART = 'draw_candle_chart',
 }
 
@@ -168,7 +167,7 @@ export async function get_data(query: string, size?: number) {
     data_set_id: 215,
   }).catch((e) => {
     logger.error(e, 'tool get_data error:')
-    return 'Nothing got, try again with more context for the query param'
+    return 'Nothing got, try again with more context for the query parameter.'
   })
   logger.info(res, 'get_data done with:')
   if (!res || (typeof res !== 'string' && res?.items.length === 0))

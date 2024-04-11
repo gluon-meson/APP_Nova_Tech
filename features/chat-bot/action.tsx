@@ -1,6 +1,6 @@
 import { nanoid } from 'ai'
 import { createAI, createStreamableUI, getMutableAIState } from 'ai/rsc'
-import { convertCurrencyToNumber, logger } from 'lib/shared'
+import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
@@ -104,6 +104,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       size?: number
     }) => {
       logger.info(args, 'call DRAW_LINE_BAR_CHART with args:')
+      reply.update(<SpinnerWithText text="Data retriving..." />)
       try {
         const { query, data_belongs, data_key, size = 100 } = args
         const data = await Promise.all(
@@ -134,6 +135,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
               dataBelongs={data_belongs}
             />,
           )
+          reply.update(<SpinnerWithText text="LLM analysing..." />)
           return `the chart had draw with data: xAxis: ${JSON.stringify(dates)} and yAxis: ${JSON.stringify(values)}}, explain the chart and give a summary or insight within 100 words`
         }
         return 'the data retrieved is not right, can not draw chart, try again'
@@ -150,7 +152,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     async (args: { query: string; incorporation: string }) => {
       reply.update(<SpinnerWithText text="Data retriving..." />)
       logger.info(args.query, 'call DRAW_CANDLE_CHART with query:')
-      const res = await queryKnowledgeBase({
+      const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
         query: args.query,
         data_set_id: 215,
       }).catch((e) => {
@@ -180,7 +182,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       )
       // How do we pass the context of the graph to LLM, the data is too large
       const keyInfo = getKeyInfoFromData(deduplicatedRes)
-      return `The candlestick chart has been drawn for the stock data, showcasing these key info: ${keyInfo}`
+      return `The candlestick chart has been drawn for the data, showcasing these key info: ${keyInfo}, please provide summary/insight/explain for it.`
     },
   )
 
