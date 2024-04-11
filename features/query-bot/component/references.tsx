@@ -39,9 +39,12 @@ export default function References({ references }: Props) {
                       key={index}
                       className="mb-[20px] max-h-[300px] overflow-hidden text-xs odd:bg-slate-50"
                     >
-                      <CardHeader className="p-4 pb-2">
+                      <CardHeader className="flex flex-row items-center justify-between p-4 pb-2">
                         <span className="w-max rounded-lg border p-2">
                           # references__{[index + 1]}
+                        </span>
+                        <span className="!mt-0 w-max rounded-lg border p-2">
+                          {item.meta__source_score.toFixed(4)}
                         </span>
                       </CardHeader>
                       <CardContent className="max-h-[240px] overflow-auto">
