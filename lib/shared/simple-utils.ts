@@ -12,8 +12,10 @@ export const consumeStream = async (stream: ReadableStream) => {
   }
 }
 
-export function convertCurrencyToNumber(currencyString: string): number {
-  const cleanedString = currencyString.replace(/[^\d.-]/g, '')
+export function convertCurrencyToNumber(
+  currencyString: string | number,
+): number {
+  const cleanedString = currencyString.toString().replace(/[^\d.-]/g, '')
 
   const result = parseFloat(cleanedString)
 

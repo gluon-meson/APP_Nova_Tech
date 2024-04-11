@@ -1,6 +1,7 @@
 import type OpenAI from 'openai'
 
 import { data_explain } from '@/features/chat-bot/constants'
+import { STOCK_DATA_ITEM } from '@/features/chat-bot/types'
 import { logger } from '@/lib/shared'
 import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
@@ -54,18 +55,39 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_line_bar_chart',
-      description: `it can draw line and bar chart for ${data_explain}, the default is line chart, you can notice me to switch to bar chart by the top right icon.`,
+      description: `it can draw line and bar chart for ${data_explain}, it can generate plot for one or multiple company stock or Index market.
+      Multiple is to compare the data trending. Example: question is Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be:
+      ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(GSPC) daily close price from 2024-01-01 to 2024-03-31"].
+      the default is line chart, you can notice me to switch to bar chart by the top right icon.
+      `,
       parameters: {
         type: 'object',
         properties: {
           query: {
-            type: 'string',
+            type: 'array',
+            items: {
+              type: 'string',
+              description:
+                'natural language for retrieve one company stock or Index data',
+            },
             description:
-              'what data the chart want to show, similar with tool get_data query parameter, but it should query a list of data not a aggregated one.',
+              'what data the chart want to show, each item is similar with tool get_data query parameter, but it should query a list of data not a aggregated one. Add the time range for the data!' +
+              "You need split question to a string array to get different data if ask multiple data. It's better to add the same time range for each item to make sure the data is comparable." +
+              'Eg: question is Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be: ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(GSPC) daily close price from 2024-01-01 to 2024-03-31"].',
           },
           data_key: {
             type: 'string',
             description: 'it should be open, high, low, close price or volume',
+          },
+          data_belongs: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description:
+                'one of the companies or index markers names, might be Coca-Cola Co(KO) or others according the query',
+            },
+            description:
+              'which company or index marker the data belongs, the sequence should be follow query parameter, one or mutilate from Booking Holdings Inc(BKNG),Nasdaq 100(GSPC) and etc...',
           },
           size: {
             type: 'number',
@@ -74,7 +96,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
               'currently the supported maximum size is 100',
           },
         },
-        required: ['query', 'data_key'],
+        required: ['query', 'data_key', 'data_belongs'],
       },
     },
   },
@@ -82,7 +104,9 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_candle_chart',
-      description: `Generate a candlestick (K-line) chart for stock market analysis. This function plots a chart showing open, high, low, and close prices of stocks over time, aiding users in identifying trends and patterns. It's an essential tool for investors analyzing market movements to inform trading decisions. The chart highlights price dynamics and can be adjusted to cover various time periods, supporting both short-term and long-term strategies.`,
+      description: `Generate a candlestick (K-line) chart for ${data_explain}.
+      This function plots a chart showing open, high, low, and close prices of stocks over time, aiding users in identifying trends and patterns.
+      It's an essential tool for investors analyzing market movements to inform trading decisions. The chart highlights price dynamics and can be adjusted to cover various time periods, supporting both short-term and long-term strategies.`,
       parameters: {
         type: 'object',
         properties: {
@@ -106,6 +130,7 @@ export enum TOOLS_NAMES {
   GET_WEATHER = 'get_current_weather',
   GET_DATA = 'get_data',
   DRAW_LINE_BAR_CHART = 'draw_line_bar_chart',
+  DRAW_COMPARE_LINE_BAR_CHART = 'draw_compare_line_bar_chart',
   DRAW_CANDLE_CHART = 'draw_candle_chart',
 }
 
@@ -137,7 +162,7 @@ async function get_current_weather(location: string, unit: string) {
 
 export async function get_data(query: string, size?: number) {
   logger.info({ query, size }, 'call get_data with query:')
-  const res = await queryKnowledgeBase({
+  const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
     query,
     size,
     data_set_id: 215,

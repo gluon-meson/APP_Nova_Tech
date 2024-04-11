@@ -34,9 +34,9 @@ export type KB_QUERY_RESP<T = Record<string, any>> = {
   pages: number
 }
 
-export const queryKnowledgeBase = async (
+export const queryKnowledgeBase = async <T = Record<string, any>>(
   params: KB_QUERY_PARAM,
-): Promise<KB_QUERY_RESP | undefined> => {
+): Promise<KB_QUERY_RESP<T>> => {
   const { page = 1, data_set_id, query = '' } = params
   const size = 100 // todo update this after api fixed
   const res = await fetch(

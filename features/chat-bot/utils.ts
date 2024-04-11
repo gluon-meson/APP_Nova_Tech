@@ -24,6 +24,33 @@ export const covertDataForLine = (
     })
     .filter((item) => item.length > 0) as K_LINE_DATA
 }
+export function extractValues(
+  data: STOCK_DATA_ITEM[][],
+  key: keyof STOCK_DATA_ITEM,
+): { dates: string[]; values: number[][] } {
+  const uniqueDatesSet = new Set<string>(data[0].map((item) => item.date))
+
+  for (let i = 1; i < data.length; i++) {
+    const set = new Set<string>(data[i].map((item) => item.date))
+    uniqueDatesSet.forEach((date) => {
+      if (!set.has(date)) {
+        uniqueDatesSet.delete(date)
+      }
+    })
+  }
+  const uniqueDates = Array.from(uniqueDatesSet)
+  uniqueDates.sort((a, b) => new Date(b).getTime() - new Date(a).getTime())
+  return {
+    dates: uniqueDates,
+    values: data.map((arr) => {
+      return uniqueDates.map((date) =>
+        convertCurrencyToNumber(
+          arr.find((item) => item.date === date)?.[key] || '0',
+        ),
+      )
+    }),
+  }
+}
 
 export const getKeyInfoFromData = (data: KB_QUERY_RESP<STOCK_DATA_ITEM>) => {
   // Extract high, low, closing, and volume arrays

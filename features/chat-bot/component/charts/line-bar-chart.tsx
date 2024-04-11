@@ -4,13 +4,32 @@ import * as echarts from 'echarts'
 import ReactEcharts from 'echarts-for-react'
 import React from 'react'
 
+const colors = [
+  {
+    itemsColors: 'rgb(255, 70, 131)',
+    areaStyleOne: 'rgb(255, 158, 68)',
+    areaStyleTwo: 'rgb(255, 70, 131)',
+  },
+  {
+    itemsColors: '#93CE07',
+    areaStyleOne: '#acdfb2',
+    areaStyleTwo: '#93CE07',
+  },
+  {
+    itemsColors: '#3398DB',
+    areaStyleOne: '#80c8dd',
+    areaStyleTwo: '#3398DB',
+  },
+] as const
 export const LineBarChart = ({
   xAxisData,
   yAxisData,
   name,
+  dataBelongs,
 }: {
   xAxisData: string[]
-  yAxisData: number[]
+  dataBelongs: string[]
+  yAxisData: number[][]
   name: string
 }) => {
   const option = {
@@ -68,25 +87,25 @@ export const LineBarChart = ({
         end: 100,
       },
     ],
-    series: [
-      {
-        name: name,
+    series: dataBelongs.map((data_name, index) => {
+      return {
+        name: data_name,
         type: 'line',
         symbol: 'none',
         sampling: 'lttb',
         itemStyle: {
-          color: 'rgb(255, 70, 131)',
+          color: colors[index].itemsColors,
         },
-        data: yAxisData,
+        data: yAxisData[index],
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
             {
               offset: 0,
-              color: 'rgb(255, 158, 68)',
+              color: colors[index].areaStyleOne,
             },
             {
               offset: 1,
-              color: 'rgb(255, 70, 131)',
+              color: colors[index].areaStyleTwo,
             },
           ]),
         },
@@ -99,8 +118,8 @@ export const LineBarChart = ({
         //     },
         //   },
         // },
-      },
-    ],
+      }
+    }),
   }
 
   return (

@@ -4,10 +4,7 @@ import { convertCurrencyToNumber, logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import {
-  covertDataForLine,
-  getKeyInfoFromData,
-} from '@/features/chat-bot/utils'
+import { covertDataForLine, extractValues, getKeyInfoFromData } from '@/features/chat-bot/utils'
 import {
   KB_QUERY_RESP,
   queryKnowledgeBase,
@@ -94,36 +91,46 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
 
   completion.onToolCall(
     TOOLS_NAMES.DRAW_LINE_BAR_CHART,
-    async (args: { query: string; data_key: string; size?: number }) => {
-      logger.info(args.query, 'call DRAW_LINE_BAR_CHART with query:')
+    async (args: {
+      query: string[]
+      data_key: keyof STOCK_DATA_ITEM
+      data_belongs: string[]
+      size?: number
+    }) => {
+      logger.info(args, 'call DRAW_LINE_BAR_CHART with args:')
       try {
-        // todo merge with get_data tool?
-        const { query, data_key, size = 100 } = args
-        const data = await queryKnowledgeBase({
-          query,
-          size,
-          data_set_id: 215,
-        })
-        logger.info(data, 'DRAW_LINE_BAR_CHART got data:')
-        if (Array.isArray(data?.items) && data?.items.length) {
-          const list = data.items.map((item) => ({
-            ...item,
-            [data_key]: convertCurrencyToNumber(item[data_key]) ?? 0,
-          }))
-          // @ts-ignore
-          list.sort((a, b) => new Date(a.date) - new Date(b.date))
-          const xAxisData = list.map((item) => item.date)
-          const yAxisData = list.map((item) => item[data_key])
+        const { query, data_belongs, data_key, size = 100 } = args
+        const data = await Promise.all(
+          query?.map((item) => {
+            return queryKnowledgeBase<STOCK_DATA_ITEM>({
+              query: item,
+              size,
+              data_set_id: 215,
+            })
+          }),
+        )
+        const { dates, values } = extractValues(
+          data.map((arr) => arr.items),
+          data_key,
+        )
+
+        logger.trace(
+          { dates, values },
+          'call DRAW_LINE_BAR_CHART with extractValues:',
+        )
+
+        if (Array.isArray(dates) && dates.length > 0) {
           toolsStreamUI.append(
             <LineBarChart
               name={data_key}
-              xAxisData={xAxisData}
-              yAxisData={yAxisData}
+              xAxisData={dates}
+              yAxisData={values}
+              dataBelongs={data_belongs}
             />,
           )
-          return `the chart had draw with data: xAxis: ${JSON.stringify(xAxisData)} and yAxis: ${JSON.stringify(yAxisData)}}, explain the chart and give a summary or insight within 100 words`
+          return `the chart had draw with data: xAxis: ${JSON.stringify(dates)} and yAxis: ${JSON.stringify(values)}}, explain the chart and give a summary or insight within 100 words`
         }
-        return 'the data retrieved is not right, can not draw chart, try again/'
+        return 'the data retrieved is not right, can not draw chart, try again'
       } catch (err) {
         logger.error(err, 'tool DRAW_LINE_BAR_CHART error:')
       }
