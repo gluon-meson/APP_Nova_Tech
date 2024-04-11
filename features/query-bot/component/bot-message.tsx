@@ -24,7 +24,9 @@ export const BotMessage = ({ content, loading, references }: Props) => {
         ) : (
           <>
             <MarkdownRenderer markdown={content} />
-            {references && <References references={references} />}
+            {references && references.length > 0 && (
+              <References references={references} />
+            )}
           </>
         )}
       </div>

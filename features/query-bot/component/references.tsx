@@ -23,12 +23,14 @@ export default function References({ references }: Props) {
   return (
     <div className="mt-4">
       <details>
-        <summary className="text-base">References Detail</summary>
+        <summary className="cursor-pointer text-base">
+          References Detail
+        </summary>
         {Object.keys(groupReferences).map((id) => {
           return (
             <div key={id}>
               <details>
-                <summary className="text-sm">
+                <summary className="cursor-pointer text-sm">
                   {groupReferences[id][0].meta__source_name}
                 </summary>
                 {groupReferences[id].map((item: Reference, index: number) => {
@@ -39,7 +41,7 @@ export default function References({ references }: Props) {
                     >
                       <CardHeader className="p-4 pb-2">
                         <span className="w-max rounded-lg border p-2">
-                          # references__{[index]}
+                          # references__{[index + 1]}
                         </span>
                       </CardHeader>
                       <CardContent className="max-h-[240px] overflow-auto">
