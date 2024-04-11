@@ -58,10 +58,12 @@ export const Query = () => {
         setMessages((preMessages) => {
           const newMessages = cloneDeep(preMessages)
           newMessages[preMessages.length - 1].content = res.content
+          newMessages[preMessages.length - 1].references = res.references
           return newMessages
         })
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log('get chat response error', error)
         setMessages((preMessages) => {
           const newMessages = cloneDeep(preMessages)
           newMessages[preMessages.length - 1].content =
@@ -105,6 +107,7 @@ export const Query = () => {
                 <BotMessage
                   key={index}
                   content={item.content}
+                  references={item.references}
                   loading={answering}
                 />
               )}
@@ -128,21 +131,6 @@ export const Query = () => {
             }
           }}
         />
-        {/*<textarea*/}
-        {/*  value={inputValue}*/}
-        {/*  className="flex h-16 w-full resize-none rounded-lg bg-background px-3 py-[1.3rem] text-base placeholder:text-slate-700 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"*/}
-        {/*  placeholder="send your message ..."*/}
-        {/*  rows={1}*/}
-        {/*  onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>*/}
-        {/*    setInputValue(e.target.value)*/}
-        {/*  }*/}
-        {/*  onKeyDown={(e) => {*/}
-        {/*    if (e.key === ENTER_KEY && !e.shiftKey) {*/}
-        {/*      e.preventDefault()*/}
-        {/*      handleSendMessage()*/}
-        {/*    }*/}
-        {/*  }}*/}
-        {/*/>*/}
         <div className="mx-4">
           {answering ? (
             <IconSend className="fill-gray-400" />
