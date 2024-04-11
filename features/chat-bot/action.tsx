@@ -6,6 +6,7 @@ import React from 'react'
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
 import {
   covertDataForLine,
+  deduplicateItemsByDate,
   extractValues,
   getKeyInfoFromData,
   isAllKeyDefined,
@@ -164,7 +165,11 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       ) {
         return 'Drawing error, try again with more context for the query param'
       }
-      const data = covertDataForLine(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)
+      const deduplicatedRes = deduplicateItemsByDate(
+        res as KB_QUERY_RESP<STOCK_DATA_ITEM>,
+      )
+
+      const data = covertDataForLine(deduplicatedRes)
 
       logger.info(data, 'convert data from knowledge base done with:')
       toolsStreamUI.append(
@@ -174,7 +179,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
         />,
       )
       // How do we pass the context of the graph to LLM, the data is too large
-      const keyInfo = getKeyInfoFromData(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)
+      const keyInfo = getKeyInfoFromData(deduplicatedRes)
       return `The candlestick chart has been drawn for the stock data, showcasing these key info: ${keyInfo}`
     },
   )

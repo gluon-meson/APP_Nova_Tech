@@ -6,6 +6,28 @@ import { KB_QUERY_RESP } from '@/lib/shared/queryKnowledgeBase'
 
 const covertKeys = ['open', 'close', 'low', 'high', 'volume'] as const
 
+export const deduplicateItemsByDate = (
+  data: KB_QUERY_RESP<STOCK_DATA_ITEM>,
+): KB_QUERY_RESP<STOCK_DATA_ITEM> => {
+  const uniqueItemsByDate = data.items.reduce(
+    (acc, item) => {
+      acc[item.date] = item
+      return acc
+    },
+    {} as { [date: string]: STOCK_DATA_ITEM },
+  )
+
+  const uniqueItems = Object.values(uniqueItemsByDate)
+
+  const updatedData: KB_QUERY_RESP<STOCK_DATA_ITEM> = {
+    ...data,
+    items: uniqueItems,
+    total: uniqueItems.length,
+  }
+
+  return updatedData
+}
+
 export const isAllKeyDefined = (item: Record<string, any>) => {
   const allKeysDefined = covertKeys.every((key) => item[key] !== undefined)
   return !!allKeysDefined
