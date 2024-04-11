@@ -4,7 +4,12 @@ import { convertCurrencyToNumber, logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import { covertDataForLine, extractValues, getKeyInfoFromData } from '@/features/chat-bot/utils'
+import {
+  covertDataForLine,
+  extractValues,
+  getKeyInfoFromData,
+  isAllKeyDefined,
+} from '@/features/chat-bot/utils'
 import {
   KB_QUERY_RESP,
   queryKnowledgeBase,
@@ -151,16 +156,16 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
         logger.error(e, 'tool DRAW_CANDLE_CHART error:')
         return 'Nothing got, try again with more context for the query param'
       })
-      logger.info(res, 'kb query for DRAW_CANDLE_CHART done with:')
 
-      if (typeof res === 'string' || res?.items.length === 0) {
+      if (
+        typeof res === 'string' ||
+        res?.items.length === 0 ||
+        !res?.items.every((item) => isAllKeyDefined(item))
+      ) {
         return 'Drawing error, try again with more context for the query param'
       }
       const data = covertDataForLine(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)
 
-      if (data.length === 0) {
-        return 'Drawing error, try again with more context for the query param'
-      }
       logger.info(data, 'convert data from knowledge base done with:')
       toolsStreamUI.append(
         <KChart
@@ -169,7 +174,8 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
         />,
       )
       // How do we pass the context of the graph to LLM, the data is too large
-      return `the candlestick chart had been drawn for the stock data, and the chart with these key info ${getKeyInfoFromData(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)}`
+      const keyInfo = getKeyInfoFromData(res as KB_QUERY_RESP<STOCK_DATA_ITEM>)
+      return `The candlestick chart has been drawn for the stock data, showcasing these key info: ${keyInfo}`
     },
   )
 
