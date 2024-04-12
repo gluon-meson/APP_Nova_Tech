@@ -191,16 +191,16 @@ export default function KChart({
         {
           type: 'inside',
           xAxisIndex: [0, 1],
-          start: 60,
-          end: 100,
+          start: 0,
+          end: 60,
         },
         {
           show: true,
           xAxisIndex: [0, 1],
           type: 'slider',
           top: '85%',
-          start: 60,
-          end: 100,
+          start: 0,
+          end: 60,
         },
       ],
       series: [

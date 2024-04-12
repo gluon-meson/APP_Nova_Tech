@@ -79,12 +79,12 @@ export const LineBarChart = ({
     dataZoom: [
       {
         type: 'inside',
-        start: 40,
-        end: 100,
+        start: 0,
+        end: 60,
       },
       {
-        start: 40,
-        end: 100,
+        start: 0,
+        end: 60,
       },
     ],
     series:

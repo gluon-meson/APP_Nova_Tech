@@ -29,7 +29,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'get_data',
-      description: `Get the trusted stock or stock market Index data in a given natural language query string for ${data_explain}`,
+      description: `Get the trusted stock or stock market Index data in a given natural language query string for ${data_explain}. It's better to add time range make sure the data is comparable the query when it needed.`,
       parameters: {
         type: 'object',
         properties: {
