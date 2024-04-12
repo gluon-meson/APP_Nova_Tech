@@ -16,8 +16,10 @@ export async function POST(request: NextRequest) {
   const data = response.substring(6)
   const parse = JSON.parse(data)
   const content = parse['answer']
-  for (const reference of JSON.parse(parse['references'])) {
-    references.push(reference)
+  if (parse['references']) {
+    for (const reference of JSON.parse(parse['references'])) {
+      references.push(reference)
+    }
   }
 
   return NextResponse.json(
