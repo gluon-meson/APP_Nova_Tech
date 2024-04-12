@@ -9,7 +9,7 @@ And The code was adapted from the repository [ai-chatbox](https://github.com/ver
 
 You will need to use the environment variables [defined in `.env.example`](.env.example) to run AI Chat bot.
 
-> Note: You should not commit your `.env` file or it will expose secrets that will allow others to control access to your various OpenAI and authentication provider accounts.
+> Note: You should not commit your `.env` file other it will expose secrets that will allow others to control access to your various OpenAI and authentication provider accounts.
 
 So first, you need create the `.env.local` and take [`.env.example`](.env.example) as a reference.
 
@@ -27,22 +27,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Before deploy, you need setup these env:
 
 ```dotenv
+## chart bot
 OPENAI_API_KEY=sk-xxx
 OPENAI_BASE_URL=https://api.openai.com/v1
+KNOWLEDGE_BASE_URL=xx
+OFFLINE_TOKEN=xx
+
+## query bot
+WEALTH_MANAGEMENT_CHAT_URL=xx
 ```
 
-And you also need check the `env_file` path in [docker-compose.yml](./docker-compose.yml)
+so you can create `.env` file and add above envs in the root of the project
 
 Then you can just run `sh startup.sh` to deploy.
-
-## Data Transformation Script
-
-This project includes a script for data transformation, which can be run using the following command:
-
-```bash
-pnpm run transform-data
-```
-
-- Files that need to be processed should be placed in the data folder
-- Processed content output.json is in the public folder
-- The processed file will be recorded in the processedHash file of temp
