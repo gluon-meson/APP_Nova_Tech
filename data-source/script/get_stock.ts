@@ -1,3 +1,7 @@
+/**
+ * install [bun](https://bun.sh/), then eg: ` cd data-source/script && bun get_stock.ts`
+ */
+
 import fs from 'fs'
 
 import { ApiResponse, DATA_TYPE, STOCK_INFO } from './type'

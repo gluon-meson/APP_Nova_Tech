@@ -1,3 +1,7 @@
+/**
+ * just for quick test kb query db api
+ */
+
 const dotenv = require('dotenv')
 
 dotenv.config({ path: '../.env.local' })
