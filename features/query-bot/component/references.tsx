@@ -28,7 +28,10 @@ export default function References({ references }: Props) {
         </summary>
         {Object.keys(groupReferences).map((id) => {
           return (
-            <div key={id}>
+            <div
+              key={id}
+              className="ml-6"
+            >
               <details>
                 <summary className="cursor-pointer text-sm">
                   {groupReferences[id][0].meta__source_name}
