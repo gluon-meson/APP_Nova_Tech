@@ -15,7 +15,7 @@ export const HintCard = () => {
         <div className="flex flex-col gap-2 rounded-lg border bg-background p-4">
           <div className="flex justify-between">
             <h1 className="text-lg font-semibold">
-              Welcome to Wealth Management Assistant!
+              欢迎来到诺瓦科技管理助手!
             </h1>
             <CollapsibleTrigger asChild>
               <Button
@@ -30,13 +30,10 @@ export const HintCard = () => {
           </div>
           <CollapsibleContent>
             <p className="text-sm leading-normal text-muted-foreground">
-              The Assistant can help to analyze the stock and Index structured
-              data that list on the left, provide insights into investment
-              opportunities and economic indicators.
+              您好，我可以协助您管理经营层面的事务并查询相关数据。有任何需要帮助的地方，请随时提问。
             </p>
             <p className="mt-2 text-sm leading-normal text-muted-foreground">
-              Please feel free to ask, you can start from the below example
-              queries!
+              你可以从下面的示例开始：
             </p>
           </CollapsibleContent>
         </div>

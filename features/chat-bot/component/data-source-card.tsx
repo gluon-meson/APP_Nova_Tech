@@ -1,4 +1,4 @@
-import { FolderSearch2Icon, LineChartIcon, TrendingUpIcon } from 'lucide-react'
+import { ClockIcon, PlusCircleIcon } from 'lucide-react'
 
 import { Separator } from '@/components/ui/separator'
 
@@ -49,65 +49,18 @@ const dataSourceList: DATA_ITEM[] = [
 export const DataSourceCard = () => {
   return (
     <div className="fixed top-8 z-10 mb-8 hidden w-72 overflow-auto rounded-lg bg-background p-2 shadow md:block lg:w-80 lg:p-4">
-      <h3 className="flex scroll-m-20 items-center text-2xl font-semibold tracking-tight">
-        <FolderSearch2Icon
+      <h4 className="flex scroll-m-20 items-center text-2xl font-semibold tracking-tight">
+        <ClockIcon
           className="mr-2"
           size={32}
         />{' '}
-        Data Source
-      </h3>
-      <Separator className="my-4" />
-      <h4 className="tracking-tigh mb-2 flex scroll-m-20 items-center text-xl font-semibold">
-        <LineChartIcon
+        历史会话｜
+        <PlusCircleIcon
           className="mr-2"
-          size={22}
-        />
-        Stock
+          size={32}
+        />{' '}
+        新会话
       </h4>
-      <p className="text-sm">
-        Daily, weekly, monthly, and yearly open, high, low, close price and
-        volume data over the past three years for the below companies:
-      </p>
-      <ul className="my-4 ml-4 list-disc [&>li]:mt-2">
-        {dataSourceList
-          .filter((item) => item.type === 'stock')
-          .map((stock) => {
-            return (
-              <li
-                key={stock.ticker}
-                // className="flex h-12 items-center truncate rounded bg-gray-100 p-2"
-              >
-                {stock.name} - {stock.ticker}
-              </li>
-            )
-          })}
-      </ul>
-      <Separator className="my-4" />
-      <h4 className="mb-2 flex scroll-m-20 items-center text-xl font-semibold tracking-tight">
-        <TrendingUpIcon
-          className="mr-2"
-          size={22}
-        />
-        Index
-      </h4>
-      <p className="text-sm">
-        Daily open, high, low, close price and volume data over the past three
-        years for the below indexes:
-      </p>
-      <ul className="my-4 ml-4 list-disc pb-10 [&>li]:mt-2">
-        {dataSourceList
-          .filter((item) => item.type === 'index')
-          .map((stock) => {
-            return (
-              <li
-                key={stock.ticker}
-                // className="flex h-12 items-center truncate rounded bg-gray-100 p-2"
-              >
-                {stock.name} - {stock.ticker}
-              </li>
-            )
-          })}
-      </ul>
     </div>
   )
 }
