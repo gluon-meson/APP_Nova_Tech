@@ -112,7 +112,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
             return queryKnowledgeBase<STOCK_DATA_ITEM>({
               query: item,
               size,
-              data_set_id: 215,
+              data_set_id: 19,
             })
           }),
         )
@@ -154,7 +154,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       logger.info(args.query, 'call DRAW_CANDLE_CHART with query:')
       const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
         query: args.query,
-        data_set_id: 215,
+        data_set_id: 19,
       }).catch((e) => {
         logger.error(e, 'tool DRAW_CANDLE_CHART error:')
         return 'Nothing got, try again with more context for the query param'

@@ -11,15 +11,19 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'get_current_weather',
-      description: 'Get the current weather in a given location',
+      description: '获取指定位置的当前天气情况。',
       parameters: {
         type: 'object',
         properties: {
           location: {
             type: 'string',
-            description: 'The city and state, e.g. San Francisco, CA',
+            description: '城市和州，例如：旧金山，加利福尼亚州',
           },
-          unit: { type: 'string', enum: ['celsius', 'fahrenheit'] },
+          unit: {
+            type: 'string',
+            enum: ['celsius', 'fahrenheit'],
+            description: '温度单位，可选值为摄氏度或华氏度',
+          },
         },
         required: ['location'],
       },
@@ -29,22 +33,17 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'get_data',
-      description: `Get the trusted stock or stock market Index data in a given natural language query string for ${data_explain}. It's better to add time range make sure the data is comparable the query when it needed.`,
+      description: `从${data_explain}中获取给定自然语言查询字符串的数据。最好添加批准日期以确保在需要时数据是可比较的。`,
       parameters: {
         type: 'object',
         properties: {
           query: {
             type: 'string',
-            description:
-              'natural language for retrieve stock or stock market Index data, The inside logic is generate postgres SQL to query db by the query parameter, ' +
-              'so try to add more context or explain as more as possible for the data you want to get, make sure this tool can generate right sql to query the data related' +
-              'Eg: Coca-Cola stock trending recently? => Coca-Cola(KO) stock daily and weekly data in past three month?',
+            description: '用于指定要检索的数据的自然语言查询字符串。',
           },
           size: {
             type: 'number',
-            description:
-              'how many amount items data do you want to get, pass it when the data you want to get is a list not aggregated result, make sure the amount of results is under your control, ' +
-              'currently the supported **maximum size** is 100', // todo
+            description: `要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的**最大尺寸**为100。`,
           },
         },
         required: ['query'],
@@ -55,11 +54,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_line_bar_chart',
-      description: `it can draw line and bar chart for ${data_explain}, it can generate plot for one or multiple company stock or market Index .
-      Multiple functionality is for comparing the data trending. Example question: Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be:
-      ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(NDX) daily close price from 2024-01-01 to 2024-03-31"].
-      the default is line chart, you can hint me to switch to bar chart by the top right icon.
-      `,
+      description: `可以为${data_explain}绘制线条和柱状图。`,
       parameters: {
         type: 'object',
         properties: {
@@ -68,32 +63,29 @@ export const tools: OpenAI.ChatCompletionTool[] = [
             items: {
               type: 'string',
               description:
-                'natural language for retrieve one company stock or stock market Index data',
+                '用于检索一家公司的股票或股票市场指数数据的自然语言查询',
             },
             description:
-              'what data the chart want to show, each item is similar with tool get_data query parameter, but it should query a array list of data not a aggregated one. Add the time range for the data!' +
-              "You need split question to a string array to get different data if ask multiple data. It's better to add the same time range for each item to make sure the data is comparable." +
-              'Eg: question is Compare the Cisco with Nasdaq 100 daily close price recently, query parameter should be: ["Cisco(CSCO) daily close price from 2024-01-01 to 2024-03-31","Nasdaq 100(NDX) daily close price from 2024-01-01 to 2024-03-31"].',
+              '图表要显示的数据，每个项目类似于tool get_data查询参数，但它应查询一个数据列表而不是聚合结果。为数据添加时间范围！如果要求多个数据，请将问题分割成字符串数组以获取不同的数据。最好为每个项目添加相同的时间范围，以确保数据可比较。例如：问题是最近比较Cisco和纳斯达克100的每日收盘价，则查询参数应为：["Cisco(CSCO)从2024-01-01到2024-03-31的每日收盘价","纳斯达克100(NDX)从2024-01-01到2024-03-31的每日收盘价"]。',
           },
           data_key: {
             type: 'string',
-            description: 'it should be open, high, low, close price or volume',
+            description: '应该是开盘价、最高价、最低价、收盘价或成交量',
           },
           data_belongs: {
             type: 'array',
             items: {
               type: 'string',
               description:
-                'one of the companies or index markers names, might be Coca-Cola Co(KO) or others according the query',
+                '公司或指数标记名称之一，根据查询可能是可口可乐公司(KO)或其他公司',
             },
             description:
-              'which company or index marker the data belongs, the sequence should be follow query parameter, one or mutilate from Booking Holdings Inc(BKNG),Nasdaq 100(NDX) and etc...',
+              '数据所属的公司或指数标记，顺序应遵循查询参数，从Booking Holdings Inc(BKNG)、纳斯达克100(NDX)等中选择一个或多个...',
           },
           size: {
             type: 'number',
             description:
-              'how many amount items data do you want to get, pass it when the data you want to get is a list not aggregated result, make sure the amount of results is under your control, ' +
-              'currently the supported maximum size is 100',
+              '要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的最大尺寸为100。',
           },
         },
         required: ['query', 'data_key', 'data_belongs'],
@@ -104,7 +96,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_candle_chart',
-      description: `Generate a candlestick (K-line) chart for ${data_explain}.
+      description: `为${data_explain}生成蜡烛图(K线图)。
       This function plots a chart showing open, high, low, and close prices of stocks over time, aiding users in identifying trends and patterns.
       It's an essential tool for investors analyzing market movements to inform trading decisions. The chart highlights price dynamics and can be adjusted to cover various time periods, supporting both short-term and long-term strategies.`,
       parameters: {
@@ -113,11 +105,11 @@ export const tools: OpenAI.ChatCompletionTool[] = [
           query: {
             type: 'string',
             description:
-              'user natural language query about stock or Stock Market Index for the candlestick (K-line) chart',
+              '用户关于股票或股票市场指数的蜡烛图(K线图)的自然语言查询。',
           },
           incorporation: {
             type: 'string',
-            description: 'the name of the stock company or Stock Market Index',
+            description: '股票公司或股票市场指数的名称。',
           },
         },
         required: ['query', 'incorporation'],
