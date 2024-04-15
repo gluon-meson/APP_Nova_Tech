@@ -4,10 +4,9 @@ import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import { sleep } from '@/lib/utils'
 
 import { SpinnerWithText } from './component/chat-messages'
-import { runOpenAICompletion } from './runOpenAICompletion'
+import { getQuestion, runOpenAICompletion } from './runOpenAICompletion'
 import { get_data, TOOLS_NAMES } from './tools'
 import { AIState, MessageRole, UIState, UIStateType } from './types'
 
@@ -57,7 +56,10 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     TOOLS_NAMES.GET_DATA,
     async (args: { query: string; size?: number }) => {
       reply.update(<SpinnerWithText text="数据检索中..." />)
-      const res = await get_data(args.query, args?.size)
+      const res = await get_data(
+        '一季度的总销售额是多少，把货币单位统一成人民币',
+        1,
+      )
       reply.update(<SpinnerWithText text="大模型分析中..." />)
       return res
     },

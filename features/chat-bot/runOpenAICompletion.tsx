@@ -4,12 +4,39 @@ import { consumeStream, logger, runAsyncFnWithoutBlocking } from 'lib/shared'
 import React from 'react'
 
 import { AI } from './action'
-import { prompt } from './constants'
+import { prompt, summaryPrompt } from './constants'
 import { getOpenaiClient, GPT_MODEL } from './openaiClient'
 import { tools, TOOLS_NAMES } from './tools'
 import { Message, MessageRole } from './types'
 
 const MAX_CALLS = 5 // Set a limit on the number of calls
+
+export const getQuestion = async () => {
+  const aiState = getAIState()
+  logger.info(aiState, 'call LLM getAIState')
+  try {
+    const openaiClient = getOpenaiClient()
+    const resp = await openaiClient.chat.completions.create({
+      model: GPT_MODEL,
+      stream: false,
+      temperature: 0.2, // todo adjust it
+      messages: [
+        { role: MessageRole.SYSTEM, content: summaryPrompt },
+        ...aiState.messages.map((message: any) => {
+          const { id, ...newItem } = message
+          return newItem
+        }),
+      ],
+    })
+
+    const question = resp.choices[0].message.content
+    logger.info({ question }, 'summarized question')
+    return question ? question : ''
+  } catch (error) {
+    logger.error(error, 'Error creating completion:')
+    throw error
+  }
+}
 
 const callLLM = async () => {
   const aiState = getAIState() // readonly
@@ -21,7 +48,7 @@ const callLLM = async () => {
       stream: true,
       tools: tools,
       tool_choice: 'auto',
-      temperature: 0.2, // todo adjust it
+      temperature: 0.2,
       messages: [
         { role: MessageRole.SYSTEM, content: prompt },
         ...aiState.messages.map((message: any) => {
@@ -29,7 +56,6 @@ const callLLM = async () => {
           return newItem
         }),
       ],
-      // max_tokens: 3000, // todo remove
     })
     logger.info(aiState?.id, 'creating completion succeed')
     return resp

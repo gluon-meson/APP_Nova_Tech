@@ -1,7 +1,7 @@
 export const exampleMessages = [
   {
     heading: '数据查询',
-    message: '一季度汇率为人民币的总销售额是多少',
+    message: '一季度的总销售额是多少，把货币单位统一成人民币',
   },
   {
     heading: '数据查询',
