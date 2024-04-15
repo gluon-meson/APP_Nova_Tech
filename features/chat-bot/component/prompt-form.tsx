@@ -55,7 +55,7 @@ export const PromptForm = () => {
         <Textarea
           tabIndex={0}
           onKeyDown={onKeyDown}
-          placeholder="Send a message."
+          placeholder="在此输入您的问题"
           className="min-h-[60px] w-full resize-none border-0 bg-transparent px-4 py-[1.3rem] focus-within:outline-none focus:ring-0 sm:text-sm"
           autoFocus
           spellCheck={false}
