@@ -4,6 +4,6 @@ services:
   web:
     build:
       context: $PWD
-    container_name: wealth_management_fe
+    container_name: nova-usecase
     ports:
       - '1091:3000'
