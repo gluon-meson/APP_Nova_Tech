@@ -164,7 +164,7 @@ export async function get_data(query: string, size?: number) {
   const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
     query,
     size,
-    data_set_id: 215,
+    data_set_id: 19,
   }).catch((e) => {
     logger.error(e, 'tool get_data error:')
     return 'Nothing got, try again with more context for the query parameter.'
