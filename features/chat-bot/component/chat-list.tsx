@@ -7,7 +7,7 @@ import { BotMessage } from '../component/bot-message'
 import { UserMessage } from '../component/chat-messages'
 import { ChatScrollAnchor } from '../component/chat-scroll-anchor'
 import { ExampleMessages } from '../component/example-messages'
-import { UIState, UIStateType } from '../types'
+import { UIStateType } from '../types'
 
 export const ChatList = () => {
   const [messages, setMessages] = useUIState<typeof AI>()
