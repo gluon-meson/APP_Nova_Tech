@@ -51,25 +51,30 @@ export const sqlTemplate = [
     question:
       '单价前五的规格型号1、2、3月的销售额分别是多少，占总销售额的百分比是多少',
     sql: `
-      SELECT
-        order_T_1_.model AS model_1_,
-        SUM(order_T_1_.price_including_tax) AS price_including_tax_2_
-      FROM
-        sales_order AS order_T_1_
-      WHERE
-        (
-          order_T_1_.approval_date BETWEEN '2024-01-01' AND '2024-01-31'
-          OR order_T_1_.approval_date BETWEEN '2024-02-01' AND '2024-02-29'
-          OR order_T_1_.approval_date BETWEEN '2024-03-01' AND '2024-03-31'
-        )
-      GROUP BY
-        order_T_1_.model
-      LIMIT 10;
+    with price_rank_pk as (
+      select distinct unit_price, model from sales_order  order by unit_price desc
+  )
+  SELECT "model",
+         SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 1 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) AS "sales_in_january",
+         SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 1 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) /
+             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 1) * 100 AS "percentage_in_january",
+         SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 2 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) AS "sales_in_february",
+         SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 2 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) /
+             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 2) * 100 AS "percentage_in_february",
+         SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 3 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) AS "sales_in_march",
+         SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 3 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) /
+             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 3) * 100 AS "percentage_in_march"
+  FROM   "sales_order"
+  WHERE  "model" IN (
+             select model from price_rank_pk limit 5
+         )
+  GROUP BY "model"
+  LIMIT  100;
     `,
   },
   {
     question:
-      '采购额最高的TOP10大客户，采购数量前三的规格型号是什么，每个型号的销售额分别是多少',
+      '购额最高的TOP10大客户，采购数量前三采的规格型号是什么，每个型号的销售额分别是多少',
     sql: `
       SELECT
         order_T_1_.purchasing_unit AS purchasing_unit_1_,
