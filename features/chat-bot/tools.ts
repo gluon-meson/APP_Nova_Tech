@@ -5,6 +5,7 @@ import { STOCK_DATA_ITEM } from '@/features/chat-bot/types'
 import { logger } from '@/lib/shared'
 import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
+import { DATA_SET } from '../../constants/conmon'
 
 export const tools: OpenAI.ChatCompletionTool[] = [
   {
@@ -39,7 +40,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
         properties: {
           query: {
             type: 'string',
-            description: '用于指定要检索的数据的自然语言查询字符串。',
+            description: '用于指定要检索的数据的自然语言。',
           },
           size: {
             type: 'number',
@@ -156,7 +157,7 @@ export async function get_data(query: string, size?: number) {
   const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
     query,
     size,
-    data_set_id: 19,
+    data_set_id: DATA_SET,
   }).catch((e) => {
     logger.error(e, 'tool get_data error:')
     return 'Nothing got, try again with more context for the query parameter.'
