@@ -4,6 +4,7 @@ import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
+import { sleep } from '@/lib/utils'
 
 import { SpinnerWithText } from './component/chat-messages'
 import { getQuestion, runOpenAICompletion } from './runOpenAICompletion'
@@ -56,10 +57,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     TOOLS_NAMES.GET_DATA,
     async (args: { query: string; size?: number }) => {
       reply.update(<SpinnerWithText text="数据检索中..." />)
-      const res = await get_data(
-        '一季度的总销售额是多少，把货币单位统一成人民币',
-        1,
-      )
+      const res = await get_data(await getQuestion(), args?.size)
       reply.update(<SpinnerWithText text="大模型分析中..." />)
       return res
     },

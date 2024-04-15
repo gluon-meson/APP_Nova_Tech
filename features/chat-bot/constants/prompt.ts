@@ -42,7 +42,7 @@ export const summaryPrompt = `
 - 根据chat messages 与上面的信息概述总结一下用户的问题
 
 **要求：**
-- 如果需要查询数据，则需要总结出查询的自然语言的描述
+- 如果需要查询数据，则需要总结出查询的自然语言的描述，该描述必须言简意赅，不要包含任何的步骤。
 `
 
 export const prompt = `
