@@ -55,13 +55,13 @@ export const sqlTemplate = [
   SELECT "model",
          SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 1 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) AS "sales_in_january",
          SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 1 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) /
-             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 1) * 100 AS "percentage_in_january",
+             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 1) AS "percentage_in_january",
          SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 2 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) AS "sales_in_february",
          SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 2 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) /
-             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 2) * 100 AS "percentage_in_february",
+             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 2) AS "percentage_in_february",
          SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 3 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) AS "sales_in_march",
          SUM(CASE WHEN EXTRACT(MONTH FROM "approval_date") = 3 THEN "price_including_tax" * "exchange_rate" ELSE 0 END) /
-             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 3) * 100 AS "percentage_in_march"
+             (SELECT SUM("price_including_tax" * "exchange_rate") FROM "sales_order" WHERE EXTRACT(MONTH FROM "approval_date") = 3) AS "percentage_in_march"
   FROM   "sales_order"
   WHERE  "model" IN (
              select model from price_rank_pk limit 5
