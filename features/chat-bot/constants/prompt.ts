@@ -11,13 +11,13 @@ export const getSummaryPrompt = () => `
   ${JSON.stringify(sqlTemplate)}
 
 **任务：**
-- 将问题与SQL模版中的question进行对比，如果能够匹配，提取匹配到的sql
+- 返回用户的最近提出的问题
+- 如果用户的问题需要查询数据库，那么将问题与SQL模版中的query进行对比，如果能够匹配，提取匹配到的sql
 
 **要求：**
-- 如果能够提取匹配到的sql，返回格式如下：
-  {just return the script without any other words:匹配的sql}
-- 如果不能提取到sql，返回格式如下：
-  {问题}
+- 如果能够提取匹配到的sql，返回格式应严格按照下面括号内的格式返回：
+  {just return the script without any other words: 匹配的sql}
+- 如果不能提取到sql，那么直接返回用户的问题
 `
 
 export const prompt = `
