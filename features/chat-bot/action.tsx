@@ -5,9 +5,10 @@ import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
 import { sleep } from '@/lib/utils'
+
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
-import { get_current_weather, get_data, TOOLS_NAMES } from './tools'
+import { get_data, TOOLS_NAMES } from './tools'
 import { AIState, MessageRole, UIState, UIStateType } from './types'
 
 async function submitUserMessage(userInput: string): Promise<UIState[number]> {
@@ -51,19 +52,6 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       })
     }
   })
-
-  completion.onToolCall(
-    TOOLS_NAMES.GET_WEATHER,
-    async (functionArgs: Record<string, unknown>) => {
-      logger.info(functionArgs, 'call get weather with arg:')
-      reply.update(
-        <SpinnerWithText text="Retriving weather information now.." />,
-      )
-      await sleep(2000)
-      // @ts-ignore
-      return get_current_weather(functionArgs.location, functionArgs.unit)
-    },
-  )
 
   completion.onToolCall(
     TOOLS_NAMES.GET_DATA,

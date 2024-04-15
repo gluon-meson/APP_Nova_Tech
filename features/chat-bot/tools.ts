@@ -4,33 +4,10 @@ import { data_explain } from '@/features/chat-bot/constants'
 import { SALES_ORDER_ITEM } from '@/features/chat-bot/types'
 import { logger } from '@/lib/shared'
 import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
-import { sleep } from '@/lib/utils'
 
 import { DATA_SET } from '../../constants/conmon'
 
 export const tools: OpenAI.ChatCompletionTool[] = [
-  {
-    type: 'function',
-    function: {
-      name: 'get_current_weather',
-      description: '获取指定位置的当前天气情况。',
-      parameters: {
-        type: 'object',
-        properties: {
-          location: {
-            type: 'string',
-            description: '城市和州，例如：旧金山，加利福尼亚州',
-          },
-          unit: {
-            type: 'string',
-            enum: ['celsius', 'fahrenheit'],
-            description: '温度单位，可选值为摄氏度或华氏度',
-          },
-        },
-        required: ['location'],
-      },
-    },
-  },
   {
     type: 'function',
     function: {
@@ -45,7 +22,8 @@ export const tools: OpenAI.ChatCompletionTool[] = [
           },
           size: {
             type: 'number',
-            description: `要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的**最大尺寸**为100。`,
+            description:
+              '要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的**最大尺寸**为5000。', // todo
           },
         },
         required: ['query'],
@@ -121,36 +99,9 @@ export const tools: OpenAI.ChatCompletionTool[] = [
 ]
 
 export enum TOOLS_NAMES {
-  GET_WEATHER = 'get_current_weather',
   GET_DATA = 'get_data',
   DRAW_LINE_BAR_CHART = 'draw_line_bar_chart',
   DRAW_CANDLE_CHART = 'draw_candle_chart',
-}
-
-export // example: https://platform.openai.com/docs/guides/function-calling/parallel-function-calling
-async function get_current_weather(location: string, unit: string) {
-  await sleep(1000)
-  if (location.toLowerCase().includes('tokyo')) {
-    return JSON.stringify({
-      location: 'Tokyo',
-      temperature: '10',
-      unit: 'celsius',
-    })
-  } else if (location.toLowerCase().includes('san francisco')) {
-    return JSON.stringify({
-      location: 'San Francisco',
-      temperature: '72',
-      unit: 'fahrenheit',
-    })
-  } else if (location.toLowerCase().includes('paris')) {
-    return JSON.stringify({
-      location: 'Paris',
-      temperature: '22',
-      unit: 'fahrenheit',
-    })
-  } else {
-    return JSON.stringify({ location, temperature: 'unknown' })
-  }
 }
 
 export async function get_data(query: string, size?: number) {
