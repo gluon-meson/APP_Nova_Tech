@@ -1,6 +1,8 @@
+import { sqlTemplate } from '@/features/chat-bot/constants/sql-template'
+
 export const data_explain = `表 'sales_order' 存储了来自 Nova Tech 公司的设备订单数据。它包括批准日期、采购单位、合同编号、交货承诺日期、定价信息、设备数量、型号、产品详细信息、销售人员、部门信息、货币、运费、汇率、材料详细信息、订单类型、行项目具体信息、折扣金额和销售组织等细节。该表很可能有助于跟踪 Nova Tech 的销售交易、库存管理和财务分析。`
 
-export const summaryPrompt = `
+export const getSummaryPrompt = () => `
 **背景：** 作为Nova Tech管理团队的一员，您的重点是监督运营数据，并做出明智的决策，推动业务成功。为了实现这一目标，您需要深入了解销售订单数据，以分析销售交易，跟踪库存，并有效地进行财务分析。
 
 **角色：** 您是数据分析和商业智能领域的专家，能够从结构化的销售订单数据中提取有价值的见解，支持Nova Tech内部战略决策。
@@ -38,11 +40,21 @@ export const summaryPrompt = `
      - discount_amount：应用的折扣金额。示例：0
      - sales_org：负责销售的组织。示例：NS01
 
+  - SQL模板：
+    ${sqlTemplate}
+
 **任务：**
 - 根据chat messages 与上面的信息概述总结一下用户的问题
 
 **要求：**
-- 如果需要查询数据，则需要总结出查询的自然语言的描述，该描述必须言简意赅，不要包含任何的步骤。
+- 如果需要查询数据，需要总结出查询的问题
+  - 该描述必须言简意赅，必须要包含关键信息，且不需要分步骤描述
+  - 理解SQL模板中的问题与SQL对。
+  - 根据总结的问题在SQL模板中提取sql
+- 返回的格式：
+  用户问题：{总结的问题}
+  可直接使用的 sql:
+  {提取的 sql, 注意不要包含任何的注释}
 `
 
 export const prompt = `
