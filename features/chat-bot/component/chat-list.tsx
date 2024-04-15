@@ -14,7 +14,7 @@ export const ChatList = () => {
   return (
     <div className="mx-auto mb-20 mt-6 max-w-4xl md:pl-4">
       <div className="rounded-lg border bg-background p-4 pb-10">
-        {messages.length === 0 && <ExampleMessages setMessages={setMessages} />}
+        {<ExampleMessages setMessages={setMessages} />}
         {messages.map((ui, index) => {
           let content: React.ReactNode = ''
           if (ui.type === UIStateType.USER)

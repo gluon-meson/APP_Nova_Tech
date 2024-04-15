@@ -4,10 +4,9 @@ import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import { sleep } from '@/lib/utils'
 
 import { SpinnerWithText } from './component/chat-messages'
-import { getQuestion, runOpenAICompletion } from './runOpenAICompletion'
+import { runOpenAICompletion } from './runOpenAICompletion'
 import { get_data, TOOLS_NAMES } from './tools'
 import { AIState, MessageRole, UIState, UIStateType } from './types'
 
@@ -29,7 +28,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     ],
   })
 
-  const reply = createStreamableUI(<SpinnerWithText text="processing..." />)
+  const reply = createStreamableUI(<SpinnerWithText text="请求处理中..." />)
 
   const toolsStreamUI = createStreamableUI('')
 
@@ -57,7 +56,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     TOOLS_NAMES.GET_DATA,
     async (args: { query: string; size?: number }) => {
       reply.update(<SpinnerWithText text="数据检索中..." />)
-      const res = await get_data(await getQuestion(), args?.size)
+      const res = await get_data(args?.query, args?.size)
       reply.update(<SpinnerWithText text="大模型分析中..." />)
       return res
     },

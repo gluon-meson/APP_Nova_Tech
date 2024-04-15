@@ -6,12 +6,12 @@ import React from 'react'
 import { AI } from './action'
 import { getSummaryPrompt, prompt } from './constants'
 import { getOpenaiClient, GPT_MODEL } from './openaiClient'
-import { tools, TOOLS_NAMES } from './tools'
+import { get_data, TOOLS_NAMES } from './tools'
 import { Message, MessageRole } from './types'
 
 const MAX_CALLS = 5 // Set a limit on the number of calls
 
-export const getQuestion = async () => {
+export const getData = async () => {
   const aiState = getAIState()
   logger.info(aiState, 'call LLM getAIState')
   try {
@@ -19,19 +19,18 @@ export const getQuestion = async () => {
     const resp = await openaiClient.chat.completions.create({
       model: GPT_MODEL,
       stream: false,
-      temperature: 0.2, // todo adjust it
+      temperature: 0, // todo adjust it
       messages: [
         { role: MessageRole.SYSTEM, content: getSummaryPrompt() },
-        ...aiState.messages.map((message: any) => {
-          const { id, ...newItem } = message
-          return newItem
-        }),
+        { role: MessageRole.SYSTEM, content: aiState.messages.pop().content },
       ],
     })
 
-    const question = resp.choices[0].message.content
-    logger.info({ question }, 'summarized question')
-    return question ? question : ''
+    const query = resp.choices[0].message.content
+    const res = query ? await get_data(query) : ''
+
+    logger.info({ res }, 'retrieved data')
+    return res
   } catch (error) {
     logger.error(error, 'Error creating completion:')
     throw error
@@ -46,11 +45,13 @@ const callLLM = async () => {
     const resp = await openaiClient.chat.completions.create({
       model: GPT_MODEL,
       stream: true,
-      tools: tools,
-      tool_choice: 'auto',
-      temperature: 0,
+      temperature: 0.1,
       messages: [
         { role: MessageRole.SYSTEM, content: prompt },
+        {
+          role: MessageRole.SYSTEM,
+          content: `retrieved data: ${await getData()}`,
+        },
         ...aiState.messages.map((message: any) => {
           const { id, ...newItem } = message
           return newItem
