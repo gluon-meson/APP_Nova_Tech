@@ -30,6 +30,8 @@ export const getQuestion = async () => {
     })
 
     const question = resp.choices[0].message.content
+      ?.replace('```sql', '')
+      .replaceAll('```', '')
     logger.info({ question }, 'summarized question')
     return question ? question : ''
   } catch (error) {

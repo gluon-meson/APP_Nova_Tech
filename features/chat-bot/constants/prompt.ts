@@ -7,54 +7,17 @@ export const getSummaryPrompt = () => `
 
 **角色：** 您是数据分析和商业智能领域的专家，能够从结构化的销售订单数据中提取有价值的见解，支持Nova Tech内部战略决策。
 
-**信息概述：**
-
-  - 您可获取的数据包括来自“sales_order”表的详细信息，涵盖了销售交易的各个方面：${data_explain}
-
-  - 数据解释和示例数据：
-   - “sales_order”表捕获了来自Nova Tech公司的设备订单数据。它包括：
-     - id: 每条纪录的唯一标识符。示例：18154
-     - approval_date：订单批准的日期。示例：2024-01-02
-     - purchasing_unit：负责采购的单位。示例：SZSYJGFGDYXGS
-     - contract_number：与订单相关的合同编号。示例：YJ2023121906
-     - delivery_commitment_date：产品交货的承诺日期。示例：2024-01-08
-     - price_including_tax：订单包含税金的总价。示例：93.33
-     - device_count：订单中的设备数量。示例：2
-     - unit_price：设备的单价。示例：46.67
-     - model：设备的型号。示例：诺瓦联网媒体播放器软件V8.0
-     - product_name：产品的名称。示例：诺瓦软件
-     - product_group：产品所属的组。示例：30
-     - product_level：产品的级别。示例：S06020178
-     - salesperson：负责订单的销售人员。示例：ZL
-     - third_department：负责物流的部门。示例：销售四部
-     - second_department：负责销售的部门。示例：深圳直销部
-     - currency：交易所使用的货币。示例：CNY
-     - remark：订单的附加备注或指示。示例：U-W-2024010013 AQ 4.8
-     - freight：订单相关的运费成本。示例：0
-     - exchange_rate：用于货币转换的汇率。示例：1
-     - material_code：与物料/产品相关的代码。示例：901030019
-     - material_type：物料/产品的类型。示例：产成品
-     - order_type_description：订单类型的描述。示例：国内销售订单
-     - order_number：唯一的订单编号。示例：10935208097
-     - line_item_number：与行项目相关的编号。示例：32
-     - discount_amount：应用的折扣金额。示例：0
-     - sales_org：负责销售的组织。示例：NS01
-
-  - SQL模板：
-    ${sqlTemplate}
+- SQL模板：
+  ${JSON.stringify(sqlTemplate)}
 
 **任务：**
-- 根据chat messages 与上面的信息概述总结一下用户的问题
+- 将问题与SQL模版中的question进行对比，如果能够匹配，提取匹配到的sql
 
 **要求：**
-- 如果需要查询数据，需要总结出查询的问题
-  - 该描述必须言简意赅，必须要包含关键信息，且不需要分步骤描述
-  - 理解SQL模板中的问题与SQL对。
-  - 根据总结的问题在SQL模板中提取sql
-- 返回的格式：
-  用户问题：{总结的问题}
-  可直接使用的 sql:
-  {提取的 sql, 注意不要包含任何的注释}
+- 如果能够提取匹配到的sql，返回格式如下：
+  {just return the script without any other words:匹配的sql}
+- 如果不能提取到sql，返回格式如下：
+  {问题}
 `
 
 export const prompt = `

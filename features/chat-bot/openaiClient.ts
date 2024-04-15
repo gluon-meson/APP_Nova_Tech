@@ -1,6 +1,6 @@
 import OpenAI from 'openai'
 
-export const GPT_MODEL = 'gpt-3.5-turbo' //'gpt-4-turbo-preview' gpt-3.5-turbo gpt-4
+export const GPT_MODEL = 'gpt-4-turbo-preview' //'gpt-4-turbo-preview' gpt-3.5-turbo gpt-4
 
 export const getOpenaiClient: () => OpenAI = (function () {
   let instance: OpenAI

@@ -27,7 +27,6 @@ export type SALES_ORDER_ITEM = {
   sales_org: string
 }
 
-
 export type K_LINE_DATA = Array<
   [string, number, number, number, number, number]
 >
