@@ -1,10 +1,11 @@
 import type OpenAI from 'openai'
 
 import { data_explain } from '@/features/chat-bot/constants'
-import { STOCK_DATA_ITEM } from '@/features/chat-bot/types'
+import { SALES_ORDER_ITEM } from '@/features/chat-bot/types'
 import { logger } from '@/lib/shared'
 import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
+
 import { DATA_SET } from '../../constants/conmon'
 
 export const tools: OpenAI.ChatCompletionTool[] = [
@@ -40,7 +41,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
         properties: {
           query: {
             type: 'string',
-            description: '用于指定要检索的数据的自然语言。',
+            description: '指定要检索的数据的自然语言。',
           },
           size: {
             type: 'number',
@@ -154,7 +155,7 @@ async function get_current_weather(location: string, unit: string) {
 
 export async function get_data(query: string, size?: number) {
   logger.info({ query, size }, 'call get_data with query:')
-  const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
+  const res = await queryKnowledgeBase<SALES_ORDER_ITEM>({
     query,
     size,
     data_set_id: DATA_SET,

@@ -4,32 +4,11 @@ import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import {
-  covertDataForLine,
-  deduplicateItemsByDate,
-  extractValues,
-  getKeyInfoFromData,
-  isAllKeyDefined,
-} from '@/features/chat-bot/utils'
-import {
-  KB_QUERY_RESP,
-  queryKnowledgeBase,
-} from '@/lib/shared/queryKnowledgeBase'
 import { sleep } from '@/lib/utils'
-
-import KChart from './component/charts/k-chart'
-import { LineBarChart } from './component/charts/line-bar-chart'
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
 import { get_current_weather, get_data, TOOLS_NAMES } from './tools'
-import {
-  AIState,
-  MessageRole,
-  STOCK_DATA_ITEM,
-  UIState,
-  UIStateType,
-} from './types'
-import { DATA_SET } from '../../constants/conmon'
+import { AIState, MessageRole, UIState, UIStateType } from './types'
 
 async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   'use server'
@@ -89,103 +68,103 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   completion.onToolCall(
     TOOLS_NAMES.GET_DATA,
     async (args: { query: string; size?: number }) => {
-      reply.update(<SpinnerWithText text="Data retriving..." />)
+      reply.update(<SpinnerWithText text="数据检索中..." />)
       const res = await get_data(args.query, args?.size)
-      reply.update(<SpinnerWithText text="LLM analysing..." />)
+      reply.update(<SpinnerWithText text="大模型分析中..." />)
       return res
     },
   )
 
-  completion.onToolCall(
-    TOOLS_NAMES.DRAW_LINE_BAR_CHART,
-    async (args: {
-      query: string[]
-      data_key: keyof STOCK_DATA_ITEM
-      data_belongs: string[]
-      size?: number
-    }) => {
-      logger.info(args, 'call DRAW_LINE_BAR_CHART with args:')
-      reply.update(<SpinnerWithText text="Data retriving..." />)
-      try {
-        const { query, data_belongs, data_key, size = 100 } = args
-        const data = await Promise.all(
-          query?.map((item) => {
-            return queryKnowledgeBase<STOCK_DATA_ITEM>({
-              query: item,
-              size,
-              data_set_id: DATA_SET,
-            })
-          }),
-        )
-        const { dates, values } = extractValues(
-          data.map((arr) => arr.items),
-          data_key,
-        )
+  // completion.onToolCall(
+  //   TOOLS_NAMES.DRAW_LINE_BAR_CHART,
+  //   async (args: {
+  //     query: string[]
+  //     data_key: keyof STOCK_DATA_ITEM
+  //     data_belongs: string[]
+  //     size?: number
+  //   }) => {
+  //     logger.info(args, 'call DRAW_LINE_BAR_CHART with args:')
+  //     reply.update(<SpinnerWithText text="Data retriving..." />)
+  //     try {
+  //       const { query, data_belongs, data_key, size = 100 } = args
+  //       const data = await Promise.all(
+  //         query?.map((item) => {
+  //           return queryKnowledgeBase<STOCK_DATA_ITEM>({
+  //             query: item,
+  //             size,
+  //             data_set_id: DATA_SET,
+  //           })
+  //         }),
+  //       )
+  //       const { dates, values } = extractValues(
+  //         data.map((arr) => arr.items),
+  //         data_key,
+  //       )
+  //
+  //       logger.trace(
+  //         { dates, values },
+  //         'call DRAW_LINE_BAR_CHART with extractValues:',
+  //       )
+  //
+  //       if (Array.isArray(dates) && dates.length > 0) {
+  //         toolsStreamUI.append(
+  //           <LineBarChart
+  //             name={data_key}
+  //             xAxisData={dates}
+  //             yAxisData={values}
+  //             dataBelongs={data_belongs}
+  //           />,
+  //         )
+  //         reply.update(<SpinnerWithText text="LLM analysing..." />)
+  //         return `the chart had draw with data: xAxis: ${JSON.stringify(dates)} and yAxis: ${JSON.stringify(values)}}, explain the chart and give a summary or insight within 100 words`
+  //       }
+  //       return 'the data retrieved is not right, can not draw chart, try again'
+  //     } catch (err) {
+  //       logger.error(err, 'tool DRAW_LINE_BAR_CHART error:')
+  //     }
+  //
+  //     return 'failed, try again'
+  //   },
+  // )
 
-        logger.trace(
-          { dates, values },
-          'call DRAW_LINE_BAR_CHART with extractValues:',
-        )
-
-        if (Array.isArray(dates) && dates.length > 0) {
-          toolsStreamUI.append(
-            <LineBarChart
-              name={data_key}
-              xAxisData={dates}
-              yAxisData={values}
-              dataBelongs={data_belongs}
-            />,
-          )
-          reply.update(<SpinnerWithText text="LLM analysing..." />)
-          return `the chart had draw with data: xAxis: ${JSON.stringify(dates)} and yAxis: ${JSON.stringify(values)}}, explain the chart and give a summary or insight within 100 words`
-        }
-        return 'the data retrieved is not right, can not draw chart, try again'
-      } catch (err) {
-        logger.error(err, 'tool DRAW_LINE_BAR_CHART error:')
-      }
-
-      return 'failed, try again'
-    },
-  )
-
-  completion.onToolCall(
-    TOOLS_NAMES.DRAW_CANDLE_CHART,
-    async (args: { query: string; incorporation: string }) => {
-      reply.update(<SpinnerWithText text="Data retriving..." />)
-      logger.info(args.query, 'call DRAW_CANDLE_CHART with query:')
-      const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
-        query: args.query,
-        data_set_id: DATA_SET,
-      }).catch((e) => {
-        logger.error(e, 'tool DRAW_CANDLE_CHART error:')
-        return 'Nothing got, try again with more context for the query param'
-      })
-
-      if (
-        typeof res === 'string' ||
-        res?.items.length === 0 ||
-        !res?.items.every((item) => isAllKeyDefined(item))
-      ) {
-        return 'Drawing error, try again with more context for the query param'
-      }
-      const deduplicatedRes = deduplicateItemsByDate(
-        res as KB_QUERY_RESP<STOCK_DATA_ITEM>,
-      )
-
-      const data = covertDataForLine(deduplicatedRes)
-
-      logger.info(data, 'convert data from knowledge base done with:')
-      toolsStreamUI.append(
-        <KChart
-          originalData={data}
-          incorporation={args.incorporation}
-        />,
-      )
-      // How do we pass the context of the graph to LLM, the data is too large
-      const keyInfo = getKeyInfoFromData(deduplicatedRes)
-      return `The candlestick chart has been drawn for the data, showcasing these key info: ${keyInfo}, please provide summary/insight/explain for it.`
-    },
-  )
+  // completion.onToolCall(
+  //   TOOLS_NAMES.DRAW_CANDLE_CHART,
+  //   async (args: { query: string; incorporation: string }) => {
+  //     reply.update(<SpinnerWithText text="Data retriving..." />)
+  //     logger.info(args.query, 'call DRAW_CANDLE_CHART with query:')
+  //     const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
+  //       query: args.query,
+  //       data_set_id: DATA_SET,
+  //     }).catch((e) => {
+  //       logger.error(e, 'tool DRAW_CANDLE_CHART error:')
+  //       return 'Nothing got, try again with more context for the query param'
+  //     })
+  //
+  //     if (
+  //       typeof res === 'string' ||
+  //       res?.items.length === 0 ||
+  //       !res?.items.every((item) => isAllKeyDefined(item))
+  //     ) {
+  //       return 'Drawing error, try again with more context for the query param'
+  //     }
+  //     const deduplicatedRes = deduplicateItemsByDate(
+  //       res as KB_QUERY_RESP<STOCK_DATA_ITEM>,
+  //     )
+  //
+  //     const data = covertDataForLine(deduplicatedRes)
+  //
+  //     logger.info(data, 'convert data from knowledge base done with:')
+  //     toolsStreamUI.append(
+  //       <KChart
+  //         originalData={data}
+  //         incorporation={args.incorporation}
+  //       />,
+  //     )
+  //     // How do we pass the context of the graph to LLM, the data is too large
+  //     const keyInfo = getKeyInfoFromData(deduplicatedRes)
+  //     return `The candlestick chart has been drawn for the data, showcasing these key info: ${keyInfo}, please provide summary/insight/explain for it.`
+  //   },
+  // )
 
   return {
     id: Date.now().toString(),
