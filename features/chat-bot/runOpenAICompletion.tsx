@@ -3,39 +3,15 @@ import { createStreamableUI, getAIState, getMutableAIState } from 'ai/rsc'
 import { consumeStream, logger, runAsyncFnWithoutBlocking } from 'lib/shared'
 import React from 'react'
 
+import { sqlTemplate } from '@/features/chat-bot/constants/sql-template'
+
 import { AI } from './action'
-import { getSummaryPrompt, prompt } from './constants'
+import { prompt } from './constants'
 import { getOpenaiClient, GPT_MODEL } from './openaiClient'
-import { get_data, TOOLS_NAMES } from './tools'
+import { tools, TOOLS_NAMES } from './tools'
 import { Message, MessageRole } from './types'
 
 const MAX_CALLS = 5 // Set a limit on the number of calls
-
-export const getData = async () => {
-  const aiState = getAIState()
-  logger.info(aiState, 'call LLM getAIState')
-  try {
-    const openaiClient = getOpenaiClient()
-    const resp = await openaiClient.chat.completions.create({
-      model: GPT_MODEL,
-      stream: false,
-      temperature: 0, // todo adjust it
-      messages: [
-        { role: MessageRole.SYSTEM, content: getSummaryPrompt() },
-        { role: MessageRole.SYSTEM, content: aiState.messages.pop().content },
-      ],
-    })
-
-    const query = resp.choices[0].message.content
-    const res = query ? await get_data(query) : ''
-
-    logger.info({ res }, 'retrieved data')
-    return res
-  } catch (error) {
-    logger.error(error, 'Error creating completion:')
-    throw error
-  }
-}
 
 const callLLM = async () => {
   const aiState = getAIState() // readonly
@@ -45,13 +21,20 @@ const callLLM = async () => {
     const resp = await openaiClient.chat.completions.create({
       model: GPT_MODEL,
       stream: true,
-      temperature: 0.1,
+      tools: tools,
+      tool_choice: 'auto',
+      temperature: 0.8,
       messages: [
-        { role: MessageRole.SYSTEM, content: prompt },
         {
           role: MessageRole.SYSTEM,
-          content: `retrieved data: ${await getData()}`,
+          content:
+            'When need to retrieve data, refer to sql template to pass query to tool',
         },
+        {
+          role: MessageRole.SYSTEM,
+          content: `sql template:\n ${JSON.stringify(sqlTemplate)}`,
+        },
+        { role: MessageRole.SYSTEM, content: prompt },
         ...aiState.messages.map((message: any) => {
           const { id, ...newItem } = message
           return newItem

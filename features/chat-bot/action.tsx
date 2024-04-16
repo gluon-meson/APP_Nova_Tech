@@ -28,7 +28,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     ],
   })
 
-  const reply = createStreamableUI(<SpinnerWithText text="请求处理中..." />)
+  const reply = createStreamableUI(<SpinnerWithText text="processing..." />)
 
   const toolsStreamUI = createStreamableUI('')
 
@@ -56,7 +56,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     TOOLS_NAMES.GET_DATA,
     async (args: { query: string; size?: number }) => {
       reply.update(<SpinnerWithText text="数据检索中..." />)
-      const res = await get_data(args?.query, args?.size)
+      const res = await get_data(args.query, args?.size)
       reply.update(<SpinnerWithText text="大模型分析中..." />)
       return res
     },

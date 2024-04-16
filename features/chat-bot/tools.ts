@@ -8,28 +8,28 @@ import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 import { DATA_SET_ID } from '../../constants/conmon'
 
 export const tools: OpenAI.ChatCompletionTool[] = [
-  // {
-  //   type: 'function',
-  //   function: {
-  //     name: 'get_data',
-  //     description: `从${data_explain}中根据用户问题查询数据。这个tool能处理大型查询，无论多复杂的查询，你只需要将整个问题传给它就好，不必把问题拆分成多个问题分次查询。`,
-  //     parameters: {
-  //       type: 'object',
-  //       properties: {
-  //         query: {
-  //           type: 'string',
-  //           description: '指定要检索的数据的问题。该字段支持复杂问题的查询',
-  //         },
-  //         size: {
-  //           type: 'number',
-  //           description:
-  //             '要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的**最大尺寸**为5000。', // todo
-  //         },
-  //       },
-  //       required: ['query'],
-  //     },
-  //   },
-  // },
+  {
+    type: 'function',
+    function: {
+      name: 'get_data',
+      description: `从${data_explain}中获取给定自然语言查询字符串的数据。最好添加批准日期以确保在需要时数据是可比较的。`,
+      parameters: {
+        type: 'object',
+        properties: {
+          query: {
+            type: 'string',
+            description: '指定要检索的数据的自然语言。',
+          },
+          size: {
+            type: 'number',
+            description:
+              '要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的最大suze为5。', // todo
+          },
+        },
+        required: ['query'],
+      },
+    },
+  },
   {
     type: 'function',
     function: {
