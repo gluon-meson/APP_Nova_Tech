@@ -5,7 +5,8 @@ export const exampleMessages = [
   },
   {
     heading: '数据查询',
-    message: '各二级销售部门的销售额是多少，把货币单位统一成人民币',
+    message:
+      '各二级销售部门的销售额是多少，把货币单位统一成人民币，并用图表展示出来',
   },
   {
     heading: '数据查询',

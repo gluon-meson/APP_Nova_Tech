@@ -4,7 +4,7 @@ import { DataSourceCard } from '@/features/chat-bot/component/data-source-card'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen bg-muted/50 p-8">
+    <main className="flex min-h-screen p-8">
       <DataSourceCard />
       <div className="hidden w-72 opacity-0 md:block lg:w-80"></div>
       <div className="flex-1">

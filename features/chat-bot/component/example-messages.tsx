@@ -1,4 +1,5 @@
 import { useActions } from 'ai/rsc'
+import React from 'react'
 
 import { exampleMessages } from '../constants'
 import { UIState, UIStateType } from '../types'

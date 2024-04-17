@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: 'Wealth Management',
-  description: 'Wealth Management',
+  title: 'Nova Tech',
+  description: 'Nova Tech',
   links: {},
 } as const

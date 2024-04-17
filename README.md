@@ -1,4 +1,4 @@
-# Wealth Management
+# Nova Tech
 
 ## Mainly Tech Stack
 

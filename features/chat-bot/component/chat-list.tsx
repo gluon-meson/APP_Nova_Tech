@@ -1,4 +1,5 @@
 import { useUIState } from 'ai/rsc'
+import React from 'react'
 
 import { Separator } from '@/components/ui/separator'
 
@@ -6,15 +7,13 @@ import type { AI } from '../action'
 import { BotMessage } from '../component/bot-message'
 import { UserMessage } from '../component/chat-messages'
 import { ChatScrollAnchor } from '../component/chat-scroll-anchor'
-import { ExampleMessages } from '../component/example-messages'
 import { UIStateType } from '../types'
 
 export const ChatList = () => {
-  const [messages, setMessages] = useUIState<typeof AI>()
+  const [messages, _] = useUIState<typeof AI>()
   return (
     <div className="mx-auto mb-20 mt-6 max-w-4xl md:pl-4">
-      <div className="rounded-lg border bg-background p-4 pb-10">
-        {<ExampleMessages setMessages={setMessages} />}
+      <div className="rounded-lg border-0 p-4 pb-10">
         {messages.map((ui, index) => {
           let content: React.ReactNode = ''
           if (ui.type === UIStateType.USER)
