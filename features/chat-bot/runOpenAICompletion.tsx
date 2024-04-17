@@ -28,7 +28,7 @@ const callLLM = async () => {
         {
           role: MessageRole.SYSTEM,
           content:
-            'When need to retrieve data, refer to sql template to pass query to tool',
+            '当需要检索数据的时候，请参考sql template，里面的 sql对应的问题都是能够一次查询成功的，所以你不需要分步查询多次，并且你不要把 sql传给查询工具',
         },
         {
           role: MessageRole.SYSTEM,
