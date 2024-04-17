@@ -4,7 +4,9 @@ import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
+import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 
+import { LineBarChart } from './component/charts/line-bar-chart'
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
 import { get_data, TOOLS_NAMES } from './tools'
@@ -28,7 +30,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     ],
   })
 
-  const reply = createStreamableUI(<SpinnerWithText text="processing..." />)
+  const reply = createStreamableUI(<SpinnerWithText text="处理中..." />)
 
   const toolsStreamUI = createStreamableUI('')
 
@@ -62,57 +64,37 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
     },
   )
 
-  // completion.onToolCall(
-  //   TOOLS_NAMES.DRAW_LINE_BAR_CHART,
-  //   async (args: {
-  //     query: string[]
-  //     data_key: keyof STOCK_DATA_ITEM
-  //     data_belongs: string[]
-  //     size?: number
-  //   }) => {
-  //     logger.info(args, 'call DRAW_LINE_BAR_CHART with args:')
-  //     reply.update(<SpinnerWithText text="Data retriving..." />)
-  //     try {
-  //       const { query, data_belongs, data_key, size = 100 } = args
-  //       const data = await Promise.all(
-  //         query?.map((item) => {
-  //           return queryKnowledgeBase<STOCK_DATA_ITEM>({
-  //             query: item,
-  //             size,
-  //             data_set_id: DATA_SET,
-  //           })
-  //         }),
-  //       )
-  //       const { dates, values } = extractValues(
-  //         data.map((arr) => arr.items),
-  //         data_key,
-  //       )
-  //
-  //       logger.trace(
-  //         { dates, values },
-  //         'call DRAW_LINE_BAR_CHART with extractValues:',
-  //       )
-  //
-  //       if (Array.isArray(dates) && dates.length > 0) {
-  //         toolsStreamUI.append(
-  //           <LineBarChart
-  //             name={data_key}
-  //             xAxisData={dates}
-  //             yAxisData={values}
-  //             dataBelongs={data_belongs}
-  //           />,
-  //         )
-  //         reply.update(<SpinnerWithText text="LLM analysing..." />)
-  //         return `the chart had draw with data: xAxis: ${JSON.stringify(dates)} and yAxis: ${JSON.stringify(values)}}, explain the chart and give a summary or insight within 100 words`
-  //       }
-  //       return 'the data retrieved is not right, can not draw chart, try again'
-  //     } catch (err) {
-  //       logger.error(err, 'tool DRAW_LINE_BAR_CHART error:')
-  //     }
-  //
-  //     return 'failed, try again'
-  //   },
-  // )
+  completion.onToolCall(
+    TOOLS_NAMES.DRAW_LINE_BAR_CHART,
+    async (args: {
+      query: string
+      title: string
+      x_ray: string[]
+      y_ray: string[]
+      values: number[][]
+    }) => {
+      logger.info(args, 'call DRAW_LINE_BAR_CHART with args:')
+      reply.update(<SpinnerWithText text="图表生成中..." />)
+      try {
+        if (Array.isArray(args.x_ray) && args.x_ray.length > 0) {
+          toolsStreamUI.append(
+            <LineBarChart
+              name={args.title}
+              xAxisData={args.x_ray}
+              yAxisData={args.values}
+              dataBelongs={args.y_ray}
+            />,
+          )
+          return 'The drawing has been completed by myself, You do not need to answer anything, just return to empty'
+        }
+        return 'No data. We can not draw it yet'
+      } catch (err) {
+        logger.error(err, 'tool DRAW_LINE_BAR_CHART error:')
+      }
+
+      return 'failed, try again'
+    },
+  )
 
   // completion.onToolCall(
   //   TOOLS_NAMES.DRAW_CANDLE_CHART,

@@ -62,12 +62,12 @@ export const queryKnowledgeBase = async <T = Record<string, any>>(
   }
   const data = await res.json()
 
-  logger.info(
-    {
-      params,
-      data,
-    },
-    'queryKnowledgeBase done with:',
-  )
+  // logger.info(
+  //   {
+  //     params,
+  //     data,
+  //   },
+  //   'queryKnowledgeBase done with:',
+  // )
   return data
 }

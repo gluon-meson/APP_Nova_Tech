@@ -1,4 +1,5 @@
 import type OpenAI from 'openai'
+import { destination } from 'pino'
 
 import { data_explain } from '@/features/chat-bot/constants'
 import { SALES_ORDER_ITEM } from '@/features/chat-bot/types'
@@ -18,12 +19,12 @@ export const tools: OpenAI.ChatCompletionTool[] = [
         properties: {
           query: {
             type: 'string',
-            description: '指定要检索的数据的自然语言。',
+            description: '指定要检索数据的自然语言，需要带上相关上下文。',
           },
           size: {
             type: 'number',
             description:
-              '要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的最大suze为5。', // todo
+              '要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的最大size为5000。', // todo
           },
         },
         required: ['query'],
@@ -34,41 +35,53 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_line_bar_chart',
-      description: `可以为${data_explain}绘制线条和柱状图。`,
+      description: `可以为用户查找出来的数据通过绘制线条和柱状图来进行图形呈现。`,
       parameters: {
         type: 'object',
         properties: {
           query: {
-            type: 'array',
-            items: {
-              type: 'string',
-              description:
-                '用于检索一家公司的股票或股票市场指数数据的自然语言查询',
-            },
-            description:
-              '图表要显示的数据，每个项目类似于tool get_data查询参数，但它应查询一个数据列表而不是聚合结果。为数据添加时间范围！如果要求多个数据，请将问题分割成字符串数组以获取不同的数据。最好为每个项目添加相同的时间范围，以确保数据可比较。例如：问题是最近比较Cisco和纳斯达克100的每日收盘价，则查询参数应为：["Cisco(CSCO)从2024-01-01到2024-03-31的每日收盘价","纳斯达克100(NDX)从2024-01-01到2024-03-31的每日收盘价"]。',
-          },
-          data_key: {
             type: 'string',
-            description: '应该是开盘价、最高价、最低价、收盘价或成交量',
+            description: '图表要显示的数据的查询自然语言。',
           },
-          data_belongs: {
+          title: {
+            type: 'string',
+            description: '用于表达这个图形展示的主题内容，简明扼要。',
+          },
+          x_ray: {
             type: 'array',
             items: {
               type: 'string',
               description:
-                '公司或指数标记名称之一，根据查询可能是可口可乐公司(KO)或其他公司',
+                '用于展示于横坐标维度的数据，你可能需要提取对应业务维度的数据',
+            },
+            destination:
+              '线图的横坐标元素，比如时间（一月、二月等）、规格型号、部门等',
+          },
+          y_ray: {
+            type: 'array',
+            items: {
+              type: 'string',
+              description:
+                '用于展示于纵坐标维度的数据，你可能需要提取对应业务维度的数据',
+            },
+            destination: '线图的纵坐标元素，比如金额、占比等',
+          },
+          values: {
+            type: 'array',
+            items: {
+              type: 'array',
+              items: {
+                type: 'number',
+                description: '对应的横坐标数据',
+              },
+              description:
+                '用于展示横坐标的数据集合，这个数组的长度应该和x_ray集合的长度相同',
             },
             description:
-              '数据所属的公司或指数标记，顺序应遵循查询参数，从Booking Holdings Inc(BKNG)、纳斯达克100(NDX)等中选择一个或多个...',
-          },
-          size: {
-            type: 'number',
-            description:
-              '要获取的数据项数量。仅当要获取的数据是一个列表而不是聚合结果时传递此参数，确保结果数量受到您的控制。目前支持的最大尺寸为100。',
+              '这是用于展示横纵坐标数据的二维数组，它里面的元素是每个横坐标维度的数据数组，这个数组的长度应该和y_ray集合的长度相同',
           },
         },
-        required: ['query', 'data_key', 'data_belongs'],
+        required: ['query'],
       },
     },
   },
@@ -114,7 +127,7 @@ export async function get_data(query: string, size?: number) {
     logger.error(e, 'tool get_data error:')
     return 'Nothing got, try again with more context for the query parameter.'
   })
-  logger.info(res, 'get_data done with:')
+  // logger.info(res, 'get_data done with:')
   if (!res || (typeof res !== 'string' && res?.items.length === 0))
     return 'Nothing retrieved, try again with more context or explain for data you want to retrieve.'
   return 'the response is:' + JSON.stringify(res)
