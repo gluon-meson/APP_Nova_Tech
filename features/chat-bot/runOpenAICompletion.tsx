@@ -3,8 +3,6 @@ import { createStreamableUI, getAIState, getMutableAIState } from 'ai/rsc'
 import { consumeStream, logger, runAsyncFnWithoutBlocking } from 'lib/shared'
 import React from 'react'
 
-import { sqlTemplate } from '@/features/chat-bot/constants/sql-template'
-
 import { AI } from './action'
 import { prompt } from './constants'
 import { getOpenaiClient, GPT_MODEL } from './openaiClient'
@@ -25,15 +23,6 @@ const callLLM = async () => {
       tool_choice: 'auto',
       temperature: 0.8,
       messages: [
-        {
-          role: MessageRole.SYSTEM,
-          content:
-            '当需要检索数据的时候，请参考sql template，里面的 sql对应的问题都是能够一次查询成功的，所以你不需要分步查询多次，并且你不要把 sql传给查询工具',
-        },
-        {
-          role: MessageRole.SYSTEM,
-          content: `sql template:\n ${JSON.stringify(sqlTemplate)}`,
-        },
         { role: MessageRole.SYSTEM, content: prompt },
         ...aiState.messages.map((message: any) => {
           const { id, ...newItem } = message
