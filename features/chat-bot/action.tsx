@@ -5,7 +5,7 @@ import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
 
-import { LineBarChart } from './component/charts/line-bar-chart'
+import { Mermaid } from './component/charts/mermaid-chart'
 import { SpinnerWithText } from './component/chat-messages'
 import { runOpenAICompletion } from './runOpenAICompletion'
 import { get_data, TOOLS_NAMES } from './tools'
@@ -64,31 +64,23 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   )
 
   completion.onToolCall(
-    TOOLS_NAMES.DRAW_LINE_BAR_CHART,
-    async (args: {
-      query: string
-      title: string
-      x_ray: string[]
-      y_ray: string[]
-      values: number[][]
-    }) => {
-      logger.info(args, 'call DRAW_LINE_BAR_CHART with args:')
+    TOOLS_NAMES.DRAW_CHART,
+    async (args: { code: string }) => {
+      logger.info(args, 'call DRAW_CHART with args:')
       reply.update(<SpinnerWithText text="图表生成中..." />)
       try {
-        if (Array.isArray(args.x_ray) && args.x_ray.length > 0) {
+        if (args.code) {
           toolsStreamUI.append(
-            <LineBarChart
-              name={args.title}
-              xAxisData={args.x_ray}
-              yAxisData={args.values}
-              dataBelongs={args.y_ray}
+            <Mermaid
+              chartCode={args.code}
+              id={'1'}
             />,
           )
           return 'draw completed, just reply: 图形已经生成，请查看上图。without any other words'
         }
         return 'No data. We can not draw it yet'
       } catch (err) {
-        logger.error(err, 'tool DRAW_LINE_BAR_CHART error:')
+        logger.error(err, 'tool DRAW_CHART error:')
       }
 
       return 'failed, try again'
