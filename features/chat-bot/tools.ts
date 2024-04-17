@@ -35,7 +35,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_line_bar_chart',
-      description: `可以为用户查找出来的数据通过绘制线条和柱状图来进行图形呈现。`,
+      description: `可以为用户查找出来的数据通过绘制条形图或者柱状图来进行图形呈现。`,
       parameters: {
         type: 'object',
         properties: {
@@ -72,7 +72,7 @@ export const tools: OpenAI.ChatCompletionTool[] = [
               type: 'array',
               items: {
                 type: 'number',
-                description: '对应的横坐标数据',
+                description: '对应的横坐标每项数据',
               },
               description:
                 '用于展示横坐标的数据集合，这个数组的长度应该和x_ray集合的长度相同',
@@ -85,36 +85,11 @@ export const tools: OpenAI.ChatCompletionTool[] = [
       },
     },
   },
-  {
-    type: 'function',
-    function: {
-      name: 'draw_candle_chart',
-      description: `为${data_explain}生成蜡烛图(K线图)。
-      This function plots a chart showing open, high, low, and close prices of stocks over time, aiding users in identifying trends and patterns.
-      It's an essential tool for investors analyzing market movements to inform trading decisions. The chart highlights price dynamics and can be adjusted to cover various time periods, supporting both short-term and long-term strategies.`,
-      parameters: {
-        type: 'object',
-        properties: {
-          query: {
-            type: 'string',
-            description:
-              '用户关于股票或股票市场指数的蜡烛图(K线图)的自然语言查询。',
-          },
-          incorporation: {
-            type: 'string',
-            description: '股票公司或股票市场指数的名称。',
-          },
-        },
-        required: ['query', 'incorporation'],
-      },
-    },
-  },
 ]
 
 export enum TOOLS_NAMES {
   GET_DATA = 'get_data',
   DRAW_LINE_BAR_CHART = 'draw_line_bar_chart',
-  DRAW_CANDLE_CHART = 'draw_candle_chart',
 }
 
 export async function get_data(query: string, size?: number) {

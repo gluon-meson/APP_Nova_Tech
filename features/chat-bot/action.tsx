@@ -4,7 +4,6 @@ import { logger } from 'lib/shared'
 import React from 'react'
 
 import { TextMessage } from '@/features/chat-bot/component/bot-message'
-import { queryKnowledgeBase } from '@/lib/shared/queryKnowledgeBase'
 
 import { LineBarChart } from './component/charts/line-bar-chart'
 import { SpinnerWithText } from './component/chat-messages'
@@ -85,7 +84,7 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
               dataBelongs={args.y_ray}
             />,
           )
-          return 'The drawing has been completed by myself, You do not need to answer anything, just return to empty'
+          return 'draw completed, just reply: 图形已经生成，请查看上图。without any other words'
         }
         return 'No data. We can not draw it yet'
       } catch (err) {
@@ -95,45 +94,6 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
       return 'failed, try again'
     },
   )
-
-  // completion.onToolCall(
-  //   TOOLS_NAMES.DRAW_CANDLE_CHART,
-  //   async (args: { query: string; incorporation: string }) => {
-  //     reply.update(<SpinnerWithText text="Data retriving..." />)
-  //     logger.info(args.query, 'call DRAW_CANDLE_CHART with query:')
-  //     const res = await queryKnowledgeBase<STOCK_DATA_ITEM>({
-  //       query: args.query,
-  //       data_set_id: DATA_SET,
-  //     }).catch((e) => {
-  //       logger.error(e, 'tool DRAW_CANDLE_CHART error:')
-  //       return 'Nothing got, try again with more context for the query param'
-  //     })
-  //
-  //     if (
-  //       typeof res === 'string' ||
-  //       res?.items.length === 0 ||
-  //       !res?.items.every((item) => isAllKeyDefined(item))
-  //     ) {
-  //       return 'Drawing error, try again with more context for the query param'
-  //     }
-  //     const deduplicatedRes = deduplicateItemsByDate(
-  //       res as KB_QUERY_RESP<STOCK_DATA_ITEM>,
-  //     )
-  //
-  //     const data = covertDataForLine(deduplicatedRes)
-  //
-  //     logger.info(data, 'convert data from knowledge base done with:')
-  //     toolsStreamUI.append(
-  //       <KChart
-  //         originalData={data}
-  //         incorporation={args.incorporation}
-  //       />,
-  //     )
-  //     // How do we pass the context of the graph to LLM, the data is too large
-  //     const keyInfo = getKeyInfoFromData(deduplicatedRes)
-  //     return `The candlestick chart has been drawn for the data, showcasing these key info: ${keyInfo}, please provide summary/insight/explain for it.`
-  //   },
-  // )
 
   return {
     id: Date.now().toString(),
