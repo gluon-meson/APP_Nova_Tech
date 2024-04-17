@@ -6,4 +6,4 @@ services:
       context: $PWD
     container_name: nova-usecase
     ports:
-      - '1091:3000'
+      - '1092:3000'
