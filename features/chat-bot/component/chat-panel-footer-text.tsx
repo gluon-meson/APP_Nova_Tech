@@ -13,7 +13,7 @@ export function ChatPanelFooterText({
       )}
       {...props}
     >
-      Wealth Management AI chatbot built with{' '}
+      Nova Tech AI chatbot built with{' '}
       <ExternalLink href="https://nextjs.org">Next.js</ExternalLink> and{' '}
       <ExternalLink href="https://platform.openai.com/">OpenAI</ExternalLink>.
     </p>

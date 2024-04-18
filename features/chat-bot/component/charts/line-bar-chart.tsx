@@ -1,26 +1,8 @@
 'use client'
 
-import * as echarts from 'echarts'
 import ReactEcharts from 'echarts-for-react'
 import React from 'react'
 
-const colors = [
-  {
-    itemsColors: 'rgb(255, 70, 131)',
-    areaStyleOne: 'rgb(255, 158, 68)',
-    areaStyleTwo: 'rgb(255, 70, 131)',
-  },
-  {
-    itemsColors: '#93CE07',
-    areaStyleOne: '#acdfb2',
-    areaStyleTwo: '#93CE07',
-  },
-  {
-    itemsColors: '#3398DB',
-    areaStyleOne: '#80c8dd',
-    areaStyleTwo: '#3398DB',
-  },
-] as const
 export const LineBarChart = ({
   xAxisData,
   yAxisData,
@@ -56,9 +38,6 @@ export const LineBarChart = ({
         saveAsImage: { show: true },
       },
     },
-    // legend: {
-    //   data: ['Volume'],
-    // },
     xAxis: {
       type: 'category',
       boundaryGap: false,
@@ -87,57 +66,19 @@ export const LineBarChart = ({
         end: 60,
       },
     ],
-    series:
-      dataBelongs.length > 1
-        ? dataBelongs.map((data_name, index) => {
-            return {
-              name: data_name,
-              type: 'line',
-              // symbol: 'none',
-              // sampling: 'lttb',
-              // itemStyle: {
-              //   color: colors[index].itemsColors,
-              // },
-              data: yAxisData[index],
-              // itemStyle: {
-              //   normal: {
-              //     color: colors[index].itemsColors,
-              //     label: {
-              //       show: true,
-              //       position: 'top',
-              //     },
-              //   },
-              // },
-            }
-          })
-        : {
-            name: dataBelongs[0],
-            type: 'line',
-            symbol: 'none',
-            sampling: 'lttb',
-            itemStyle: {
-              color: colors[0].itemsColors,
-            },
-            data: yAxisData[0],
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: colors[0].areaStyleOne,
-                },
-                {
-                  offset: 1,
-                  color: colors[0].areaStyleTwo,
-                },
-              ]),
-            },
-          },
+    series: dataBelongs.map((data_name, index) => {
+      return {
+        name: data_name,
+        type: 'line',
+        data: yAxisData[index],
+      }
+    }),
   }
 
   return (
     <ReactEcharts
       option={option}
-      style={{ height: '500px', width: '100%' }}
+      style={{ height: '400px', width: '100%', paddingBottom: '20px' }}
     />
   )
 }
@@ -180,7 +121,7 @@ export const PieChart = ({
   return (
     <ReactEcharts
       option={option}
-      style={{ height: '500px', width: '100%' }}
+      style={{ height: '400px', width: '100%', paddingBottom: '20px' }}
     />
   )
 }

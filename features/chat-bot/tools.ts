@@ -52,30 +52,14 @@ export const tools: OpenAI.ChatCompletionTool[] = [
     type: 'function',
     function: {
       name: 'draw_pie_chart',
-      description: `将使用数据生成option传入Echarts组件，以便通过饼状图的形式将数据呈现出来。`,
-      parameters: {
-        type: 'object',
-        properties: {
-          option: {
-            type: 'string',
-            description: '根据Echarts 的语法规则编写相应的代码',
-          },
-        },
-        required: ['option'],
-      },
-    },
-  },
-  {
-    type: 'function',
-    function: {
-      name: 'draw_pie_chart',
       description: `可以为用户查找出来的数据通过绘制饼状图来进行图形呈现。`,
       parameters: {
         type: 'object',
         properties: {
           title: {
             type: 'string',
-            description: '用于表达这个图形展示的主题内容，简明扼要。',
+            description:
+              '用于表达这个图形展示的主题内容，简明扼要，不要有乱码。',
           },
           data: {
             type: 'array',
@@ -106,32 +90,27 @@ export const tools: OpenAI.ChatCompletionTool[] = [
       parameters: {
         type: 'object',
         properties: {
-          query: {
-            type: 'string',
-            description: '图表要显示的数据的查询自然语言。',
-          },
           title: {
             type: 'string',
-            description: '用于表达这个图形展示的主题内容，简明扼要。',
+            description:
+              '用于表达这个图形展示的主题内容，简明扼要，不要有乱码。',
           },
           x_ray: {
             type: 'array',
             items: {
               type: 'string',
-              description:
-                '用于展示于横坐标维度的数据，你可能需要提取对应业务维度的数据',
+              description: '横坐标，相应业务数据名称',
             },
             destination:
-              '线图的横坐标元素，比如时间（一月、二月等）、规格型号、部门等',
+              '线或柱状图的横坐标，比如时间（一月、二月等）、规格型号、部门等，这个数组的元素个数应该和values数组的数组个数相同',
           },
           y_ray: {
             type: 'array',
             items: {
               type: 'string',
-              description:
-                '用于展示于纵坐标维度的数据，你可能需要提取对应业务维度的数据',
+              description: '一条线或者一组柱的名称，对应一组数据的名称',
             },
-            destination: '线图的纵坐标元素，比如金额、占比等',
+            destination: '多条线或柱状图的名称数组',
           },
           values: {
             type: 'array',
@@ -139,16 +118,16 @@ export const tools: OpenAI.ChatCompletionTool[] = [
               type: 'array',
               items: {
                 type: 'number',
-                description: '对应的横坐标数据',
+                description: '在纵坐标显示的对应横坐标的数据项',
               },
               description:
-                '用于展示横坐标的数据集合，这个数组的长度应该和x_ray集合的长度相同',
+                '一组数据的数据项，注意！非常重要！！这个数组的元素个数应该和x_ray数组的元素个数相同',
             },
             description:
-              '这是用于展示横纵坐标数据的二维数组，它里面的元素是每个横坐标维度的数据数组，这个数组的长度应该和y_ray集合的长度相同',
+              '该二维数组能够存储多组数据，数据组数等于y_ray里元素个数，其中每一个一维数组便是一组数据，举例说明：如果需要对比2组数据，那么它的格式为[[1, 2, 3],[2, 3, 1]], 否则如果只有一组数据，那么它的格式为[[1, 2, 3]], ',
           },
         },
-        required: ['query'],
+        required: ['title', 'x_ray', 'y_ray', 'values'],
       },
     },
   },

@@ -14,8 +14,8 @@ const fontSans = FontSans({
 })
 
 export const metadata: Metadata = {
-  title: 'Wealth Management',
-  description: 'Wealth Management',
+  title: 'Nova Tech',
+  description: 'Nova Tech',
 }
 
 export default function RootLayout({

@@ -68,30 +68,6 @@ async function submitUserMessage(userInput: string): Promise<UIState[number]> {
   )
 
   completion.onToolCall(
-    TOOLS_NAMES.DRAW_COMPLEX_CHART,
-    async (args: { code: string }) => {
-      logger.info(args, 'call DRAW_COMPLEX_CHART with args:')
-      reply.update(<SpinnerWithText text="图表生成中..." />)
-      try {
-        if (args.code) {
-          toolsStreamUI.append(
-            <Mermaid
-              chartCode={args.code}
-              id={'1'}
-            />,
-          )
-          return 'The drawing has been completed by myself, You do not need to answer anything, just return to empty'
-        }
-        return 'No data. We can not draw it yet'
-      } catch (err) {
-        logger.error(err, 'tool DRAW_CHART error:')
-      }
-
-      return 'failed, try again'
-    },
-  )
-
-  completion.onToolCall(
     TOOLS_NAMES.DRAW_PIE_CHART,
     async (args: {
       title: string
